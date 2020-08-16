@@ -1,0 +1,443 @@
+EESchema Schematic File Version 4
+LIBS:negative_power_supply-cache
+EELAYER 26 0
+EELAYER END
+$Descr A4 11693 8268
+encoding utf-8
+Sheet 1 1
+Title ""
+Date ""
+Rev ""
+Comp ""
+Comment1 ""
+Comment2 ""
+Comment3 ""
+Comment4 ""
+$EndDescr
+$Comp
+L Timer:NE555 U1
+U 1 1 5E934AB7
+P 4450 3850
+F 0 "U1" H 4450 4428 50  0000 C CNN
+F 1 "NE555" H 4450 4337 50  0000 C CNN
+F 2 "Housings_DIP:DIP-8_W7.62mm_LongPads" H 4450 3850 50  0001 C CNN
+F 3 "http://www.ti.com/lit/ds/symlink/ne555.pdf" H 4450 3850 50  0001 C CNN
+	1    4450 3850
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR0101
+U 1 1 5E934B6B
+P 4450 4400
+F 0 "#PWR0101" H 4450 4150 50  0001 C CNN
+F 1 "GND" H 4455 4227 50  0000 C CNN
+F 2 "" H 4450 4400 50  0001 C CNN
+F 3 "" H 4450 4400 50  0001 C CNN
+	1    4450 4400
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:+5V #PWR0102
+U 1 1 5E934BF2
+P 4450 3250
+F 0 "#PWR0102" H 4450 3100 50  0001 C CNN
+F 1 "+5V" H 4465 3423 50  0000 C CNN
+F 2 "" H 4450 3250 50  0001 C CNN
+F 3 "" H 4450 3250 50  0001 C CNN
+	1    4450 3250
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	4450 4250 4450 4400
+Wire Wire Line
+	4450 3250 4450 3350
+Wire Wire Line
+	4950 4050 4950 4750
+Wire Wire Line
+	4950 4750 3750 4750
+Wire Wire Line
+	3750 4750 3750 3650
+Wire Wire Line
+	3750 3650 3950 3650
+Wire Wire Line
+	3950 4050 3850 4050
+Connection ~ 4450 3350
+Wire Wire Line
+	4450 3350 4450 3450
+$Comp
+L Device:C C1
+U 1 1 5E934FF6
+P 4950 4900
+F 0 "C1" H 5065 4946 50  0000 L CNN
+F 1 "C" H 5065 4855 50  0000 L CNN
+F 2 "Capacitors_SMD:C_1206" H 4988 4750 50  0001 C CNN
+F 3 "~" H 4950 4900 50  0001 C CNN
+	1    4950 4900
+	1    0    0    -1  
+$EndComp
+Connection ~ 4950 4750
+$Comp
+L power:GND #PWR0103
+U 1 1 5E9350E2
+P 4950 5100
+F 0 "#PWR0103" H 4950 4850 50  0001 C CNN
+F 1 "GND" H 4955 4927 50  0000 C CNN
+F 2 "" H 4950 5100 50  0001 C CNN
+F 3 "" H 4950 5100 50  0001 C CNN
+	1    4950 5100
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	4950 5050 4950 5100
+$Comp
+L Device:R_POT RV1
+U 1 1 5E9351BC
+P 5500 3900
+F 0 "RV1" H 5430 3946 50  0000 R CNN
+F 1 "R_POT" H 5430 3855 50  0000 R CNN
+F 2 "Potentiometers:Potentiometer_Trimmer_ACP_CA6VSMD_Horizontal" H 5500 3900 50  0001 C CNN
+F 3 "~" H 5500 3900 50  0001 C CNN
+	1    5500 3900
+	0    -1   -1   0   
+$EndComp
+NoConn ~ 3950 3850
+$Comp
+L Device:Q_NMOS_GDS Q1
+U 1 1 5E9384D1
+P 6150 3650
+F 0 "Q1" H 6355 3696 50  0000 L CNN
+F 1 "Q_NMOS_GDS" H 6355 3605 50  0000 L CNN
+F 2 "Power_Integrations:TO-220" H 6350 3750 50  0001 C CNN
+F 3 "~" H 6150 3650 50  0001 C CNN
+	1    6150 3650
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR0104
+U 1 1 5E93856E
+P 6250 3950
+F 0 "#PWR0104" H 6250 3700 50  0001 C CNN
+F 1 "GND" H 6255 3777 50  0000 C CNN
+F 2 "" H 6250 3950 50  0001 C CNN
+F 3 "" H 6250 3950 50  0001 C CNN
+	1    6250 3950
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:D D1
+U 1 1 5E9385B1
+P 5950 3350
+F 0 "D1" H 5950 3566 50  0000 C CNN
+F 1 "D" H 5950 3475 50  0000 C CNN
+F 2 "Diodes_SMD:D_SMA_Handsoldering" H 5950 3350 50  0001 C CNN
+F 3 "~" H 5950 3350 50  0001 C CNN
+	1    5950 3350
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:R R1
+U 1 1 5E938687
+P 5350 3650
+F 0 "R1" V 5143 3650 50  0000 C CNN
+F 1 "R" V 5234 3650 50  0000 C CNN
+F 2 "Resistors_SMD:R_1206" V 5280 3650 50  0001 C CNN
+F 3 "~" H 5350 3650 50  0001 C CNN
+	1    5350 3650
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	6250 3850 6250 3950
+Wire Wire Line
+	5950 3650 5500 3650
+Wire Wire Line
+	5200 3650 4950 3650
+Wire Wire Line
+	6250 3450 6250 3350
+Wire Wire Line
+	6250 3350 6100 3350
+Wire Wire Line
+	5450 3350 5450 2950
+Wire Wire Line
+	5450 2950 6250 2950
+Connection ~ 5450 3350
+Wire Wire Line
+	5450 3350 4450 3350
+$Comp
+L Device:D D4
+U 1 1 5E93925D
+P 7900 3400
+F 0 "D4" V 7946 3321 50  0000 R CNN
+F 1 "D" V 7855 3321 50  0000 R CNN
+F 2 "Diodes_SMD:D_SMA_Handsoldering" H 7900 3400 50  0001 C CNN
+F 3 "~" H 7900 3400 50  0001 C CNN
+	1    7900 3400
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Device:D D5
+U 1 1 5E9392E2
+P 7900 4100
+F 0 "D5" V 7854 4179 50  0000 L CNN
+F 1 "D" V 7945 4179 50  0000 L CNN
+F 2 "Diodes_SMD:D_SMA_Handsoldering" H 7900 4100 50  0001 C CNN
+F 3 "~" H 7900 4100 50  0001 C CNN
+	1    7900 4100
+	0    1    1    0   
+$EndComp
+$Comp
+L Device:D D9
+U 1 1 5E939316
+P 8300 4100
+F 0 "D9" V 8346 4021 50  0000 R CNN
+F 1 "D" V 8255 4021 50  0000 R CNN
+F 2 "Diodes_SMD:D_SMA_Handsoldering" H 8300 4100 50  0001 C CNN
+F 3 "~" H 8300 4100 50  0001 C CNN
+	1    8300 4100
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Device:D D8
+U 1 1 5E939368
+P 8300 3400
+F 0 "D8" V 8254 3479 50  0000 L CNN
+F 1 "D" V 8345 3479 50  0000 L CNN
+F 2 "Diodes_SMD:D_SMA_Handsoldering" H 8300 3400 50  0001 C CNN
+F 3 "~" H 8300 3400 50  0001 C CNN
+	1    8300 3400
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	8300 3550 8300 3900
+Wire Wire Line
+	8300 4250 7900 4250
+Wire Wire Line
+	7550 4250 7900 4250
+Connection ~ 7900 4250
+Wire Wire Line
+	8300 3900 8850 3900
+Connection ~ 8300 3900
+Wire Wire Line
+	8300 3900 8300 3950
+Wire Wire Line
+	8300 3250 7900 3250
+Connection ~ 7900 3250
+$Comp
+L Device:Transformer_1P_2S T1
+U 1 1 5E93B96A
+P 6650 3150
+F 0 "T1" H 6650 3728 50  0000 C CNN
+F 1 "Transformer_1P_2S" H 6650 3637 50  0000 C CNN
+F 2 "Connectors_Molex:Molex_KK-6410-06_06x2.54mm_Straight" H 6650 3150 50  0001 C CNN
+F 3 "~" H 6650 3150 50  0001 C CNN
+	1    6650 3150
+	1    0    0    -1  
+$EndComp
+Connection ~ 6250 3350
+Wire Wire Line
+	7050 3250 7900 3250
+Wire Wire Line
+	7550 3550 7050 3550
+$Comp
+L Device:CP C3
+U 1 1 5E93D4BB
+P 8850 3750
+F 0 "C3" H 8968 3796 50  0000 L CNN
+F 1 "CP" H 8968 3705 50  0000 L CNN
+F 2 "Capacitors_SMD:CP_Elec_10x10.5" H 8888 3600 50  0001 C CNN
+F 3 "~" H 8850 3750 50  0001 C CNN
+	1    8850 3750
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	7900 3550 7900 3600
+$Comp
+L Device:D D2
+U 1 1 5E93E2BD
+P 7900 2200
+F 0 "D2" V 7946 2121 50  0000 R CNN
+F 1 "D" V 7855 2121 50  0000 R CNN
+F 2 "Diodes_SMD:D_SMA_Handsoldering" H 7900 2200 50  0001 C CNN
+F 3 "~" H 7900 2200 50  0001 C CNN
+	1    7900 2200
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Device:D D3
+U 1 1 5E93E2C3
+P 7900 2900
+F 0 "D3" V 7854 2979 50  0000 L CNN
+F 1 "D" V 7945 2979 50  0000 L CNN
+F 2 "Diodes_SMD:D_SMA_Handsoldering" H 7900 2900 50  0001 C CNN
+F 3 "~" H 7900 2900 50  0001 C CNN
+	1    7900 2900
+	0    1    1    0   
+$EndComp
+$Comp
+L Device:D D7
+U 1 1 5E93E2C9
+P 8300 2900
+F 0 "D7" V 8346 2821 50  0000 R CNN
+F 1 "D" V 8255 2821 50  0000 R CNN
+F 2 "Diodes_SMD:D_SMA_Handsoldering" H 8300 2900 50  0001 C CNN
+F 3 "~" H 8300 2900 50  0001 C CNN
+	1    8300 2900
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Device:D D6
+U 1 1 5E93E2CF
+P 8300 2200
+F 0 "D6" V 8254 2279 50  0000 L CNN
+F 1 "D" V 8345 2279 50  0000 L CNN
+F 2 "Diodes_SMD:D_SMA_Handsoldering" H 8300 2200 50  0001 C CNN
+F 3 "~" H 8300 2200 50  0001 C CNN
+	1    8300 2200
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	8300 2350 8300 2700
+Wire Wire Line
+	8300 3050 7900 3050
+Connection ~ 7900 3050
+Wire Wire Line
+	8300 2700 8850 2700
+Connection ~ 8300 2700
+Wire Wire Line
+	8300 2700 8300 2750
+Wire Wire Line
+	8300 2050 7900 2050
+Connection ~ 7900 2050
+Wire Wire Line
+	7050 2050 7900 2050
+$Comp
+L Device:CP C2
+U 1 1 5E93E2DF
+P 8850 2550
+F 0 "C2" H 8968 2596 50  0000 L CNN
+F 1 "CP" H 8968 2505 50  0000 L CNN
+F 2 "Capacitors_SMD:CP_Elec_10x10.5" H 8888 2400 50  0001 C CNN
+F 3 "~" H 8850 2550 50  0001 C CNN
+	1    8850 2550
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	7900 2350 7900 2400
+Wire Wire Line
+	7550 3550 7550 4250
+Wire Wire Line
+	8850 3600 7900 3600
+Connection ~ 7900 3600
+Wire Wire Line
+	7900 3600 7900 3950
+Wire Wire Line
+	8850 2400 7900 2400
+Connection ~ 7900 2400
+Wire Wire Line
+	7900 2400 7900 2750
+Wire Wire Line
+	7050 3050 7900 3050
+Wire Wire Line
+	7050 2050 7050 2750
+$Comp
+L Connector:Conn_01x02_Male J1
+U 1 1 5E940CA9
+P 3100 3600
+F 0 "J1" H 3206 3778 50  0000 C CNN
+F 1 "Conn_01x02_Male" H 3206 3687 50  0000 C CNN
+F 2 "Connectors_Molex:Molex_KK-6410-02_02x2.54mm_Straight" H 3100 3600 50  0001 C CNN
+F 3 "~" H 3100 3600 50  0001 C CNN
+	1    3100 3600
+	1    0    0    -1  
+$EndComp
+$Comp
+L Connector:Conn_01x02_Male J2
+U 1 1 5E940E03
+P 9450 2600
+F 0 "J2" H 9423 2480 50  0000 R CNN
+F 1 "Conn_01x02_Male" H 9423 2571 50  0000 R CNN
+F 2 "Connectors_Molex:Molex_KK-6410-02_02x2.54mm_Straight" H 9450 2600 50  0001 C CNN
+F 3 "~" H 9450 2600 50  0001 C CNN
+	1    9450 2600
+	-1   0    0    1   
+$EndComp
+$Comp
+L Connector:Conn_01x02_Male J3
+U 1 1 5E940F55
+P 9450 3800
+F 0 "J3" H 9423 3680 50  0000 R CNN
+F 1 "Conn_01x02_Male" H 9423 3771 50  0000 R CNN
+F 2 "Connectors_Molex:Molex_KK-6410-02_02x2.54mm_Straight" H 9450 3800 50  0001 C CNN
+F 3 "~" H 9450 3800 50  0001 C CNN
+	1    9450 3800
+	-1   0    0    1   
+$EndComp
+Wire Wire Line
+	9250 3700 9250 3600
+Wire Wire Line
+	9250 3600 8850 3600
+Connection ~ 8850 3600
+Wire Wire Line
+	9250 3800 9250 3900
+Wire Wire Line
+	9250 3900 8850 3900
+Connection ~ 8850 3900
+Wire Wire Line
+	9250 2600 9250 2700
+Wire Wire Line
+	9250 2700 8850 2700
+Connection ~ 8850 2700
+Wire Wire Line
+	9250 2500 9250 2400
+Wire Wire Line
+	9250 2400 8850 2400
+Connection ~ 8850 2400
+$Comp
+L power:+5V #PWR0105
+U 1 1 5E943821
+P 3300 3400
+F 0 "#PWR0105" H 3300 3250 50  0001 C CNN
+F 1 "+5V" H 3315 3573 50  0000 C CNN
+F 2 "" H 3300 3400 50  0001 C CNN
+F 3 "" H 3300 3400 50  0001 C CNN
+	1    3300 3400
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR0106
+U 1 1 5E943854
+P 3300 3900
+F 0 "#PWR0106" H 3300 3650 50  0001 C CNN
+F 1 "GND" H 3305 3727 50  0000 C CNN
+F 2 "" H 3300 3900 50  0001 C CNN
+F 3 "" H 3300 3900 50  0001 C CNN
+	1    3300 3900
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	3300 3700 3300 3900
+Wire Wire Line
+	3300 3600 3300 3400
+Wire Wire Line
+	5350 4050 5150 4050
+Connection ~ 4950 4050
+Wire Wire Line
+	3850 4050 3850 3350
+Wire Wire Line
+	5350 3900 5350 4050
+Wire Wire Line
+	3850 3350 4450 3350
+Wire Wire Line
+	5450 3350 5650 3350
+Wire Wire Line
+	5150 4050 5150 3850
+Wire Wire Line
+	5150 3850 4950 3850
+Connection ~ 5150 4050
+Wire Wire Line
+	5150 4050 4950 4050
+Wire Wire Line
+	5650 3900 5650 3350
+Connection ~ 5650 3350
+Wire Wire Line
+	5650 3350 5800 3350
+$EndSCHEMATC

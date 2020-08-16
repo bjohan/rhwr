@@ -1,0 +1,3 @@
+(sym_lib_table
+  (lib (name grf_3042)(type Legacy)(uri /home/bjohan/projects/rhwr/test_equipment/lo_amp/lo_amp/grf_3042.lib)(options "")(descr ""))
+)

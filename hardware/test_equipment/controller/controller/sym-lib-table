@@ -1,0 +1,4 @@
+(sym_lib_table
+  (lib (name arduino)(type Legacy)(uri /home/bjohan/git_wd/kicad_libraries/arduino-kicad-library/arduino.lib)(options "")(descr ""))
+  (lib (name diff_interface)(type Legacy)(uri /home/bjohan/projects/rhwr/test_equipment/controller/controller/diff_interface.lib)(options "")(descr ""))
+)

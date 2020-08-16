@@ -1,0 +1,3 @@
+(sym_lib_table
+  (lib (name xl66009)(type Legacy)(uri /home/bjohan/projects/rhwr/test_equipment/smps_2/smps2/xl66009.lib)(options "")(descr ""))
+)

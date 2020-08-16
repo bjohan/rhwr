@@ -1,0 +1,743 @@
+EESchema Schematic File Version 4
+EELAYER 26 0
+EELAYER END
+$Descr A4 11693 8268
+encoding utf-8
+Sheet 1 1
+Title ""
+Date ""
+Rev ""
+Comp ""
+Comment1 ""
+Comment2 ""
+Comment3 ""
+Comment4 ""
+$EndDescr
+$Comp
+L Regulator_Switching:LM2595S-3.3 U3
+U 1 1 5EDA9B18
+P 3800 1400
+F 0 "U3" H 3800 1767 50  0000 C CNN
+F 1 "LM2595S-3.3" H 3800 1676 50  0000 C CNN
+F 2 "TO_SOT_Packages_SMD:TO-263-5_TabPin3" H 3850 1150 50  0001 L CIN
+F 3 "http://www.ti.com.cn/cn/lit/ds/symlink/lm2595.pdf" H 3800 1400 50  0001 C CNN
+	1    3800 1400
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:CP C3
+U 1 1 5EDA9EF1
+P 2100 1450
+F 0 "C3" H 2218 1496 50  0000 L CNN
+F 1 "CP" H 2218 1405 50  0000 L CNN
+F 2 "Capacitors_SMD:CP_Elec_10x10.5" H 2138 1300 50  0001 C CNN
+F 3 "~" H 2100 1450 50  0001 C CNN
+	1    2100 1450
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:L L9
+U 1 1 5EDAA12A
+P 5450 1500
+F 0 "L9" V 5640 1500 50  0000 C CNN
+F 1 "L" V 5549 1500 50  0000 C CNN
+F 2 "Inductors_NEOSID:Neosid_Inductor_Ms95" H 5450 1500 50  0001 C CNN
+F 3 "~" H 5450 1500 50  0001 C CNN
+	1    5450 1500
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Device:CP C12
+U 1 1 5EDAA3A3
+P 5700 1650
+F 0 "C12" H 5818 1696 50  0000 L CNN
+F 1 "CP" H 5818 1605 50  0000 L CNN
+F 2 "Capacitors_SMD:CP_Elec_10x10.5" H 5738 1500 50  0001 C CNN
+F 3 "~" H 5700 1650 50  0001 C CNN
+	1    5700 1650
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	1850 1300 1900 1300
+Connection ~ 2100 1300
+Wire Wire Line
+	2100 1600 2100 1800
+Wire Wire Line
+	5700 1500 5600 1500
+$Comp
+L power:GND #PWR0101
+U 1 1 5EDAAD5E
+P 7150 1500
+F 0 "#PWR0101" H 7150 1250 50  0001 C CNN
+F 1 "GND" H 7155 1327 50  0000 C CNN
+F 2 "" H 7150 1500 50  0001 C CNN
+F 3 "" H 7150 1500 50  0001 C CNN
+	1    7150 1500
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	7150 1500 6950 1500
+Wire Wire Line
+	3800 1700 3800 1800
+$Comp
+L xl66009:xl6009 U2
+U 1 1 5EDAB592
+P 3500 2950
+F 0 "U2" H 3841 2821 50  0000 L CNN
+F 1 "xl6009" H 3841 2730 50  0000 L CNN
+F 2 "TO_SOT_Packages_SMD:TO-263-5_TabPin3" H 3500 2950 50  0001 C CNN
+F 3 "" H 3500 2950 50  0001 C CNN
+	1    3500 2950
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:C C13
+U 1 1 5EDAB92F
+P 6450 1650
+F 0 "C13" H 6335 1604 50  0000 R CNN
+F 1 "C" H 6335 1695 50  0000 R CNN
+F 2 "Capacitors_SMD:C_1206" H 6488 1500 50  0001 C CNN
+F 3 "~" H 6450 1650 50  0001 C CNN
+	1    6450 1650
+	-1   0    0    1   
+$EndComp
+Wire Wire Line
+	6450 1500 6100 1500
+Connection ~ 6450 1500
+Wire Wire Line
+	6450 1800 6100 1800
+Connection ~ 6450 1800
+$Comp
+L Device:C C2
+U 1 1 5EDABEE6
+P 1850 1450
+F 0 "C2" H 1735 1404 50  0000 R CNN
+F 1 "C" H 1735 1495 50  0000 R CNN
+F 2 "Capacitors_SMD:C_1206" H 1888 1300 50  0001 C CNN
+F 3 "~" H 1850 1450 50  0001 C CNN
+	1    1850 1450
+	-1   0    0    1   
+$EndComp
+Wire Wire Line
+	1850 1600 1850 1800
+Wire Wire Line
+	1850 1800 2100 1800
+Connection ~ 2100 1800
+$Comp
+L Device:CP C6
+U 1 1 5EDAC2D0
+P 2500 3150
+F 0 "C6" H 2618 3196 50  0000 L CNN
+F 1 "CP" H 2618 3105 50  0000 L CNN
+F 2 "Capacitors_SMD:CP_Elec_10x10.5" H 2538 3000 50  0001 C CNN
+F 3 "~" H 2500 3150 50  0001 C CNN
+	1    2500 3150
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:C C5
+U 1 1 5EDAC3B0
+P 2150 3150
+F 0 "C5" H 2035 3104 50  0000 R CNN
+F 1 "C" H 2035 3195 50  0000 R CNN
+F 2 "Capacitors_SMD:C_1206" H 2188 3000 50  0001 C CNN
+F 3 "~" H 2150 3150 50  0001 C CNN
+	1    2150 3150
+	-1   0    0    1   
+$EndComp
+$Comp
+L Device:L L5
+U 1 1 5EDAC4AA
+P 3150 2850
+F 0 "L5" V 3340 2850 50  0000 C CNN
+F 1 "L" V 3249 2850 50  0000 C CNN
+F 2 "Inductors_NEOSID:Neosid_Inductor_Ms95" H 3150 2850 50  0001 C CNN
+F 3 "~" H 3150 2850 50  0001 C CNN
+	1    3150 2850
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Device:R_POT RV1
+U 1 1 5EDAC710
+P 4350 3050
+F 0 "RV1" H 4280 3096 50  0000 R CNN
+F 1 "R_POT" H 4280 3005 50  0000 R CNN
+F 2 "Potentiometers:Potentiometer_Trimmer_Vishay_TS53YL" H 4350 3050 50  0001 C CNN
+F 3 "~" H 4350 3050 50  0001 C CNN
+	1    4350 3050
+	-1   0    0    -1  
+$EndComp
+$Comp
+L Device:CP C9
+U 1 1 5EDAC950
+P 5200 3000
+F 0 "C9" H 5318 3046 50  0000 L CNN
+F 1 "CP" H 5318 2955 50  0000 L CNN
+F 2 "Capacitors_SMD:CP_Elec_10x10.5" H 5238 2850 50  0001 C CNN
+F 3 "~" H 5200 3000 50  0001 C CNN
+	1    5200 3000
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:C C8
+U 1 1 5EDAC956
+P 4850 3000
+F 0 "C8" H 4735 2954 50  0000 R CNN
+F 1 "C" H 4735 3045 50  0000 R CNN
+F 2 "Capacitors_SMD:C_1206" H 4888 2850 50  0001 C CNN
+F 3 "~" H 4850 3000 50  0001 C CNN
+	1    4850 3000
+	-1   0    0    1   
+$EndComp
+Wire Wire Line
+	3150 3400 2500 3400
+Wire Wire Line
+	2150 3400 2150 3300
+Wire Wire Line
+	2500 3300 2500 3400
+Connection ~ 2500 3400
+Wire Wire Line
+	2500 3400 2150 3400
+Wire Wire Line
+	3000 3000 2500 3000
+Connection ~ 2500 3000
+Wire Wire Line
+	2500 3000 2150 3000
+Wire Wire Line
+	3000 2850 3000 3000
+Connection ~ 3000 3000
+Wire Wire Line
+	3300 2850 3500 2850
+Connection ~ 3500 2850
+Wire Wire Line
+	3500 2850 3700 2850
+Wire Wire Line
+	4350 2900 4350 2850
+Wire Wire Line
+	4350 2850 4050 2850
+Wire Wire Line
+	5200 2850 4850 2850
+Connection ~ 4350 2850
+Connection ~ 4850 2850
+Wire Wire Line
+	4850 2850 4350 2850
+Wire Wire Line
+	3150 3400 3150 3500
+Wire Wire Line
+	3150 3500 4350 3500
+Wire Wire Line
+	5200 3500 5200 3150
+Connection ~ 3150 3400
+Wire Wire Line
+	4850 3150 4850 3500
+Connection ~ 4850 3500
+Wire Wire Line
+	4850 3500 5200 3500
+Wire Wire Line
+	4350 3200 4350 3500
+Connection ~ 4350 3500
+Wire Wire Line
+	4350 3500 4850 3500
+Wire Wire Line
+	4200 3050 3800 3050
+$Comp
+L power:GND #PWR0102
+U 1 1 5EDB0AC1
+P 3150 3500
+F 0 "#PWR0102" H 3150 3250 50  0001 C CNN
+F 1 "GND" H 3155 3327 50  0000 C CNN
+F 2 "" H 3150 3500 50  0001 C CNN
+F 3 "" H 3150 3500 50  0001 C CNN
+	1    3150 3500
+	1    0    0    -1  
+$EndComp
+Connection ~ 3150 3500
+Text Label 4500 2850 0    50   ~ 0
+20V
+Text Label 3950 1800 0    50   ~ 0
+-20V
+Connection ~ 3800 1800
+$Comp
+L Device:R_POT RV3
+U 1 1 5EDB278B
+P 6100 1650
+F 0 "RV3" H 6030 1696 50  0000 R CNN
+F 1 "R_POT" H 6030 1605 50  0000 R CNN
+F 2 "Potentiometers:Potentiometer_Trimmer_Vishay_TS53YL" H 6100 1650 50  0001 C CNN
+F 3 "~" H 6100 1650 50  0001 C CNN
+	1    6100 1650
+	-1   0    0    -1  
+$EndComp
+$Comp
+L Regulator_Switching:LM2595S-3.3 U1
+U 1 1 5EDB4F10
+P 3150 5700
+F 0 "U1" H 3150 6067 50  0000 C CNN
+F 1 "LM2595S-3.3" H 3150 5976 50  0000 C CNN
+F 2 "TO_SOT_Packages_SMD:TO-263-5_TabPin3" H 3200 5450 50  0001 L CIN
+F 3 "http://www.ti.com.cn/cn/lit/ds/symlink/lm2595.pdf" H 3150 5700 50  0001 C CNN
+	1    3150 5700
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:CP C4
+U 1 1 5EDB5232
+P 2100 5750
+F 0 "C4" H 2218 5796 50  0000 L CNN
+F 1 "CP" H 2218 5705 50  0000 L CNN
+F 2 "Capacitors_SMD:CP_Elec_10x10.5" H 2138 5600 50  0001 C CNN
+F 3 "~" H 2100 5750 50  0001 C CNN
+	1    2100 5750
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:C C1
+U 1 1 5EDB533E
+P 1750 5750
+F 0 "C1" H 1635 5704 50  0000 R CNN
+F 1 "C" H 1635 5795 50  0000 R CNN
+F 2 "Capacitors_SMD:C_1206" H 1788 5600 50  0001 C CNN
+F 3 "~" H 1750 5750 50  0001 C CNN
+	1    1750 5750
+	-1   0    0    1   
+$EndComp
+$Comp
+L Device:L L6
+U 1 1 5EDB554A
+P 4350 5800
+F 0 "L6" V 4540 5800 50  0000 C CNN
+F 1 "L" V 4449 5800 50  0000 C CNN
+F 2 "Inductors_NEOSID:Neosid_Inductor_Ms95" H 4350 5800 50  0001 C CNN
+F 3 "~" H 4350 5800 50  0001 C CNN
+	1    4350 5800
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Device:CP C11
+U 1 1 5EDB577E
+P 5550 5950
+F 0 "C11" H 5668 5996 50  0000 L CNN
+F 1 "CP" H 5668 5905 50  0000 L CNN
+F 2 "Capacitors_SMD:CP_Elec_10x10.5" H 5588 5800 50  0001 C CNN
+F 3 "~" H 5550 5950 50  0001 C CNN
+	1    5550 5950
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:C C10
+U 1 1 5EDB5784
+P 5200 5950
+F 0 "C10" H 5085 5904 50  0000 R CNN
+F 1 "C" H 5085 5995 50  0000 R CNN
+F 2 "Capacitors_SMD:C_1206" H 5238 5800 50  0001 C CNN
+F 3 "~" H 5200 5950 50  0001 C CNN
+	1    5200 5950
+	-1   0    0    1   
+$EndComp
+$Comp
+L Device:R_POT RV2
+U 1 1 5EDB6DA4
+P 4850 5950
+F 0 "RV2" H 4780 5904 50  0000 R CNN
+F 1 "R_POT" H 4780 5995 50  0000 R CNN
+F 2 "Potentiometers:Potentiometer_Trimmer_Vishay_TS53YL" H 4850 5950 50  0001 C CNN
+F 3 "~" H 4850 5950 50  0001 C CNN
+	1    4850 5950
+	-1   0    0    1   
+$EndComp
+Wire Wire Line
+	2650 5600 2100 5600
+Connection ~ 2100 5600
+Wire Wire Line
+	2100 5600 1750 5600
+Wire Wire Line
+	3150 6000 2650 6000
+Wire Wire Line
+	1750 6000 1750 5900
+Wire Wire Line
+	2100 5900 2100 6000
+Connection ~ 2100 6000
+Wire Wire Line
+	2100 6000 1750 6000
+Wire Wire Line
+	2650 5800 2650 6000
+Connection ~ 2650 6000
+Wire Wire Line
+	2650 6000 2100 6000
+Wire Wire Line
+	5550 5800 5200 5800
+Wire Wire Line
+	5550 6100 5200 6100
+Wire Wire Line
+	3150 6100 3150 6000
+Connection ~ 5200 6100
+Connection ~ 3150 6000
+$Comp
+L power:GND #PWR0103
+U 1 1 5EDBDAA4
+P 3150 6100
+F 0 "#PWR0103" H 3150 5850 50  0001 C CNN
+F 1 "GND" H 3155 5927 50  0000 C CNN
+F 2 "" H 3150 6100 50  0001 C CNN
+F 3 "" H 3150 6100 50  0001 C CNN
+	1    3150 6100
+	1    0    0    -1  
+$EndComp
+Connection ~ 3150 6100
+Connection ~ 4850 6100
+Wire Wire Line
+	4850 6100 5200 6100
+Wire Wire Line
+	5200 5800 4850 5800
+Connection ~ 5200 5800
+Connection ~ 4850 5800
+Wire Wire Line
+	4850 5800 4500 5800
+Wire Wire Line
+	4700 5950 4700 5600
+Wire Wire Line
+	4700 5600 3650 5600
+Connection ~ 2150 3000
+Wire Wire Line
+	1250 1300 1250 3000
+Wire Wire Line
+	1250 3000 2150 3000
+Wire Wire Line
+	1250 3000 1250 5600
+Connection ~ 1250 3000
+Connection ~ 5200 2850
+$Comp
+L Connector:Conn_01x02_Male J1
+U 1 1 5EDC98E9
+P 600 3000
+F 0 "J1" H 706 3178 50  0000 C CNN
+F 1 "Conn_01x02_Male" H 706 3087 50  0000 C CNN
+F 2 "Connectors_Molex:Molex_KK-6410-02_02x2.54mm_Straight" H 600 3000 50  0001 C CNN
+F 3 "~" H 600 3000 50  0001 C CNN
+	1    600  3000
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR0104
+U 1 1 5EDC9AA7
+P 800 3200
+F 0 "#PWR0104" H 800 2950 50  0001 C CNN
+F 1 "GND" H 805 3027 50  0000 C CNN
+F 2 "" H 800 3200 50  0001 C CNN
+F 3 "" H 800 3200 50  0001 C CNN
+	1    800  3200
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	800  3100 800  3200
+Wire Wire Line
+	800  3000 1250 3000
+$Comp
+L Connector:Conn_01x02_Male J3
+U 1 1 5EDCDCD4
+P 6350 5900
+F 0 "J3" H 6323 5780 50  0000 R CNN
+F 1 "Conn_01x02_Male" H 6323 5871 50  0000 R CNN
+F 2 "Connectors_Molex:Molex_KK-6410-02_02x2.54mm_Straight" H 6350 5900 50  0001 C CNN
+F 3 "~" H 6350 5900 50  0001 C CNN
+	1    6350 5900
+	-1   0    0    1   
+$EndComp
+$Comp
+L Connector:Conn_01x02_Male J2
+U 1 1 5EDCDF48
+P 6350 2950
+F 0 "J2" H 6323 2830 50  0000 R CNN
+F 1 "Conn_01x02_Male" H 6323 2921 50  0000 R CNN
+F 2 "Connectors_Molex:Molex_KK-6410-02_02x2.54mm_Straight" H 6350 2950 50  0001 C CNN
+F 3 "~" H 6350 2950 50  0001 C CNN
+	1    6350 2950
+	-1   0    0    1   
+$EndComp
+$Comp
+L Connector:Conn_01x02_Male J4
+U 1 1 5EDCE02C
+P 7600 1800
+F 0 "J4" H 7573 1680 50  0000 R CNN
+F 1 "Conn_01x02_Male" H 7573 1771 50  0000 R CNN
+F 2 "Connectors_Molex:Molex_KK-6410-02_02x2.54mm_Straight" H 7600 1800 50  0001 C CNN
+F 3 "~" H 7600 1800 50  0001 C CNN
+	1    7600 1800
+	-1   0    0    1   
+$EndComp
+Wire Wire Line
+	7400 1700 6950 1700
+Wire Wire Line
+	6950 1700 6950 1500
+Connection ~ 6950 1500
+Wire Wire Line
+	6150 2850 5200 2850
+Wire Wire Line
+	6150 2950 6150 3500
+Wire Wire Line
+	6150 3500 5200 3500
+Connection ~ 5200 3500
+Wire Wire Line
+	6150 5800 5550 5800
+Connection ~ 5550 5800
+Wire Wire Line
+	6150 5900 6150 6100
+Wire Wire Line
+	6150 6100 5550 6100
+Connection ~ 5550 6100
+$Comp
+L Device:L L7
+U 1 1 5EDDC0B7
+P 4350 5950
+F 0 "L7" V 4540 5950 50  0000 C CNN
+F 1 "L" V 4449 5950 50  0000 C CNN
+F 2 "Inductors_NEOSID:Neosid_Inductor_Ms95" H 4350 5950 50  0001 C CNN
+F 3 "~" H 4350 5950 50  0001 C CNN
+	1    4350 5950
+	0    -1   -1   0   
+$EndComp
+Wire Wire Line
+	4500 5950 4500 5800
+Connection ~ 4500 5800
+Wire Wire Line
+	4200 5950 4200 5800
+Connection ~ 4200 5800
+$Comp
+L Device:L L8
+U 1 1 5EDE12F2
+P 5450 1400
+F 0 "L8" V 5640 1400 50  0000 C CNN
+F 1 "L" V 5549 1400 50  0000 C CNN
+F 2 "Inductors_NEOSID:Neosid_Inductor_Ms95" H 5450 1400 50  0001 C CNN
+F 3 "~" H 5450 1400 50  0001 C CNN
+	1    5450 1400
+	0    -1   -1   0   
+$EndComp
+Wire Wire Line
+	5600 1400 5600 1500
+Connection ~ 5600 1500
+Wire Wire Line
+	5300 1400 5300 1500
+Connection ~ 5300 1500
+$Comp
+L Device:L L4
+U 1 1 5EDE67D6
+P 3150 2800
+F 0 "L4" V 3340 2800 50  0000 C CNN
+F 1 "L" V 3249 2800 50  0000 C CNN
+F 2 "Inductors_NEOSID:Neosid_Inductor_Ms95" H 3150 2800 50  0001 C CNN
+F 3 "~" H 3150 2800 50  0001 C CNN
+	1    3150 2800
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Device:L L3
+U 1 1 5EDE6834
+P 3150 2750
+F 0 "L3" V 3340 2750 50  0000 C CNN
+F 1 "L" V 3249 2750 50  0000 C CNN
+F 2 "Inductors_NEOSID:Neosid_Inductor_Ms95" H 3150 2750 50  0001 C CNN
+F 3 "~" H 3150 2750 50  0001 C CNN
+	1    3150 2750
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Device:L L2
+U 1 1 5EDE6894
+P 3150 2700
+F 0 "L2" V 3340 2700 50  0000 C CNN
+F 1 "L" V 3249 2700 50  0000 C CNN
+F 2 "Inductors_NEOSID:Neosid_Inductor_Ms95" H 3150 2700 50  0001 C CNN
+F 3 "~" H 3150 2700 50  0001 C CNN
+	1    3150 2700
+	0    -1   -1   0   
+$EndComp
+$Comp
+L Device:L L1
+U 1 1 5EDE68F6
+P 3150 2650
+F 0 "L1" V 3340 2650 50  0000 C CNN
+F 1 "L" V 3249 2650 50  0000 C CNN
+F 2 "Inductors_NEOSID:Neosid_Inductor_Ms95" H 3150 2650 50  0001 C CNN
+F 3 "~" H 3150 2650 50  0001 C CNN
+	1    3150 2650
+	0    -1   -1   0   
+$EndComp
+Wire Wire Line
+	3300 2650 3300 2700
+Connection ~ 3300 2850
+Connection ~ 3300 2700
+Wire Wire Line
+	3300 2700 3300 2750
+Connection ~ 3300 2750
+Wire Wire Line
+	3300 2750 3300 2800
+Connection ~ 3300 2800
+Wire Wire Line
+	3300 2800 3300 2850
+Wire Wire Line
+	3000 2650 3000 2700
+Connection ~ 3000 2850
+Connection ~ 3000 2700
+Wire Wire Line
+	3000 2700 3000 2750
+Connection ~ 3000 2750
+Wire Wire Line
+	3000 2750 3000 2800
+Connection ~ 3000 2800
+Wire Wire Line
+	3000 2800 3000 2850
+$Comp
+L Device:D_Schottky_AKA D3
+U 1 1 5EDECBFE
+P 3900 2850
+F 0 "D3" H 3925 2625 50  0000 C CNN
+F 1 "D_Schottky_AKA" H 3925 2716 50  0000 C CNN
+F 2 "Power_Integrations:TO-220" H 3900 2850 50  0001 C CNN
+F 3 "~" H 3900 2850 50  0001 C CNN
+	1    3900 2850
+	-1   0    0    1   
+$EndComp
+Wire Wire Line
+	3150 6100 3900 6100
+Wire Wire Line
+	3950 6150 3900 6150
+Wire Wire Line
+	3900 6150 3900 6100
+Connection ~ 3900 6150
+Wire Wire Line
+	3900 6150 3850 6150
+Connection ~ 3900 6100
+Wire Wire Line
+	3900 6100 4850 6100
+Connection ~ 4050 2850
+Wire Wire Line
+	4050 2850 4000 2850
+Wire Wire Line
+	3700 2950 3700 2850
+Wire Wire Line
+	3650 5800 3850 5800
+Connection ~ 3700 2850
+$Comp
+L Device:D_Schottky_AKA D1
+U 1 1 5EDF65C1
+P 1750 1100
+F 0 "D1" H 1775 875 50  0000 C CNN
+F 1 "D_Schottky_AKA" H 1775 966 50  0000 C CNN
+F 2 "Power_Integrations:TO-220" H 1750 1100 50  0001 C CNN
+F 3 "~" H 1750 1100 50  0001 C CNN
+	1    1750 1100
+	-1   0    0    1   
+$EndComp
+Wire Wire Line
+	1550 1100 1550 1200
+Connection ~ 1550 1200
+Wire Wire Line
+	1550 1200 1550 1300
+Wire Wire Line
+	1900 1100 1900 1300
+Connection ~ 1900 1300
+Wire Wire Line
+	1900 1300 2100 1300
+$Comp
+L Device:D_Schottky_AKA D4
+U 1 1 5EE00726
+P 5150 1650
+F 0 "D4" V 5129 1791 50  0000 L CNN
+F 1 "D_Schottky_AKA" V 5220 1791 50  0000 L CNN
+F 2 "Power_Integrations:TO-220" H 5150 1650 50  0001 C CNN
+F 3 "~" H 5150 1650 50  0001 C CNN
+	1    5150 1650
+	0    1    1    0   
+$EndComp
+Connection ~ 5150 1500
+Wire Wire Line
+	5150 1500 5300 1500
+Wire Wire Line
+	5150 1850 5200 1850
+Wire Wire Line
+	5200 1800 5200 1850
+Connection ~ 5200 1800
+Wire Wire Line
+	5200 1800 5700 1800
+Connection ~ 5200 1850
+Wire Wire Line
+	5200 1850 5250 1850
+$Comp
+L Device:D_Schottky_AKA D2
+U 1 1 5EE07798
+P 3850 5950
+F 0 "D2" V 3829 6091 50  0000 L CNN
+F 1 "D_Schottky_AKA" V 3920 6091 50  0000 L CNN
+F 2 "Power_Integrations:TO-220" H 3850 5950 50  0001 C CNN
+F 3 "~" H 3850 5950 50  0001 C CNN
+	1    3850 5950
+	0    1    1    0   
+$EndComp
+Connection ~ 3850 5800
+Wire Wire Line
+	3850 5800 4200 5800
+Wire Wire Line
+	6450 1500 6750 1500
+Wire Wire Line
+	6450 1800 6800 1800
+$Comp
+L Device:D_Schottky_AKA D5
+U 1 1 5EE079CD
+P 6750 1650
+F 0 "D5" V 6729 1791 50  0000 L CNN
+F 1 "D_Schottky_AKA" V 6820 1791 50  0000 L CNN
+F 2 "Power_Integrations:TO-220" H 6750 1650 50  0001 C CNN
+F 3 "~" H 6750 1650 50  0001 C CNN
+	1    6750 1650
+	0    1    1    0   
+$EndComp
+Connection ~ 6750 1500
+Wire Wire Line
+	6750 1500 6950 1500
+Wire Wire Line
+	6850 1850 6800 1850
+Wire Wire Line
+	6800 1800 6800 1850
+Connection ~ 6800 1800
+Wire Wire Line
+	6800 1800 7400 1800
+Connection ~ 6800 1850
+Wire Wire Line
+	6800 1850 6750 1850
+Wire Wire Line
+	1250 1300 1550 1300
+Connection ~ 1550 1300
+Wire Wire Line
+	1550 1300 1600 1300
+Wire Wire Line
+	1250 5600 1750 5600
+Connection ~ 1750 5600
+Text Label 1550 3000 0    50   ~ 0
+vin
+Text Label 2200 1300 0    50   ~ 0
+vin_d
+Text Label 4350 1500 0    50   ~ 0
+sw
+Wire Wire Line
+	6100 1500 5700 1500
+Wire Wire Line
+	3800 1800 5200 1800
+Wire Wire Line
+	4300 1500 5150 1500
+Connection ~ 6100 1500
+Connection ~ 5700 1500
+Wire Wire Line
+	6100 1800 5700 1800
+Connection ~ 6100 1800
+Connection ~ 5700 1800
+Wire Wire Line
+	5950 1650 5950 1300
+Wire Wire Line
+	4300 1300 5950 1300
+Wire Wire Line
+	2100 1800 3800 1800
+Wire Wire Line
+	2100 1300 3300 1300
+NoConn ~ 3300 1500
+$EndSCHEMATC

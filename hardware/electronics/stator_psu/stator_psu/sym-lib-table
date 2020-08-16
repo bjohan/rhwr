@@ -1,0 +1,3 @@
+(sym_lib_table
+  (lib (name stator_psu_modules)(type Legacy)(uri /home/bjohan/projects/rhwr/electronics/stator_psu/stator_psu/stator_psu_modules.lib)(options "")(descr ""))
+)

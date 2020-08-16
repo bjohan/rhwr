@@ -1,0 +1,1132 @@
+EESchema Schematic File Version 4
+EELAYER 26 0
+EELAYER END
+$Descr A4 11693 8268
+encoding utf-8
+Sheet 1 1
+Title ""
+Date ""
+Rev ""
+Comp ""
+Comment1 ""
+Comment2 ""
+Comment3 ""
+Comment4 ""
+$EndDescr
+$Comp
+L Regulator_Switching:CRE1S2405SC U1
+U 1 1 5E8241E5
+P 4350 3000
+F 0 "U1" H 4350 3467 50  0000 C CNN
+F 1 "CRE1S2405SC" H 4350 3376 50  0000 C CNN
+F 2 "my_lib:2149f" H 4350 2600 50  0001 C CNN
+F 3 "http://power.murata.com/datasheet?/data/power/ncl/kdc_cre1.pdf" H 4350 2500 50  0001 C CNN
+	1    4350 3000
+	1    0    0    -1  
+$EndComp
+$Comp
+L Regulator_Switching:R-781.5-0.5 U2
+U 1 1 5E824644
+P 4350 4400
+F 0 "U2" H 4350 4642 50  0000 C CNN
+F 1 "R-781.5-0.5" H 4350 4551 50  0000 C CNN
+F 2 "my_lib:0663ac" H 4400 4150 50  0001 L CIN
+F 3 "https://www.recom-power.com/pdf/Innoline/R-78xx-0.5.pdf" H 4350 4400 50  0001 C CNN
+	1    4350 4400
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:L L6
+U 1 1 5E824CC2
+P 5650 2850
+F 0 "L6" V 5472 2850 50  0000 C CNN
+F 1 "L" V 5563 2850 50  0000 C CNN
+F 2 "Inductors_NEOSID:Neosid_Inductor_SM-NE127" H 5650 2850 50  0001 C CNN
+F 3 "~" H 5650 2850 50  0001 C CNN
+	1    5650 2850
+	0    1    1    0   
+$EndComp
+$Comp
+L Device:C C29
+U 1 1 5E824F92
+P 6000 3000
+F 0 "C29" H 6115 3046 50  0000 L CNN
+F 1 "C" H 6115 2955 50  0000 L CNN
+F 2 "Capacitors_SMD:C_1206" H 6038 2850 50  0001 C CNN
+F 3 "~" H 6000 3000 50  0001 C CNN
+	1    6000 3000
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:CP C33
+U 1 1 5E825021
+P 6300 3000
+F 0 "C33" H 6418 3046 50  0000 L CNN
+F 1 "CP" H 6418 2955 50  0000 L CNN
+F 2 "Capacitors_SMD:CP_Elec_10x10.5" H 6338 2850 50  0001 C CNN
+F 3 "~" H 6300 3000 50  0001 C CNN
+	1    6300 3000
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:C C21
+U 1 1 5E8250AE
+P 5050 3000
+F 0 "C21" H 5165 3046 50  0000 L CNN
+F 1 "C" H 5165 2955 50  0000 L CNN
+F 2 "Capacitors_SMD:C_1206" H 5088 2850 50  0001 C CNN
+F 3 "~" H 5050 3000 50  0001 C CNN
+	1    5050 3000
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:CP C25
+U 1 1 5E8250F2
+P 5350 3000
+F 0 "C25" H 5468 3046 50  0000 L CNN
+F 1 "CP" H 5468 2955 50  0000 L CNN
+F 2 "Capacitors_SMD:CP_Elec_10x10.5" H 5388 2850 50  0001 C CNN
+F 3 "~" H 5350 3000 50  0001 C CNN
+	1    5350 3000
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:L L2
+U 1 1 5E8259F4
+P 2800 2850
+F 0 "L2" V 2622 2850 50  0000 C CNN
+F 1 "L" V 2713 2850 50  0000 C CNN
+F 2 "Inductors_NEOSID:Neosid_Inductor_SM-NE127" H 2800 2850 50  0001 C CNN
+F 3 "~" H 2800 2850 50  0001 C CNN
+	1    2800 2850
+	0    1    1    0   
+$EndComp
+$Comp
+L Device:C C13
+U 1 1 5E8259FA
+P 3450 3000
+F 0 "C13" H 3565 3046 50  0000 L CNN
+F 1 "C" H 3565 2955 50  0000 L CNN
+F 2 "Capacitors_SMD:C_1206" H 3488 2850 50  0001 C CNN
+F 3 "~" H 3450 3000 50  0001 C CNN
+	1    3450 3000
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:CP C9
+U 1 1 5E825A00
+P 3150 3000
+F 0 "C9" H 3268 3046 50  0000 L CNN
+F 1 "CP" H 3268 2955 50  0000 L CNN
+F 2 "Capacitors_SMD:CP_Elec_10x10.5" H 3188 2850 50  0001 C CNN
+F 3 "~" H 3150 3000 50  0001 C CNN
+	1    3150 3000
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:C C5
+U 1 1 5E825A06
+P 2550 3000
+F 0 "C5" H 2665 3046 50  0000 L CNN
+F 1 "C" H 2665 2955 50  0000 L CNN
+F 2 "Capacitors_SMD:C_1206" H 2588 2850 50  0001 C CNN
+F 3 "~" H 2550 3000 50  0001 C CNN
+	1    2550 3000
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:CP C1
+U 1 1 5E825A0C
+P 2250 3000
+F 0 "C1" H 2368 3046 50  0000 L CNN
+F 1 "CP" H 2368 2955 50  0000 L CNN
+F 2 "Capacitors_SMD:CP_Elec_10x10.5" H 2288 2850 50  0001 C CNN
+F 3 "~" H 2250 3000 50  0001 C CNN
+	1    2250 3000
+	1    0    0    -1  
+$EndComp
+$Comp
+L Regulator_Switching:CRE1S2405SC U4
+U 1 1 5E825DF3
+P 4400 1450
+F 0 "U4" H 4400 1917 50  0000 C CNN
+F 1 "CRE1S2405SC" H 4400 1826 50  0000 C CNN
+F 2 "my_lib:cn6009psu" H 4400 1050 50  0001 C CNN
+F 3 "http://power.murata.com/datasheet?/data/power/ncl/kdc_cre1.pdf" H 4400 950 50  0001 C CNN
+	1    4400 1450
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:L L9
+U 1 1 5E825DF9
+P 5700 1300
+F 0 "L9" V 5522 1300 50  0000 C CNN
+F 1 "L" V 5613 1300 50  0000 C CNN
+F 2 "Inductors_NEOSID:Neosid_Inductor_SM-NE127" H 5700 1300 50  0001 C CNN
+F 3 "~" H 5700 1300 50  0001 C CNN
+	1    5700 1300
+	0    1    1    0   
+$EndComp
+$Comp
+L Device:C C32
+U 1 1 5E825DFF
+P 6050 1450
+F 0 "C32" H 6165 1496 50  0000 L CNN
+F 1 "C" H 6165 1405 50  0000 L CNN
+F 2 "Capacitors_SMD:C_1206" H 6088 1300 50  0001 C CNN
+F 3 "~" H 6050 1450 50  0001 C CNN
+	1    6050 1450
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:CP C36
+U 1 1 5E825E05
+P 6350 1450
+F 0 "C36" H 6468 1496 50  0000 L CNN
+F 1 "CP" H 6468 1405 50  0000 L CNN
+F 2 "Capacitors_SMD:CP_Elec_10x10.5" H 6388 1300 50  0001 C CNN
+F 3 "~" H 6350 1450 50  0001 C CNN
+	1    6350 1450
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:C C24
+U 1 1 5E825E0B
+P 5100 1450
+F 0 "C24" H 5215 1496 50  0000 L CNN
+F 1 "C" H 5215 1405 50  0000 L CNN
+F 2 "Capacitors_SMD:C_1206" H 5138 1300 50  0001 C CNN
+F 3 "~" H 5100 1450 50  0001 C CNN
+	1    5100 1450
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:CP C28
+U 1 1 5E825E11
+P 5400 1450
+F 0 "C28" H 5518 1496 50  0000 L CNN
+F 1 "CP" H 5518 1405 50  0000 L CNN
+F 2 "Capacitors_SMD:CP_Elec_10x10.5" H 5438 1300 50  0001 C CNN
+F 3 "~" H 5400 1450 50  0001 C CNN
+	1    5400 1450
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:L L5
+U 1 1 5E825E17
+P 2850 1300
+F 0 "L5" V 2672 1300 50  0000 C CNN
+F 1 "L" V 2763 1300 50  0000 C CNN
+F 2 "Inductors_NEOSID:Neosid_Inductor_SM-NE127" H 2850 1300 50  0001 C CNN
+F 3 "~" H 2850 1300 50  0001 C CNN
+	1    2850 1300
+	0    1    1    0   
+$EndComp
+$Comp
+L Device:C C16
+U 1 1 5E825E1D
+P 3500 1450
+F 0 "C16" H 3615 1496 50  0000 L CNN
+F 1 "C" H 3615 1405 50  0000 L CNN
+F 2 "Capacitors_SMD:C_1206" H 3538 1300 50  0001 C CNN
+F 3 "~" H 3500 1450 50  0001 C CNN
+	1    3500 1450
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:CP C12
+U 1 1 5E825E23
+P 3200 1450
+F 0 "C12" H 3318 1496 50  0000 L CNN
+F 1 "CP" H 3318 1405 50  0000 L CNN
+F 2 "Capacitors_SMD:CP_Elec_10x10.5" H 3238 1300 50  0001 C CNN
+F 3 "~" H 3200 1450 50  0001 C CNN
+	1    3200 1450
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:C C8
+U 1 1 5E825E29
+P 2600 1450
+F 0 "C8" H 2715 1496 50  0000 L CNN
+F 1 "C" H 2715 1405 50  0000 L CNN
+F 2 "Capacitors_SMD:C_1206" H 2638 1300 50  0001 C CNN
+F 3 "~" H 2600 1450 50  0001 C CNN
+	1    2600 1450
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:CP C4
+U 1 1 5E825E2F
+P 2300 1450
+F 0 "C4" H 2418 1496 50  0000 L CNN
+F 1 "CP" H 2418 1405 50  0000 L CNN
+F 2 "Capacitors_SMD:CP_Elec_10x10.5" H 2338 1300 50  0001 C CNN
+F 3 "~" H 2300 1450 50  0001 C CNN
+	1    2300 1450
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:L L8
+U 1 1 5E82712D
+P 5650 5200
+F 0 "L8" V 5472 5200 50  0000 C CNN
+F 1 "L" V 5563 5200 50  0000 C CNN
+F 2 "Inductors_NEOSID:Neosid_Inductor_SM-NE127" H 5650 5200 50  0001 C CNN
+F 3 "~" H 5650 5200 50  0001 C CNN
+	1    5650 5200
+	0    1    1    0   
+$EndComp
+$Comp
+L Device:C C31
+U 1 1 5E827133
+P 6000 5350
+F 0 "C31" H 6115 5396 50  0000 L CNN
+F 1 "C" H 6115 5305 50  0000 L CNN
+F 2 "Capacitors_SMD:C_1206" H 6038 5200 50  0001 C CNN
+F 3 "~" H 6000 5350 50  0001 C CNN
+	1    6000 5350
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:CP C35
+U 1 1 5E827139
+P 6300 5350
+F 0 "C35" H 6418 5396 50  0000 L CNN
+F 1 "CP" H 6418 5305 50  0000 L CNN
+F 2 "Capacitors_SMD:CP_Elec_10x10.5" H 6338 5200 50  0001 C CNN
+F 3 "~" H 6300 5350 50  0001 C CNN
+	1    6300 5350
+	-1   0    0    1   
+$EndComp
+$Comp
+L Device:C C23
+U 1 1 5E82713F
+P 5050 5350
+F 0 "C23" H 5165 5396 50  0000 L CNN
+F 1 "C" H 5165 5305 50  0000 L CNN
+F 2 "Capacitors_SMD:C_1206" H 5088 5200 50  0001 C CNN
+F 3 "~" H 5050 5350 50  0001 C CNN
+	1    5050 5350
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:CP C27
+U 1 1 5E827145
+P 5350 5350
+F 0 "C27" H 5468 5396 50  0000 L CNN
+F 1 "CP" H 5468 5305 50  0000 L CNN
+F 2 "Capacitors_SMD:CP_Elec_10x10.5" H 5388 5200 50  0001 C CNN
+F 3 "~" H 5350 5350 50  0001 C CNN
+	1    5350 5350
+	-1   0    0    1   
+$EndComp
+$Comp
+L Device:L L4
+U 1 1 5E82714B
+P 2800 5200
+F 0 "L4" V 2622 5200 50  0000 C CNN
+F 1 "L" V 2713 5200 50  0000 C CNN
+F 2 "Inductors_NEOSID:Neosid_Inductor_SM-NE127" H 2800 5200 50  0001 C CNN
+F 3 "~" H 2800 5200 50  0001 C CNN
+	1    2800 5200
+	0    1    1    0   
+$EndComp
+$Comp
+L Device:C C15
+U 1 1 5E827151
+P 3450 5350
+F 0 "C15" H 3565 5396 50  0000 L CNN
+F 1 "C" H 3565 5305 50  0000 L CNN
+F 2 "Capacitors_SMD:C_1206" H 3488 5200 50  0001 C CNN
+F 3 "~" H 3450 5350 50  0001 C CNN
+	1    3450 5350
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:CP C11
+U 1 1 5E827157
+P 3150 5350
+F 0 "C11" H 3268 5396 50  0000 L CNN
+F 1 "CP" H 3268 5305 50  0000 L CNN
+F 2 "Capacitors_SMD:CP_Elec_10x10.5" H 3188 5200 50  0001 C CNN
+F 3 "~" H 3150 5350 50  0001 C CNN
+	1    3150 5350
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:C C7
+U 1 1 5E82715D
+P 2550 5350
+F 0 "C7" H 2665 5396 50  0000 L CNN
+F 1 "C" H 2665 5305 50  0000 L CNN
+F 2 "Capacitors_SMD:C_1206" H 2588 5200 50  0001 C CNN
+F 3 "~" H 2550 5350 50  0001 C CNN
+	1    2550 5350
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:CP C3
+U 1 1 5E827163
+P 2250 5350
+F 0 "C3" H 2368 5396 50  0000 L CNN
+F 1 "CP" H 2368 5305 50  0000 L CNN
+F 2 "Capacitors_SMD:CP_Elec_10x10.5" H 2288 5200 50  0001 C CNN
+F 3 "~" H 2250 5350 50  0001 C CNN
+	1    2250 5350
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:L L7
+U 1 1 5E82716F
+P 5650 4400
+F 0 "L7" V 5472 4400 50  0000 C CNN
+F 1 "L" V 5563 4400 50  0000 C CNN
+F 2 "Inductors_NEOSID:Neosid_Inductor_SM-NE127" H 5650 4400 50  0001 C CNN
+F 3 "~" H 5650 4400 50  0001 C CNN
+	1    5650 4400
+	0    1    1    0   
+$EndComp
+$Comp
+L Device:C C30
+U 1 1 5E827175
+P 6000 4550
+F 0 "C30" H 6115 4596 50  0000 L CNN
+F 1 "C" H 6115 4505 50  0000 L CNN
+F 2 "Capacitors_SMD:C_1206" H 6038 4400 50  0001 C CNN
+F 3 "~" H 6000 4550 50  0001 C CNN
+	1    6000 4550
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:CP C34
+U 1 1 5E82717B
+P 6300 4550
+F 0 "C34" H 6418 4596 50  0000 L CNN
+F 1 "CP" H 6418 4505 50  0000 L CNN
+F 2 "Capacitors_SMD:CP_Elec_10x10.5" H 6338 4400 50  0001 C CNN
+F 3 "~" H 6300 4550 50  0001 C CNN
+	1    6300 4550
+	-1   0    0    1   
+$EndComp
+$Comp
+L Device:C C22
+U 1 1 5E827181
+P 5050 4550
+F 0 "C22" H 5165 4596 50  0000 L CNN
+F 1 "C" H 5165 4505 50  0000 L CNN
+F 2 "Capacitors_SMD:C_1206" H 5088 4400 50  0001 C CNN
+F 3 "~" H 5050 4550 50  0001 C CNN
+	1    5050 4550
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:CP C26
+U 1 1 5E827187
+P 5350 4550
+F 0 "C26" H 5468 4596 50  0000 L CNN
+F 1 "CP" H 5468 4505 50  0000 L CNN
+F 2 "Capacitors_SMD:CP_Elec_10x10.5" H 5388 4400 50  0001 C CNN
+F 3 "~" H 5350 4550 50  0001 C CNN
+	1    5350 4550
+	-1   0    0    1   
+$EndComp
+$Comp
+L Device:L L3
+U 1 1 5E82718D
+P 2800 4400
+F 0 "L3" V 2622 4400 50  0000 C CNN
+F 1 "L" V 2713 4400 50  0000 C CNN
+F 2 "Inductors_NEOSID:Neosid_Inductor_SM-NE127" H 2800 4400 50  0001 C CNN
+F 3 "~" H 2800 4400 50  0001 C CNN
+	1    2800 4400
+	0    1    1    0   
+$EndComp
+$Comp
+L Device:C C14
+U 1 1 5E827193
+P 3450 4550
+F 0 "C14" H 3565 4596 50  0000 L CNN
+F 1 "C" H 3565 4505 50  0000 L CNN
+F 2 "Capacitors_SMD:C_1206" H 3488 4400 50  0001 C CNN
+F 3 "~" H 3450 4550 50  0001 C CNN
+	1    3450 4550
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:CP C10
+U 1 1 5E827199
+P 3150 4550
+F 0 "C10" H 3268 4596 50  0000 L CNN
+F 1 "CP" H 3268 4505 50  0000 L CNN
+F 2 "Capacitors_SMD:CP_Elec_10x10.5" H 3188 4400 50  0001 C CNN
+F 3 "~" H 3150 4550 50  0001 C CNN
+	1    3150 4550
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:C C6
+U 1 1 5E82719F
+P 2550 4550
+F 0 "C6" H 2665 4596 50  0000 L CNN
+F 1 "C" H 2665 4505 50  0000 L CNN
+F 2 "Capacitors_SMD:C_1206" H 2588 4400 50  0001 C CNN
+F 3 "~" H 2550 4550 50  0001 C CNN
+	1    2550 4550
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:CP C2
+U 1 1 5E8271A5
+P 2250 4550
+F 0 "C2" H 2368 4596 50  0000 L CNN
+F 1 "CP" H 2368 4505 50  0000 L CNN
+F 2 "Capacitors_SMD:CP_Elec_10x10.5" H 2288 4400 50  0001 C CNN
+F 3 "~" H 2250 4550 50  0001 C CNN
+	1    2250 4550
+	1    0    0    -1  
+$EndComp
+$Comp
+L Regulator_Switching:R-781.5-0.5 U3
+U 1 1 5E82750B
+P 4350 5200
+F 0 "U3" H 4350 5442 50  0000 C CNN
+F 1 "R-781.5-0.5" H 4350 5351 50  0000 C CNN
+F 2 "my_lib:0663ac" H 4400 4950 50  0001 L CIN
+F 3 "https://www.recom-power.com/pdf/Innoline/R-78xx-0.5.pdf" H 4350 5200 50  0001 C CNN
+	1    4350 5200
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:C C18
+U 1 1 5E827D89
+P 4350 2400
+F 0 "C18" V 4098 2400 50  0000 C CNN
+F 1 "C" V 4189 2400 50  0000 C CNN
+F 2 "Capacitors_SMD:C_1206" H 4388 2250 50  0001 C CNN
+F 3 "~" H 4350 2400 50  0001 C CNN
+	1    4350 2400
+	0    1    1    0   
+$EndComp
+$Comp
+L Device:C C17
+U 1 1 5E827E8F
+P 4350 2150
+F 0 "C17" V 4098 2150 50  0000 C CNN
+F 1 "C" V 4189 2150 50  0000 C CNN
+F 2 "Capacitors_SMD:C_1206" H 4388 2000 50  0001 C CNN
+F 3 "~" H 4350 2150 50  0001 C CNN
+	1    4350 2150
+	0    1    1    0   
+$EndComp
+$Comp
+L Device:C C20
+U 1 1 5E827F0D
+P 4400 850
+F 0 "C20" V 4148 850 50  0000 C CNN
+F 1 "C" V 4239 850 50  0000 C CNN
+F 2 "Capacitors_SMD:C_1206" H 4438 700 50  0001 C CNN
+F 3 "~" H 4400 850 50  0001 C CNN
+	1    4400 850 
+	0    1    1    0   
+$EndComp
+$Comp
+L Device:C C19
+U 1 1 5E827FCD
+P 4400 600
+F 0 "C19" V 4148 600 50  0000 C CNN
+F 1 "C" V 4239 600 50  0000 C CNN
+F 2 "Capacitors_SMD:C_1206" H 4438 450 50  0001 C CNN
+F 3 "~" H 4400 600 50  0001 C CNN
+	1    4400 600 
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	5100 1600 5400 1600
+Connection ~ 5400 1600
+Wire Wire Line
+	5400 1600 5650 1600
+Connection ~ 6050 1600
+Wire Wire Line
+	6050 1600 6350 1600
+Wire Wire Line
+	4900 1650 4900 1600
+Wire Wire Line
+	4900 1600 5100 1600
+Connection ~ 5100 1600
+Wire Wire Line
+	4900 1250 4900 1300
+Wire Wire Line
+	4900 1300 5000 1300
+Wire Wire Line
+	5100 1300 5400 1300
+Connection ~ 5100 1300
+Connection ~ 5400 1300
+Wire Wire Line
+	5400 1300 5550 1300
+Wire Wire Line
+	5850 1300 6050 1300
+Connection ~ 6050 1300
+Wire Wire Line
+	6050 1300 6350 1300
+Wire Wire Line
+	3900 1650 3900 1600
+Wire Wire Line
+	3900 1600 3500 1600
+Connection ~ 2600 1600
+Wire Wire Line
+	2600 1600 2300 1600
+Connection ~ 3200 1600
+Wire Wire Line
+	3200 1600 2900 1600
+Connection ~ 3500 1600
+Wire Wire Line
+	3500 1600 3200 1600
+Wire Wire Line
+	3900 1250 3900 1300
+Wire Wire Line
+	3900 1300 3700 1300
+Connection ~ 3200 1300
+Wire Wire Line
+	3200 1300 3000 1300
+Connection ~ 3500 1300
+Wire Wire Line
+	3500 1300 3200 1300
+Wire Wire Line
+	2700 1300 2600 1300
+Connection ~ 2600 1300
+Wire Wire Line
+	2600 1300 2300 1300
+Wire Wire Line
+	4550 600  4550 750 
+Wire Wire Line
+	4250 600  4250 750 
+Wire Wire Line
+	4500 2150 4500 2300
+Wire Wire Line
+	4200 2150 4200 2300
+Wire Wire Line
+	3850 2800 3850 2850
+Wire Wire Line
+	3850 2850 3700 2850
+Connection ~ 3150 2850
+Wire Wire Line
+	3150 2850 2950 2850
+Connection ~ 3450 2850
+Wire Wire Line
+	3450 2850 3150 2850
+Wire Wire Line
+	3850 3200 3850 3150
+Wire Wire Line
+	3850 3150 3450 3150
+Connection ~ 2550 3150
+Wire Wire Line
+	2550 3150 2250 3150
+Connection ~ 3150 3150
+Wire Wire Line
+	3150 3150 2900 3150
+Connection ~ 3450 3150
+Wire Wire Line
+	3450 3150 3150 3150
+Wire Wire Line
+	2250 2850 2550 2850
+Connection ~ 2550 2850
+Wire Wire Line
+	2550 2850 2650 2850
+Wire Wire Line
+	4850 2800 4850 2850
+Wire Wire Line
+	4850 2850 5000 2850
+Connection ~ 5050 2850
+Wire Wire Line
+	5050 2850 5350 2850
+Connection ~ 5350 2850
+Wire Wire Line
+	5350 2850 5500 2850
+Wire Wire Line
+	4850 3200 4850 3150
+Wire Wire Line
+	4850 3150 5050 3150
+Connection ~ 5050 3150
+Wire Wire Line
+	5050 3150 5350 3150
+Connection ~ 5350 3150
+Wire Wire Line
+	5350 3150 5650 3150
+Connection ~ 6000 3150
+Wire Wire Line
+	6000 3150 6300 3150
+Wire Wire Line
+	5800 2850 6000 2850
+Connection ~ 6000 2850
+Wire Wire Line
+	6000 2850 6300 2850
+Wire Wire Line
+	4650 4400 5050 4400
+Connection ~ 5050 4400
+Wire Wire Line
+	5050 4400 5350 4400
+Connection ~ 5350 4400
+Wire Wire Line
+	5350 4400 5500 4400
+Wire Wire Line
+	5800 4400 6000 4400
+Connection ~ 6000 4400
+Wire Wire Line
+	6000 4400 6300 4400
+Wire Wire Line
+	5500 5200 5350 5200
+Connection ~ 5050 5200
+Wire Wire Line
+	5050 5200 4650 5200
+Connection ~ 5350 5200
+Wire Wire Line
+	5350 5200 5050 5200
+Wire Wire Line
+	5000 1300 5000 750 
+Wire Wire Line
+	5000 750  4550 750 
+Connection ~ 5000 1300
+Wire Wire Line
+	5000 1300 5100 1300
+Connection ~ 4550 750 
+Wire Wire Line
+	4550 750  4550 850 
+Wire Wire Line
+	5000 2850 5000 2300
+Wire Wire Line
+	5000 2300 4500 2300
+Connection ~ 5000 2850
+Wire Wire Line
+	5000 2850 5050 2850
+Connection ~ 4500 2300
+Wire Wire Line
+	4500 2300 4500 2400
+Wire Wire Line
+	3700 2850 3700 2300
+Wire Wire Line
+	3700 2300 4200 2300
+Connection ~ 3700 2850
+Wire Wire Line
+	3700 2850 3450 2850
+Connection ~ 4200 2300
+Wire Wire Line
+	4200 2300 4200 2400
+Wire Wire Line
+	3700 1300 3700 750 
+Wire Wire Line
+	3700 750  4250 750 
+Connection ~ 3700 1300
+Wire Wire Line
+	3700 1300 3500 1300
+Connection ~ 4250 750 
+Wire Wire Line
+	4250 750  4250 850 
+Wire Wire Line
+	2250 4700 2550 4700
+Connection ~ 2550 4700
+Wire Wire Line
+	2550 4700 3150 4700
+Connection ~ 3150 4700
+Wire Wire Line
+	3150 4700 3450 4700
+Connection ~ 3450 4700
+Wire Wire Line
+	3450 4700 4350 4700
+Connection ~ 4350 4700
+Wire Wire Line
+	4350 4700 5050 4700
+Connection ~ 5050 4700
+Wire Wire Line
+	5050 4700 5350 4700
+Connection ~ 5350 4700
+Wire Wire Line
+	5350 4700 6000 4700
+Connection ~ 6000 4700
+Wire Wire Line
+	6000 4700 6300 4700
+Wire Wire Line
+	2250 5500 2550 5500
+Connection ~ 2550 5500
+Wire Wire Line
+	2550 5500 3150 5500
+Connection ~ 3150 5500
+Wire Wire Line
+	3150 5500 3450 5500
+Connection ~ 3450 5500
+Wire Wire Line
+	3450 5500 4350 5500
+Connection ~ 4350 5500
+Wire Wire Line
+	4350 5500 5050 5500
+Connection ~ 5050 5500
+Wire Wire Line
+	5050 5500 5350 5500
+Connection ~ 5350 5500
+Wire Wire Line
+	5350 5500 6000 5500
+Connection ~ 6000 5500
+Wire Wire Line
+	6000 5500 6300 5500
+Wire Wire Line
+	5800 5200 6000 5200
+Connection ~ 6000 5200
+Wire Wire Line
+	6000 5200 6300 5200
+Wire Wire Line
+	4050 5200 3450 5200
+Connection ~ 3150 5200
+Wire Wire Line
+	3150 5200 2950 5200
+Connection ~ 3450 5200
+Wire Wire Line
+	3450 5200 3150 5200
+Wire Wire Line
+	2250 5200 2550 5200
+Connection ~ 2550 5200
+Wire Wire Line
+	2550 5200 2650 5200
+Wire Wire Line
+	2250 4400 2550 4400
+Connection ~ 2550 4400
+Wire Wire Line
+	2550 4400 2650 4400
+Wire Wire Line
+	2950 4400 3150 4400
+Connection ~ 3150 4400
+Wire Wire Line
+	3150 4400 3450 4400
+Connection ~ 3450 4400
+Wire Wire Line
+	3450 4400 4050 4400
+$Comp
+L Device:D D1
+U 1 1 5E848799
+P 6300 4250
+F 0 "D1" V 6254 4329 50  0000 L CNN
+F 1 "D" V 6345 4329 50  0000 L CNN
+F 2 "Diodes_SMD:D_2010" H 6300 4250 50  0001 C CNN
+F 3 "~" H 6300 4250 50  0001 C CNN
+	1    6300 4250
+	0    1    1    0   
+$EndComp
+Connection ~ 6300 4400
+$Comp
+L Device:D D2
+U 1 1 5E8489C1
+P 6300 5050
+F 0 "D2" V 6254 5129 50  0000 L CNN
+F 1 "D" V 6345 5129 50  0000 L CNN
+F 2 "Diodes_SMD:D_2010" H 6300 5050 50  0001 C CNN
+F 3 "~" H 6300 5050 50  0001 C CNN
+	1    6300 5050
+	0    1    1    0   
+$EndComp
+Connection ~ 6300 5200
+$Comp
+L power:GND #PWR0101
+U 1 1 5E848AA0
+P 6600 4100
+F 0 "#PWR0101" H 6600 3850 50  0001 C CNN
+F 1 "GND" H 6605 3927 50  0000 C CNN
+F 2 "" H 6600 4100 50  0001 C CNN
+F 3 "" H 6600 4100 50  0001 C CNN
+	1    6600 4100
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR0102
+U 1 1 5E848B16
+P 6600 4900
+F 0 "#PWR0102" H 6600 4650 50  0001 C CNN
+F 1 "GND" H 6605 4727 50  0000 C CNN
+F 2 "" H 6600 4900 50  0001 C CNN
+F 3 "" H 6600 4900 50  0001 C CNN
+	1    6600 4900
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	6300 4900 6600 4900
+Wire Wire Line
+	6300 4100 6600 4100
+$Comp
+L power:GND #PWR0103
+U 1 1 5E85081B
+P 5650 3150
+F 0 "#PWR0103" H 5650 2900 50  0001 C CNN
+F 1 "GND" H 5655 2977 50  0000 C CNN
+F 2 "" H 5650 3150 50  0001 C CNN
+F 3 "" H 5650 3150 50  0001 C CNN
+	1    5650 3150
+	1    0    0    -1  
+$EndComp
+Connection ~ 5650 3150
+Wire Wire Line
+	5650 3150 6000 3150
+$Comp
+L power:GND #PWR0104
+U 1 1 5E850893
+P 5650 1600
+F 0 "#PWR0104" H 5650 1350 50  0001 C CNN
+F 1 "GND" H 5655 1427 50  0000 C CNN
+F 2 "" H 5650 1600 50  0001 C CNN
+F 3 "" H 5650 1600 50  0001 C CNN
+	1    5650 1600
+	1    0    0    -1  
+$EndComp
+Connection ~ 5650 1600
+Wire Wire Line
+	5650 1600 6050 1600
+$Comp
+L power:GND #PWR0105
+U 1 1 5E850904
+P 2900 1600
+F 0 "#PWR0105" H 2900 1350 50  0001 C CNN
+F 1 "GND" H 2905 1427 50  0000 C CNN
+F 2 "" H 2900 1600 50  0001 C CNN
+F 3 "" H 2900 1600 50  0001 C CNN
+	1    2900 1600
+	1    0    0    -1  
+$EndComp
+Connection ~ 2900 1600
+Wire Wire Line
+	2900 1600 2600 1600
+$Comp
+L power:GND #PWR0106
+U 1 1 5E850975
+P 2900 3150
+F 0 "#PWR0106" H 2900 2900 50  0001 C CNN
+F 1 "GND" H 2905 2977 50  0000 C CNN
+F 2 "" H 2900 3150 50  0001 C CNN
+F 3 "" H 2900 3150 50  0001 C CNN
+	1    2900 3150
+	1    0    0    -1  
+$EndComp
+Connection ~ 2900 3150
+Wire Wire Line
+	2900 3150 2550 3150
+$Comp
+L power:GND #PWR0107
+U 1 1 5E8509E6
+P 4350 4700
+F 0 "#PWR0107" H 4350 4450 50  0001 C CNN
+F 1 "GND" H 4355 4527 50  0000 C CNN
+F 2 "" H 4350 4700 50  0001 C CNN
+F 3 "" H 4350 4700 50  0001 C CNN
+	1    4350 4700
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR0108
+U 1 1 5E850A55
+P 4350 5500
+F 0 "#PWR0108" H 4350 5250 50  0001 C CNN
+F 1 "GND" H 4355 5327 50  0000 C CNN
+F 2 "" H 4350 5500 50  0001 C CNN
+F 3 "" H 4350 5500 50  0001 C CNN
+	1    4350 5500
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:L L1
+U 1 1 5E850AC4
+P 1150 1300
+F 0 "L1" V 972 1300 50  0000 C CNN
+F 1 "L" V 1063 1300 50  0000 C CNN
+F 2 "Inductors_NEOSID:Neosid_Inductor_SM-NE127" H 1150 1300 50  0001 C CNN
+F 3 "~" H 1150 1300 50  0001 C CNN
+	1    1150 1300
+	0    1    1    0   
+$EndComp
+Connection ~ 2300 1300
+Wire Wire Line
+	2250 2850 1800 2850
+Wire Wire Line
+	1800 2850 1800 1300
+Wire Wire Line
+	1300 1300 1800 1300
+Connection ~ 2250 2850
+Connection ~ 1800 1300
+Wire Wire Line
+	1800 1300 2300 1300
+Wire Wire Line
+	2250 5200 2150 5200
+Wire Wire Line
+	1800 5200 1800 4400
+Connection ~ 2250 5200
+Connection ~ 1800 2850
+Wire Wire Line
+	2250 4400 2150 4400
+Connection ~ 2250 4400
+Connection ~ 1800 4400
+Wire Wire Line
+	1800 4400 1800 2850
+$Comp
+L power:GND #PWR0109
+U 1 1 5E863AD2
+P 1000 1550
+F 0 "#PWR0109" H 1000 1300 50  0001 C CNN
+F 1 "GND" H 1005 1377 50  0000 C CNN
+F 2 "" H 1000 1550 50  0001 C CNN
+F 3 "" H 1000 1550 50  0001 C CNN
+	1    1000 1550
+	1    0    0    -1  
+$EndComp
+$Comp
+L Device:Fuse F1
+U 1 1 5E90CD3E
+P 2000 4400
+F 0 "F1" V 1803 4400 50  0000 C CNN
+F 1 "Fuse" V 1894 4400 50  0000 C CNN
+F 2 "Resistors_SMD:R_1206" V 1930 4400 50  0001 C CNN
+F 3 "~" H 2000 4400 50  0001 C CNN
+	1    2000 4400
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	1850 4400 1800 4400
+$Comp
+L Device:Fuse F2
+U 1 1 5E917FB3
+P 2000 5200
+F 0 "F2" V 1803 5200 50  0000 C CNN
+F 1 "Fuse" V 1894 5200 50  0000 C CNN
+F 2 "Resistors_SMD:R_1206" V 1930 5200 50  0001 C CNN
+F 3 "~" H 2000 5200 50  0001 C CNN
+	1    2000 5200
+	0    1    1    0   
+$EndComp
+Wire Wire Line
+	1850 5200 1800 5200
+$Comp
+L Connector:Conn_01x02_Male J4
+U 1 1 5E931BA2
+P 6950 1500
+F 0 "J4" H 6923 1380 50  0000 R CNN
+F 1 "Conn_01x02_Male" H 6923 1471 50  0000 R CNN
+F 2 "Connectors_Molex:Molex_KK-6410-02_02x2.54mm_Straight" H 6950 1500 50  0001 C CNN
+F 3 "~" H 6950 1500 50  0001 C CNN
+	1    6950 1500
+	-1   0    0    1   
+$EndComp
+$Comp
+L Connector:Conn_01x02_Male J2
+U 1 1 5E931DA2
+P 6900 3050
+F 0 "J2" H 6873 2930 50  0000 R CNN
+F 1 "Conn_01x02_Male" H 6873 3021 50  0000 R CNN
+F 2 "Connectors_Molex:Molex_KK-6410-02_02x2.54mm_Straight" H 6900 3050 50  0001 C CNN
+F 3 "~" H 6900 3050 50  0001 C CNN
+	1    6900 3050
+	-1   0    0    1   
+$EndComp
+$Comp
+L Connector:Conn_01x02_Male J3
+U 1 1 5E931E72
+P 6900 4600
+F 0 "J3" H 6873 4480 50  0000 R CNN
+F 1 "Conn_01x02_Male" H 6873 4571 50  0000 R CNN
+F 2 "Connectors_Molex:Molex_KK-6410-02_02x2.54mm_Straight" H 6900 4600 50  0001 C CNN
+F 3 "~" H 6900 4600 50  0001 C CNN
+	1    6900 4600
+	-1   0    0    1   
+$EndComp
+$Comp
+L Connector:Conn_01x02_Male J5
+U 1 1 5E931F34
+P 7000 5400
+F 0 "J5" H 6973 5280 50  0000 R CNN
+F 1 "Conn_01x02_Male" H 6973 5371 50  0000 R CNN
+F 2 "Connectors_Molex:Molex_KK-6410-02_02x2.54mm_Straight" H 7000 5400 50  0001 C CNN
+F 3 "~" H 7000 5400 50  0001 C CNN
+	1    7000 5400
+	-1   0    0    1   
+$EndComp
+$Comp
+L power:GND #PWR0110
+U 1 1 5E931FE6
+P 6800 5450
+F 0 "#PWR0110" H 6800 5200 50  0001 C CNN
+F 1 "GND" H 6805 5277 50  0000 C CNN
+F 2 "" H 6800 5450 50  0001 C CNN
+F 3 "" H 6800 5450 50  0001 C CNN
+	1    6800 5450
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR0111
+U 1 1 5E932063
+P 6700 4650
+F 0 "#PWR0111" H 6700 4400 50  0001 C CNN
+F 1 "GND" H 6705 4477 50  0000 C CNN
+F 2 "" H 6700 4650 50  0001 C CNN
+F 3 "" H 6700 4650 50  0001 C CNN
+	1    6700 4650
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR0112
+U 1 1 5E9320E0
+P 6700 3100
+F 0 "#PWR0112" H 6700 2850 50  0001 C CNN
+F 1 "GND" H 6705 2927 50  0000 C CNN
+F 2 "" H 6700 3100 50  0001 C CNN
+F 3 "" H 6700 3100 50  0001 C CNN
+	1    6700 3100
+	1    0    0    -1  
+$EndComp
+$Comp
+L power:GND #PWR0113
+U 1 1 5E93215D
+P 6750 1550
+F 0 "#PWR0113" H 6750 1300 50  0001 C CNN
+F 1 "GND" H 6755 1377 50  0000 C CNN
+F 2 "" H 6750 1550 50  0001 C CNN
+F 3 "" H 6750 1550 50  0001 C CNN
+	1    6750 1550
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	6750 1400 6750 1300
+Wire Wire Line
+	6750 1300 6350 1300
+Connection ~ 6350 1300
+Wire Wire Line
+	6750 1500 6750 1550
+Wire Wire Line
+	6700 3050 6700 3100
+Wire Wire Line
+	6700 2950 6700 2850
+Wire Wire Line
+	6700 2850 6300 2850
+Connection ~ 6300 2850
+Wire Wire Line
+	6700 4600 6700 4650
+Wire Wire Line
+	6700 4500 6700 4400
+Wire Wire Line
+	6700 4400 6300 4400
+Wire Wire Line
+	6800 5400 6800 5450
+Wire Wire Line
+	6800 5300 6800 5200
+Wire Wire Line
+	6800 5200 6300 5200
+$Comp
+L Connector:Conn_01x02_Male J1
+U 1 1 5E95E41C
+P 650 1300
+F 0 "J1" H 756 1478 50  0000 C CNN
+F 1 "Conn_01x02_Male" H 756 1387 50  0000 C CNN
+F 2 "Connectors_Molex:Molex_KK-6410-02_02x2.54mm_Straight" H 650 1300 50  0001 C CNN
+F 3 "~" H 650 1300 50  0001 C CNN
+	1    650  1300
+	1    0    0    -1  
+$EndComp
+Wire Wire Line
+	1000 1550 1000 1400
+Wire Wire Line
+	1000 1400 850  1400
+Wire Wire Line
+	850  1300 1000 1300
+$EndSCHEMATC

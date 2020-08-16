@@ -1,0 +1,3 @@
+(sym_lib_table
+  (lib (name components)(type Legacy)(uri /home/bjohan/projects/rhwr/electronics/stator_controller/stator_controller/components.lib)(options "")(descr ""))
+)
