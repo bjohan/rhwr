@@ -1,3 +1,3 @@
 [submodule "Corbomite"]
-	path = Corbomite
+	path = external_dependencies/Corbomite
 	url = https://github.com/bjohan/Corbomite.git
