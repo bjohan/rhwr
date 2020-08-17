@@ -31,4 +31,7 @@ lmx.reset()
 lmx.applyConfig('../../external_dependencies/Lmx2594/py/10GOut320MRef.txt')
 print("done")
 print(lmx.isLocked())
+for fn in lmx.getAllFieldNames():
+    v = lmx.getField(fn)
+    print("%s:"%(fn), v)
 time.sleep(10)

@@ -2,6 +2,7 @@ import sys
 sys.path.append('../../external_dependencies/Lmx2594/py/')
 import lmx2594
 import time
+import Queue
 
 class CorbomiteLmxInterface(lmx2594.HardwareInterface):
     def __init__(self, regAddressWidget, writeDataWidget, getRegisterDataWidget, readEventWidget, writeEventWidget):
@@ -11,19 +12,22 @@ class CorbomiteLmxInterface(lmx2594.HardwareInterface):
         self.getRegisterDataWidget = getRegisterDataWidget
         self.readEventWidget = readEventWidget
         self.writeEventWidget = writeEventWidget
-        #self.rddat=None
-        #self.readEventWidget.addCallback(self.readCallback)
+        self.rdQ = Queue.Queue()
+        self.getRegisterDataWidget.addCallback(self.readCallback)
 
-    #def readCallback(self, value):
-    #    self.rddat = value
+
+    def readCallback(self, widget):
+        print("Read callback called", widget.value.getRaw());
+        self.rdQ.put(widget.value.getRaw())
 
     def readReg(self, ra):
         self.regAddressWidget.writeValue(ra)
-        #self.rddat= None
         self.readEventWidget.writeValue(None)
-        time.sleep(0.1)
-        v = self.getRegisterDataWidget.value.getRaw()
-        print(v)
+        print("waiting for data")
+        #time.sleep(0.3)
+        v = self.rdQ.get()
+        #v = self.getRegisterDataWidget.value.getRaw()
+        print("got", v)
         return v
 
     def writeReg(self, ra, v):
