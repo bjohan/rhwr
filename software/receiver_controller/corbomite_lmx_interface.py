@@ -38,8 +38,8 @@ class CorbomiteLmxInterface(lmx2594.HardwareInterface):
 
     def writeReg(self, ra, v):
         self.regAddressWidget.writeValue(ra)
-        time.sleep(0.05)
+        #time.sleep(0.1)
         self.writeDataWidget.writeValue(v)
-        time.sleep(0.05)
+        #time.sleep(0.1)
         self.writeEventWidget.writeValue(None)
-        time.sleep(0.05)
+        #time.sleep(0.1)
