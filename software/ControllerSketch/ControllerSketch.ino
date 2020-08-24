@@ -13,8 +13,8 @@
 //Control pins for LO band receiver
 #define G_LOW 4
 #define G_LOW_BAR 5
-#define BL_LOW 7 //blanking inverted
-#define BL_LOW_BAR 6
+#define BL_LOW 6 
+#define BL_LOW_BAR 7
 #define LRU1_LOW 8
 #define LRU1_LOW_BAR 9
 #define LRU2_LOW 10
