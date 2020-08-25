@@ -29,12 +29,18 @@ c = corbomiteClient.CorbomiteClient(port)
 autocalEnable = c.widgets['AUTOCAL_ENABLE']
 calTrig = c.widgets['CAL_TRIG']
 
+hru = c.widgets['HRU_HI']
 lru1 = c.widgets['LRU1_LOW']
 lru2 = c.widgets['LRU2_LOW']
 bl_low = c.widgets['BL_LOW']
-g = c.widgets['G_LOW']
+bl_high = c.widgets['BL_HI']
+g_low = c.widgets['G_LOW']
+g_high = c.widgets['G_HI']
 
+hru.writeValue(False)
 bl_low.writeValue(False)
+bl_high.writeValue(False)
+bl_low.writeValue(True)
 
 def setFilter0():
     #600MHz to 1300MHz
@@ -61,17 +67,23 @@ def setFilter3():
     lru1.writeValue(True)
     lru2.writeValue(True)
 
-def enableBite():
-    print("Enabling BITE");
-    autocalEnable.writeValue(True)
-    calTrig.writeValue(True)
+def enableBite(state):
+    if state:
+        print("Enabling BITE");
+        autocalEnable.writeValue(True)
+        calTrig.writeValue(True)
+    else:
+        print("Disabling BITE");
+        autocalEnable.writeValue(True)
+        calTrig.writeValue(False)
 
 
 setFilter1()
-enableBite()
+enableBite(False)
 
 #quit()
-g.writeValue(True)
+g_high.writeValue(True)
+g_low.writeValue(True)
 
 print("Setting up LMX");
 time.sleep(1)
@@ -97,7 +109,9 @@ lmx.applyConfig('../../external_dependencies/Lmx2594/py/10GOut320MRef.txt')
 #for i in np.linspace(600e6, 2600e6, 200):
 #    lmx.setFrequency(i)
 #    time.sleep(3)
-lmx.setFrequency(1100e6)
+lmx.setFrequency(1101e6)
+lmx.setFrequency(1600e6)
+lmx.setFrequency(6500e6)
 #after = getAllFields(lmx)
 #compareFields(before, after)
 #for fn in lmx.getAllFieldNames():
@@ -105,10 +119,13 @@ lmx.setFrequency(1100e6)
 #    print("%s:"%(fn), v)
 print("done")
 print("Lock status:", lmx.isLocked())
+
 while True:
-    g.writeValue(True)
+    g_low.writeValue(True)
+    g_high.writeValue(True)
     time.sleep(1)
-    g.writeValue(False)
+    g_low.writeValue(False)
+    g_high.writeValue(False)
     time.sleep(1)
 time.sleep(10000)
 for i in np.arange(300e6, 2000e6, 1e6):
