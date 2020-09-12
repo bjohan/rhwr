@@ -1,12 +1,12 @@
-uint8_t stepperP = 4;
-uint8_t stepperDir = 7;
-uint8_t stepperSleepBar = 6;
+uint8_t stepperP = 3;
+uint8_t stepperDir = 2;
+uint8_t stepperSleepBar = 4;
 uint8_t stepperResetBar = 5;
-uint8_t stepperMs3 = 3;
-uint8_t stepperMs2 = 2;
-uint8_t stepperMs1 = 9;
-uint8_t stepperEnableBar = 8;
-
+uint8_t stepperMs3 = 6;
+uint8_t stepperMs2 = 7;
+uint8_t stepperMs1 = 8;
+uint8_t stepperEnableBar = 9;
+uint16_t newSpeed = 0;
 
 void setMotorSpeed(int32_t d){
 	int32_t value;
@@ -19,21 +19,23 @@ void setMotorSpeed(int32_t d){
 	value = 250000/d;
 	//value = 8*250000/d;
 	if(value > 65535) value=65535;
-	OCR1A = value;	
+	//OCR1A = value;	
+	newSpeed = value;
 }
 
 
 SIGNAL(TIMER1_COMPA_vect)
 {
-	static int steps=1470*32;
+	//static int steps=1470*32;
 	static int t=0;
 	if((t&0x1)==0)
-		if(steps){
+		//if(steps){
 			digitalWrite(stepperP, HIGH);
 			digitalWrite(stepperP, LOW);
 			//steps--;
-		}
+		//}
 	t++;
+	OCR1A = newSpeed;
 }
 
 
@@ -64,7 +66,7 @@ void setup()
   digitalWrite(stepperResetBar, HIGH);
   digitalWrite(stepperMs3, HIGH);
   digitalWrite(stepperMs2, HIGH);
-  digitalWrite(stepperMs1, HIGH);
+  digitalWrite(stepperMs1, LOW);
   //digitalWrite(stepperEnableBar, LOW);
 
   digitalWrite(stepperDir, LOW);
@@ -90,7 +92,7 @@ void loop()
 	setMotorSpeed(speed);
   	digitalWrite(stepperEnableBar, LOW);
 	delay(10);
-	if(speed < 8000) speed+=1;
-	if(speed<2940*4) speed+=2;
+	if(speed < 16000) speed+=1;
+	if(speed<2940*2) speed+=10;
 }
  
