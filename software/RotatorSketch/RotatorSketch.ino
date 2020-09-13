@@ -8,6 +8,14 @@ uint8_t stepperMs1 = 8;
 uint8_t stepperEnableBar = 9;
 uint16_t newSpeed = 0;
 
+extern "C"
+{
+	#include "uart_command_lib.h"
+	#include "corbomite.h"
+}
+
+extern "C"
+{
 void setMotorSpeed(int32_t d){
 	int32_t value;
 	if(d < 0){
@@ -21,6 +29,12 @@ void setMotorSpeed(int32_t d){
 	if(value > 65535) value=65535;
 	//OCR1A = value;	
 	newSpeed = value;
+}
+
+void setEnableBar(uint8_t s){
+	if(s) digitalWrite(stepperEnableBar, HIGH);
+	else digitalWrite(stepperEnableBar, LOW);
+}
 }
 
 
@@ -49,9 +63,23 @@ void stepperPower(uint8_t state){
 	}
 }
 
+ANA_OUT("speed", "RPM", "-1", "1", -2940*2, 2940*2, setMotorSpeed, setMotorSpeedWidget);
+DIG_OUT("ENBL_BAR", setEnableBar, setEnableBarWidget);
+const CorbomiteEntry last PROGMEM = {LASTTYPE, "", 0};
+const EventData initEvent PROGMEM = {registeredEntries};
+const CorbomiteEntry initcmd PROGMEM = {EVENT_OUT, internalId, (CorbomiteData*)&initEvent};	
+
+const CorbomiteEntry * const entries [] PROGMEM = {
+	&setMotorSpeedWidget,
+	&setEnableBarWidget,
+	&initcmd, &last
+};
+
+
+
 void setup()
 {
-  Serial.begin(9600);
+  Serial.begin(115200);
   pinMode(stepperP, OUTPUT);
   pinMode(stepperDir, OUTPUT);
   pinMode(stepperSleepBar, OUTPUT);
@@ -80,6 +108,7 @@ void setup()
   TCCR1B |= (1 << CS10) | (1<<CS11);
   TIMSK1 |= (1 <<OCIE1A);
   setMotorSpeed(0);
+  setEnableBar(1);
 //  OCR0A = 0xAF;
 //  TIMSK0 |= _BV(OCIE0A);
 
@@ -88,11 +117,22 @@ void setup()
 
 void loop()
 {
-	static uint32_t speed = 0;
+	/*static uint32_t speed = 0;
 	setMotorSpeed(speed);
   	digitalWrite(stepperEnableBar, LOW);
 	delay(10);
 	//if(speed < 160) speed+=1;
-	if(speed<2940*2) speed+=10;
+	if(speed<2940*2) speed+=10;*/
+	commandLine();
+	delay(10);
 }
- 
+
+void serialEvent(){
+	while(Serial.available()){
+		addCharToBuffer(Serial.read());
+	}
+}
+
+void platformSerialWrite(const char *buf, uint16_t len){
+	Serial.write((uint8_t *) buf, len);
+} 
