@@ -36,10 +36,18 @@
 #define SDI_DATA_OUT_LO_HI 47
 #define MUX_LO_HI 49
 
+//LOW band receiver LO controls
+#define CE_LO_LO 38
+#define CSB_LO_LO 50
+#define SCK_LO_LO 44
+#define SDI_DATA_OUT_LO_LO 46
+#define MUX_LO_LO 48
+
 
 #include "lmx_spi_interface.h"
 
 LmxSpiInterface lmx_lo_hi = LmxSpiInterface(CSB_LO_HI, SCK_LO_HI, SDI_DATA_OUT_LO_HI, MUX_LO_HI, CE_LO_HI);
+LmxSpiInterface lmx_lo_lo = LmxSpiInterface(CSB_LO_LO, SCK_LO_LO, SDI_DATA_OUT_LO_LO, MUX_LO_LO, CE_LO_LO);
 
 extern "C"
 {
@@ -49,18 +57,21 @@ extern "C"
 
 extern "C" {
 
-	uint32_t registerAddress;
-	uint32_t registerData;
-	uint32_t registerWriteData;
+	uint32_t registerAddressHi;
+	uint32_t registerReadDataHi;
+	uint32_t registerWriteDataHi;
+	uint32_t registerAddressLo;
+	uint32_t registerReadDataLo;
+	uint32_t registerWriteDataLo;
 	void setGHigh(uint8_t s){
 		if(s){
 			digitalWrite(G_HIGH, HIGH);
 			digitalWrite(G_HIGH_BAR, LOW);
-		transmitString("setGHigh active");
+		//transmitString("setGHigh active");
 		} else {
 			digitalWrite(G_HIGH, LOW);
 			digitalWrite(G_HIGH_BAR, HIGH);
-		transmitString("setGHigh inactive");
+		//transmitString("setGHigh inactive");
 		}
 	}
 	
@@ -68,11 +79,11 @@ extern "C" {
 		if(s){
 			digitalWrite(BL_HIGH, HIGH);
 			digitalWrite(BL_HIGH_BAR, LOW);
-		transmitString("setBlHigh active");
+		//transmitString("setBlHigh active");
 		} else {
 			digitalWrite(BL_HIGH, LOW);
 			digitalWrite(BL_HIGH_BAR, HIGH);
-		transmitString("setBlHigh inactive");
+		//transmitString("setBlHigh inactive");
 		}
 	}
 
@@ -80,11 +91,11 @@ extern "C" {
 		if(s){
 			digitalWrite(HRU_HIGH, HIGH);
 			digitalWrite(HRU_HIGH_BAR, LOW);
-		transmitString("setHruHigh active");
+		//transmitString("setHruHigh active");
 		} else {
 			digitalWrite(HRU_HIGH, LOW);
 			digitalWrite(HRU_HIGH_BAR, HIGH);
-		transmitString("setHruHigh inactive");
+		//transmitString("setHruHigh inactive");
 		}
 	}
 
@@ -92,11 +103,11 @@ extern "C" {
 		if(s){
 			digitalWrite(G_LOW, HIGH);
 			digitalWrite(G_LOW_BAR, LOW);
-		transmitString("setGLow active");
+		//transmitString("setGLow active");
 		} else {
 			digitalWrite(G_LOW, LOW);
 			digitalWrite(G_LOW_BAR, HIGH);
-		transmitString("setGLow inactive");
+		//transmitString("setGLow inactive");
 		}
 	}
 
@@ -104,11 +115,11 @@ extern "C" {
 		if(s){
 			digitalWrite(BL_LOW, HIGH);
 			digitalWrite(BL_LOW_BAR, LOW);
-		transmitString("setBlLow active");
+		//transmitString("setBlLow active");
 		} else {
 			digitalWrite(BL_LOW, LOW);
 			digitalWrite(BL_LOW_BAR, HIGH);
-		transmitString("setBlLow inactive");
+		//transmitString("setBlLow inactive");
 		}
 	}
 
@@ -116,11 +127,11 @@ extern "C" {
 		if(s){
 			digitalWrite(LRU1_LOW, HIGH);
 			digitalWrite(LRU1_LOW_BAR, LOW);
-		transmitString("setLru1Low active");
+		//transmitString("setLru1Low active");
 		} else {
 			digitalWrite(LRU1_LOW, LOW);
 			digitalWrite(LRU1_LOW_BAR, HIGH);
-		transmitString("setLru1Low inactive");
+		//transmitString("setLru1Low inactive");
 		}
 	}
 
@@ -128,11 +139,11 @@ extern "C" {
 		if(s){
 			digitalWrite(LRU2_LOW, HIGH);
 			digitalWrite(LRU2_LOW_BAR, LOW);
-		transmitString("setLru2Low active");
+		//transmitString("setLru2Low active");
 		} else {
 			digitalWrite(LRU2_LOW, LOW);
 			digitalWrite(LRU2_LOW_BAR, HIGH);
-		transmitString("setLru2Low inactive");
+		//transmitString("setLru2Low inactive");
 		}
 	}
 
@@ -141,58 +152,59 @@ extern "C" {
 		if(s){
 			digitalWrite(BT_LOW, HIGH);
 			digitalWrite(BT_LOW_BAR, LOW);
-		transmitString("setBtLow active");
+		//transmitString("setBtLow active");
 		} else {
 			digitalWrite(BT_LOW, LOW);
 			digitalWrite(BT_LOW_BAR, HIGH);
-		transmitString("setBtLow inactive");
+		//transmitString("setBtLow inactive");
 		}
 	}
 
 	void setCalTrig(uint8_t s){
 		if(s){
 			digitalWrite(CAL_TRIG, HIGH);
-		transmitString("setCalTrig active");
+		//transmitString("setCalTrig active");
 		} else {
 			digitalWrite(CAL_TRIG, LOW);
-		transmitString("setCalTrig inactive");
+		//transmitString("setCalTrig inactive");
 		}
 	}
 
 	void setAutocalEnable(uint8_t s){
 		if(s){
 			digitalWrite(AUTOCAL_ENABLE, HIGH);
-		transmitString("setAutocalEnable active");
+		//transmitString("setAutocalEnable active");
 		} else {
 			digitalWrite(AUTOCAL_ENABLE, LOW);
-		transmitString("setAutocalEnable inactive");
+		//transmitString("setAutocalEnable inactive");
 		}
 	}
 
-	void setRegisterAddress(uint32_t a){
-		registerAddress = a;
+//High band pll access functions
+	void setRegisterAddressHi(int32_t a){
+		registerAddressHi = a;
 	}
 
-	void setRegisterData(uint32_t d){
-		registerWriteData = d;
+	void setRegisterDataHi(int32_t d){
+		registerWriteDataHi = d;
 	}
 
-	int32_t getRegisterData(){
-		return registerData;
-	}
+	/*int32_t getRegisterData(){
+		return registerReadDataHi;
+	}*/
 
-	ANA_IN("readReg", "raw", "0", "65535", 0, 65535, getRegisterDataWidget);
+	ANA_IN("readReg_hi", "raw", "0", "65535", 0, 65535, getRegisterDataHiWidget);
 	void readHiBandLmxRegister(){
-		registerData = lmx_lo_hi.readRegister(registerAddress);
-		transmitAnalogIn(&getRegisterDataWidget, registerData);
+		registerReadDataHi = lmx_lo_hi.readRegister(registerAddressHi);
+		transmitAnalogIn(&getRegisterDataHiWidget, registerReadDataHi);
 	}
 
 	void writeHiBandLmxRegister(){
 		transmitString("Writing");
-		transmitInt(registerAddress);
-		transmitInt(registerWriteData);
+		transmitInt(registerAddressHi);
+		transmitInt(registerWriteDataHi);
 		transmitString("\n");	
-		lmx_lo_hi.writeRegister(registerAddress, registerWriteData);
+		lmx_lo_hi.writeRegister(registerAddressHi, registerWriteDataHi);
 	}
 
 	void setHiBandCe(uint8_t s){
@@ -204,6 +216,43 @@ extern "C" {
 
 	}
 	
+//Low band pll access functions
+	void setRegisterAddressLo(int32_t a){
+		registerAddressLo = a;
+	}
+
+	void setRegisterDataLo(int32_t d){
+		registerWriteDataLo = d;
+	}
+
+	/*int32_t getRegisterData(){
+		return registerReadDataLo;
+	}*/
+
+	ANA_IN("readReg_lo", "raw", "0", "65535", 0, 65535, getRegisterDataLoWidget);
+	void readLoBandLmxRegister(){
+		registerReadDataLo = lmx_lo_lo.readRegister(registerAddressLo);
+		transmitAnalogIn(&getRegisterDataLoWidget, registerReadDataLo);
+	}
+
+	void writeLoBandLmxRegister(){
+		transmitString("Writing");
+		transmitInt(registerAddressLo);
+		transmitInt(registerWriteDataLo);
+		transmitString("\n");	
+		lmx_lo_lo.writeRegister(registerAddressLo, registerWriteDataLo);
+	}
+
+	void setLoBandCe(uint8_t s){
+		if(s){
+			digitalWrite(CE_LO_LO, HIGH);
+		} else {
+			digitalWrite(CE_LO_LO, LOW);
+		}
+
+	}
+	
+
 
 	DIG_OUT("G_HI", setGHigh, setGHighWidget);
 	DIG_OUT("BL_HI", setBlHigh, setBlHighWidget);
@@ -218,12 +267,21 @@ extern "C" {
 	DIG_OUT("AUTOCAL_ENABLE", setAutocalEnable, setAutocalEnableWidget);
 	DIG_OUT("CAL_TRIG", setCalTrig, setCalTrigWidget);
 
-	ANA_OUT("registerAddress", "raw", "0", "65535", ((const int32_t) 0), ((const int32_t) 65535), setRegisterAddress, setRegisterAddressWidget);
-	ANA_OUT("writeReg", "raw", "0", "65535", 0, 65535, setRegisterData, setRegisterDataWidget);
-
-	EVENT_OUT("read", readHiBandLmxRegister, readHiBandLmxRegisterWidget);
-	EVENT_OUT("write", writeHiBandLmxRegister, writeHiBandLmxRegisterWidget);
+	//high band pll widgets
+	ANA_OUT("regAddr_hi", "raw", "0", "65535", ((const int32_t) 0), ((const int32_t) 65535), setRegisterAddressHi, setRegisterAddressHiWidget);
+	ANA_OUT("writeReg_hi", "raw", "0", "65535", 0, 65535, setRegisterDataHi, setRegisterDataHiWidget);
+	EVENT_OUT("read_hi", readHiBandLmxRegister, readHiBandLmxRegisterWidget);
+	EVENT_OUT("write_hi", writeHiBandLmxRegister, writeHiBandLmxRegisterWidget);
 	DIG_OUT("CE_LO_HI", setHiBandCe, setHiBandCeWidget);
+
+	//low band pll widgets
+	ANA_OUT("regAddr_lo", "raw", "0", "65535", ((const int32_t) 0), ((const int32_t) 65535), setRegisterAddressLo, setRegisterAddressLoWidget);
+	ANA_OUT("writeReg_lo", "raw", "0", "65535", 0, 65535, setRegisterDataLo, setRegisterDataLoWidget);
+	EVENT_OUT("read_lo", readLoBandLmxRegister, readLoBandLmxRegisterWidget);
+	EVENT_OUT("write_lo", writeLoBandLmxRegister, writeLoBandLmxRegisterWidget);
+	DIG_OUT("CE_LO_LO", setLoBandCe, setLoBandCeWidget);
+
+
 	const CorbomiteEntry last PROGMEM = {LASTTYPE, "", 0};
 	const EventData initEvent PROGMEM = {registeredEntries};
 	const CorbomiteEntry initcmd PROGMEM = {EVENT_OUT, internalId, (CorbomiteData*)&initEvent};	
@@ -239,12 +297,21 @@ extern "C" {
 		&setBtLowWidget,
 		&setCalTrigWidget,
 		&setAutocalEnableWidget,
-		&setRegisterAddressWidget,
-		&setRegisterDataWidget,
-		&getRegisterDataWidget,
+
+		&setRegisterAddressHiWidget,
+		&setRegisterDataHiWidget,
+		&getRegisterDataHiWidget,
 		&readHiBandLmxRegisterWidget,
 		&writeHiBandLmxRegisterWidget,
 		&setHiBandCeWidget,
+
+		&setRegisterAddressLoWidget,
+		&setRegisterDataLoWidget,
+		&getRegisterDataLoWidget,
+		&readLoBandLmxRegisterWidget,
+		&writeLoBandLmxRegisterWidget,
+		&setLoBandCeWidget,
+
 		&initcmd, &last
 	};
 }
@@ -252,7 +319,7 @@ extern "C" {
 void setup()
 {
   	Serial.begin(115200);
-  	Serial.print("Rotating Controller\n\r");
+  	//Serial.print("Rotating Controller\n\r");
 	pinMode(G_HIGH, OUTPUT);
 	pinMode(G_HIGH_BAR, OUTPUT);
 	pinMode(BL_HIGH, OUTPUT);

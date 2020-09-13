@@ -64,9 +64,9 @@ void setup()
 
   digitalWrite(stepperSleepBar, HIGH);
   digitalWrite(stepperResetBar, HIGH);
-  digitalWrite(stepperMs3, HIGH);
-  digitalWrite(stepperMs2, HIGH);
-  digitalWrite(stepperMs1, LOW);
+  digitalWrite(stepperMs3, LOW);
+  digitalWrite(stepperMs2, LOW);
+  digitalWrite(stepperMs1, HIGH);
   //digitalWrite(stepperEnableBar, LOW);
 
   digitalWrite(stepperDir, LOW);
@@ -79,7 +79,7 @@ void setup()
   TCCR1B |= (1 << WGM12);
   TCCR1B |= (1 << CS10) | (1<<CS11);
   TIMSK1 |= (1 <<OCIE1A);
-  setMotorSpeed(500);
+  setMotorSpeed(0);
 //  OCR0A = 0xAF;
 //  TIMSK0 |= _BV(OCIE0A);
 
@@ -88,11 +88,11 @@ void setup()
 
 void loop()
 {
-	static uint32_t speed = 500;
+	static uint32_t speed = 0;
 	setMotorSpeed(speed);
   	digitalWrite(stepperEnableBar, LOW);
 	delay(10);
-	if(speed < 16000) speed+=1;
+	//if(speed < 160) speed+=1;
 	if(speed<2940*2) speed+=10;
 }
  

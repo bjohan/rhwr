@@ -18,7 +18,7 @@ def compareFields(a, b):
         if a[fn] != b[fn]:
             print fn, a[fn], b[fn]
 
-port = serial.Serial('/dev/ttyUSB0', 115200, timeout=1)
+port = serial.Serial('/dev/ttyUSB1', 115200, timeout=1)
 print("waiting for arduino to sleep");
 time.sleep(1) #allow time to boot
 
@@ -119,26 +119,31 @@ import corbomite_lmx_interface
 sys.path.append('../../external_dependencies/Lmx2594/py/')
 import lmx2594
 w = c.widgets
-hwif = corbomite_lmx_interface.CorbomiteLmxInterface(w['registerAddress'], w['writeReg'], w['readReg'], w['read'],  w['write'], w['CE_LO_HI']);
+#hwif = corbomite_lmx_interface.CorbomiteLmxInterface(w['regAddr_hi'], w['writeReg_hi'], w['readReg_hi'], w['read_hi'],  w['write_hi'], w['CE_LO_HI']);
+hwif = corbomite_lmx_interface.CorbomiteLmxInterface(w['regAddr_lo'], w['writeReg_lo'], w['readReg_lo'], w['read_lo'],  w['write_lo'], w['CE_LO_LO']);
 lmx = lmx2594.Lmx2594(hwif, fosc=320.069334e6)
 lmx.reset()
 lmx.applyConfig('../../external_dependencies/Lmx2594/py/10GOut320MRef.txt')
 frf = 6200e6;
-fif = 300e6;
+fif = 377e6;
 hbr.setFilter(frf)
 lbr.setFilter(frf)
-hbr.setHighGain(False)
-lbr.setHighGain(False)
+hbr.setHighGain(True)
+lbr.setHighGain(True)
 lbr.enableBite(True)
-lmx.setFrequency(frf+fif)
-quit()
-for i in range(90):
-    frf = i*200e6;
-    lmx.setFrequency(frf+fif)
-    print "Tuned to", frf, "lock status", lmx.isLocked()
-    time.sleep(3)
+#lmx.setFrequency(frf+fif)
+#quit()
+#for i in range(90):
+#    frf = i*200e6;
+#    lmx.setFrequency(frf+fif)
+#    print "Tuned to", frf, "lock status", lmx.isLocked()
+#    time.sleep(3)
 #print lmx.getFpd()/1e6
 #before = getAllFields(lmx)
+#print before
+#while True:
+#    for i in range(112):
+#        print(lmx.iface.read(i))
 #time.sleep(10)
 #lmx.applyConfig('../../external_dependencies/Lmx2594/py/4640HexReg.txt')
 #print lmx.getFpd()/1e6
@@ -156,9 +161,9 @@ for i in range(90):
 #lmx.setFrequency(6500e6)
 #after = getAllFields(lmx)
 #compareFields(before, after)
-#for fn in lmx.getAllFieldNames():
-#    v = lmx.getField(fn)
-#    print("%s:"%(fn), v)
+for fn in lmx.getAllFieldNames():
+    v = lmx.getField(fn)
+    print("%s:"%(fn), v)
 print("done")
 print("Lock status:", lmx.isLocked())
 
@@ -169,7 +174,7 @@ print("Lock status:", lmx.isLocked())
 #    g_low.writeValue(False)
 #    g_high.writeValue(False)
 #    time.sleep(1)
-time.sleep(10000)
+time.sleep(1)
 for i in np.arange(300e6, 2000e6, 1e6):
     lmx.setFrequency(i)
     print "Locked", lmx.isLocked(), "frequency", i/1e6
