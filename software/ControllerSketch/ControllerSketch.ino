@@ -356,7 +356,7 @@ void setup()
 void loop()
 {
 	commandLine();
-	delay(10);
+	//delay(10);
 }
 
 

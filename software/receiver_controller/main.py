@@ -27,8 +27,21 @@ time.sleep(1) #allow time to boot
 print("creating client");
 c = corbomiteClient.CorbomiteClient(port)
 
-class HighBandReceiver:
-    def __init__(self, c):
+class Receiver:
+    def __init__(self, pll):
+        self.pll = pll
+        self.pll.reset()
+        self.pll.applyConfig('../../external_dependencies/Lmx2594/py/10GOut320MRef.txt')
+
+    def tune(self, frf, fif):
+        lo = frf-fif
+        self.setFilter(frf)
+        self.pll.setFrequency(lo)
+        self.pll.enableLockDetect(True)
+
+class HighBandReceiver(Receiver):
+    def __init__(self, c, pll):
+        Receiver.__init__(self, pll)
         self.bl_high = c.widgets['BL_HI']
         self.g_high = c.widgets['G_HI']
         self.hru = c.widgets['HRU_HI']
@@ -55,8 +68,9 @@ class HighBandReceiver:
     def setFilter1(self):
         self.hru.writeValue(True)
 
-class LowBandReceiver:
-    def __init__(self, c):
+class LowBandReceiver(Receiver):
+    def __init__(self, c, pll):
+        Receiver.__init__(self, pll)
         self.autocalEnable = c.widgets['AUTOCAL_ENABLE']
         self.calTrig = c.widgets['CAL_TRIG']
         self.lru1 = c.widgets['LRU1_LOW']
@@ -72,7 +86,7 @@ class LowBandReceiver:
             self.bl_low.writeValue(True)
 
     def unBlank(self):
-            self.bl_low.writeValue(false)
+            self.bl_low.writeValue(False)
 
     def setFilter(self, f):
         if f < 1200e6:
@@ -110,8 +124,6 @@ class LowBandReceiver:
             self.autocalEnable.writeValue(True)
             self.calTrig.writeValue(False)
 
-hbr = HighBandReceiver(c)
-lbr = LowBandReceiver(c)
 
 print("Setting up LMX");
 time.sleep(1)
@@ -119,68 +131,28 @@ import corbomite_lmx_interface
 sys.path.append('../../external_dependencies/Lmx2594/py/')
 import lmx2594
 w = c.widgets
-#hwif = corbomite_lmx_interface.CorbomiteLmxInterface(w['regAddr_hi'], w['writeReg_hi'], w['readReg_hi'], w['read_hi'],  w['write_hi'], w['CE_LO_HI']);
-hwif = corbomite_lmx_interface.CorbomiteLmxInterface(w['regAddr_lo'], w['writeReg_lo'], w['readReg_lo'], w['read_lo'],  w['write_lo'], w['CE_LO_LO']);
-lmx = lmx2594.Lmx2594(hwif, fosc=320.069334e6)
-lmx.reset()
-lmx.applyConfig('../../external_dependencies/Lmx2594/py/10GOut320MRef.txt')
+hwif1 = corbomite_lmx_interface.CorbomiteLmxInterface(w['regAddr_hi'], w['writeReg_hi'], w['readReg_hi'], w['read_hi'],  w['write_hi'], w['CE_LO_HI']);
+hwif2 = corbomite_lmx_interface.CorbomiteLmxInterface(w['regAddr_lo'], w['writeReg_lo'], w['readReg_lo'], w['read_lo'],  w['write_lo'], w['CE_LO_LO']);
+lmx1 = lmx2594.Lmx2594(hwif1, fosc=320.069334e6)
+lmx2 = lmx2594.Lmx2594(hwif2, fosc=320.069334e6)
+
+hbr = HighBandReceiver(c, lmx2)
+lbr = LowBandReceiver(c, lmx1)
+
 frf = 6200e6;
 fif = 377e6;
 hbr.setFilter(frf)
 lbr.setFilter(frf)
+hbr.unBlank()
+lbr.unBlank()
 hbr.setHighGain(True)
 lbr.setHighGain(True)
-lbr.enableBite(True)
-#lmx.setFrequency(frf+fif)
-#quit()
-#for i in range(90):
-#    frf = i*200e6;
-#    lmx.setFrequency(frf+fif)
-#    print "Tuned to", frf, "lock status", lmx.isLocked()
-#    time.sleep(3)
-#print lmx.getFpd()/1e6
-#before = getAllFields(lmx)
-#print before
-#while True:
-#    for i in range(112):
-#        print(lmx.iface.read(i))
-#time.sleep(10)
-#lmx.applyConfig('../../external_dependencies/Lmx2594/py/4640HexReg.txt')
-#print lmx.getFpd()/1e6
-#lmx.setField('OUTB_PD', 0)
-#lmx.setField('OUTA_PD', 0)
-#lmx.setField('OUTA_MUX', 1)
-#lmx.setField('OUTB_MUX', 1)
-#lmx.setField('PLL_R', 1)
-#lmx.setField('PLL_R_PRE', 1)
-#for i in np.linspace(600e6, 2600e6, 200):
-#    lmx.setFrequency(i)
-#    time.sleep(3)
-#lmx.setFrequency(1101e6)
-#lmx.setFrequency(1600e6)
-#lmx.setFrequency(6500e6)
-#after = getAllFields(lmx)
-#compareFields(before, after)
-for fn in lmx.getAllFieldNames():
-    v = lmx.getField(fn)
-    print("%s:"%(fn), v)
-print("done")
-print("Lock status:", lmx.isLocked())
-
-#while True:
-#    g_low.writeValue(True)
-#    g_high.writeValue(True)
+lbr.enableBite(False)
+lbr.tune(2001e6, 375e6)
+hbr.tune(5900e6, 375e6)
+#lbr.enableBite(True)
+#for i in range(1000):
+#    lbr.tune((600+i)*1e6, 375)
 #    time.sleep(1)
-#    g_low.writeValue(False)
-#    g_high.writeValue(False)
-#    time.sleep(1)
-time.sleep(1)
-for i in np.arange(300e6, 2000e6, 1e6):
-    lmx.setFrequency(i)
-    print "Locked", lmx.isLocked(), "frequency", i/1e6
-#hwif.chipEnable(False)
-#for fn in lmx.getAllFieldNames():
-#    v = lmx.getField(fn)
-#    print("%s:"%(fn), v)
 time.sleep(10)
 c=None
