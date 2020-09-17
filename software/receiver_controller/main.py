@@ -23,7 +23,6 @@ time.sleep(1) #allow time to boot
 print("creating client");
 c = corbomiteClient.CorbomiteClient(port)
 ttc = turntableController.TurntableController(c)
-ttc.setEnable(False)
 
 hbr = rxc.highBandReceiver
 lbr = rxc.lowBandReceiver
@@ -43,6 +42,9 @@ hbr.tune(5900e6, 375e6)
 #for i in range(1000):
 #    lbr.tune((600+i)*1e6, 375)
 #    time.sleep(1)
-#ttc.rampTo(1, 3.0)
+ttc.setEnable(True)
+ttc.rampTo(1, 3.0)
 time.sleep(10)
+ttc.rampTo(0, 3.0)
+ttc.setEnable(False)
 c=None
