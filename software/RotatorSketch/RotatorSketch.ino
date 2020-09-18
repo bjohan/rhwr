@@ -92,8 +92,8 @@ void setup()
 
   digitalWrite(stepperSleepBar, HIGH);
   digitalWrite(stepperResetBar, HIGH);
-  digitalWrite(stepperMs3, LOW);
-  digitalWrite(stepperMs2, LOW);
+  digitalWrite(stepperMs3, HIGH);
+  digitalWrite(stepperMs2, HIGH);
   digitalWrite(stepperMs1, HIGH);
   //digitalWrite(stepperEnableBar, LOW);
 
@@ -105,7 +105,7 @@ void setup()
 
   OCR1A = 64435;//500;16384/100; //512/6;
   TCCR1B |= (1 << WGM12);
-  TCCR1B |= (1 << CS10) | (1<<CS11);
+  TCCR1B |= /*(1 << CS10) |*/ (1<<CS11);
   TIMSK1 |= (1 <<OCIE1A);
   setMotorSpeed(0);
   setEnableBar(1);
@@ -124,7 +124,7 @@ void loop()
 	//if(speed < 160) speed+=1;
 	if(speed<2940*2) speed+=10;*/
 	commandLine();
-	delay(10);
+	//delay(10);
 }
 
 void serialEvent(){
