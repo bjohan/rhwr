@@ -1,11 +1,12 @@
+#pragma once
 #include <iostream>
 #include <mutex>
 using namespace std;
 
-template < class T>
+template < typename T>
 class InterThreadBuffer{
 	private:
-		T m_buffs[];
+		T* m_buffs;
 		int m_producerPos=0;
 		int m_consumerPos=0;
 		int m_sz = 0;
@@ -18,6 +19,7 @@ class InterThreadBuffer{
 		void producerCheckin(T);
 		T consumerCheckout();
 		void consumerCheckin();
-		T getBufferUnsafe(int i);
+		T* getBufferIndexUnsafe(int i);
+		int getSize();
 };
 

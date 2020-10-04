@@ -9,6 +9,7 @@ class MyHackRf{
 
 	public:
 		//float *gpuBuf;
+		int m_idx;
 		bool running;
 		hackrf_device *dev = NULL;
 		MyHackRf(int index);

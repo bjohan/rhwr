@@ -11,8 +11,10 @@ MyHackRf::MyHackRf(int index){
 		hackrf_init();
 		devs = hackrf_device_list();
 	}
+	m_idx = index;
 	refCount++;
 	status = hackrf_device_list_open(devs, index, &dev);
+	hackrf_set_sample_rate(dev, 5e6);
 	if(status) cout << "Failed to open hackrf index: " << index << " status: " << status << endl;
 
 	//cudaMalloc((void**) &gpuBuf, sizeof(float)*BUFLEN);
