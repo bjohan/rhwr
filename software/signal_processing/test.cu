@@ -1,17 +1,19 @@
 #include <iostream>
 #include <thread>
 #include <chrono>
-#include <mutex>
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
 #include <assert.h>
-#include <libhackrf/hackrf.h>
 #include <cuda_runtime.h>
+#include "thread_stuff.hpp"
+#include "hackrf_wrapper.hpp"
+
 #define BUFLEN 262144
+
 using namespace std;
 
-template < class T>
+/*template < class T>
 class InterThreadBuffer{
 	private:
 		T m_buffs[];
@@ -170,7 +172,7 @@ MyHackRf::~MyHackRf(){
 	       	hackrf_exit();
 	}
 }
-
+*/
 
 
 

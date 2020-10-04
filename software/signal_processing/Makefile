@@ -1,26 +1,32 @@
-CC=nvcc
+GPUCC=nvcc
 LIB_DIRS=/usr/lib/aarch64-linux-gnu
 LIBS=hackrf 
-CFLAGS=-L $(LIB_DIRS) -l$(LIBS) -O3
+LDFLAGS=-L $(LIB_DIRS) -l$(LIBS)
+CFLAGS= -O3
+CXX=g++
+CXXSRC=$(wildcard *.cpp)
+CUSRC=$(wildcard *.cu)
+CXXOBJS=$(patsubst %.cpp, %.o, $(CXXSRC))  
+CUOBJS=$(patsubst %.cu, %.o, $(CUSRC))
+OBJS=$(CXXOBJS) $(CUOBJS)
 
 .PHONY : all
-all : test.o
-
-debug: test.dbg
-
-%.dbg: %.cu
-	$(CC) -o $@ $< $(CFLAGS) -g
+all : sigproc
 
 %.o: %.cu
-	$(CC) -o $@ $< $(CFLAGS)
+	$(GPUCC) -c -o $@ $< $(CFLAGS)
+
+%.o: %.cpp
+	$(CXX) -c -o $@ $< $(CXXFLAGX)
+
+sigproc: $(OBJS)
+	echo $(OBJS)
+	$(GPUCC) -o sigproc $(OBJS) $(LDFLAGS)
 
 .PHONY : run
-run : test.o
-	./test.o
-
-debug_run: test.dbg
-	gdb test.dbg
+run : sigproc
+	./sigproc
 
 .PHONY : clean
 clean:
-	rm test.o test.dbg
+	rm *.o sigproc
