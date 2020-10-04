@@ -4,3 +4,6 @@
 [submodule "external_dependencies/Lmx2594"]
 	path = external_dependencies/Lmx2594
 	url = https://github.com/bjohan/Lmx2594.git
+[submodule "external_dependencies/pyhackrf"]
+	path = external_dependencies/pyhackrf
+	url = https://github.com/dressel/pyhackrf.git
