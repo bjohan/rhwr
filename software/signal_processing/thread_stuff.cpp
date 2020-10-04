@@ -34,7 +34,7 @@ void InterThreadBuffer<T>::producerCheckin(T p){
 	int next = (m_producerPos+1)%m_sz;
 	if(next == m_consumerPos){
 		m_mutex.unlock();
-		cout << "next " << next << "m_consumerPos " << m_consumerPos << endl;
+		cout << "next " << next << " m_consumerPos " << m_consumerPos << endl;
 	       	throw "Error, try to commit to full buffer";
 	}
 	m_buffs[m_producerPos] = p;
@@ -46,7 +46,7 @@ template <typename T>
 T InterThreadBuffer<T>::consumerCheckout(){
 	T result;
 	m_mutex.lock();
-	if(m_consumerPos != m_producerPos){
+	if(m_consumerPos == m_producerPos){
 		m_mutex.unlock();
 	       return NULL;
 	}

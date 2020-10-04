@@ -16,21 +16,16 @@ MyHackRf::MyHackRf(int index){
 	status = hackrf_device_list_open(devs, index, &dev);
 	hackrf_set_sample_rate(dev, 5e6);
 	if(status) cout << "Failed to open hackrf index: " << index << " status: " << status << endl;
-
-	//cudaMalloc((void**) &gpuBuf, sizeof(float)*BUFLEN);
 	running = false;
 
 }
 
 int MyHackRf::myRxCallback(hackrf_transfer* transfer){
-	//cudaMemcpy(transfer->buffer, gpuBuf, transfer->valid_length, cudaMemcpyHostToDevice);
 	return 0;
 }
 
 int MyHackRf::rx_callback(hackrf_transfer* transfer){
 	return ((MyHackRf *)transfer->rx_ctx)->myRxCallback(transfer);
-	//cudaMemcpy(transfer->buffer, transfer->rx_ctx, transfer->valid_length, cudaMemcpyHostToDevice);
-	//return 0;
 }
 
 void MyHackRf::start(){
@@ -52,7 +47,6 @@ void MyHackRf::stop(){
 MyHackRf::~MyHackRf(){
 	stop();
 	hackrf_close(dev);
-	//cudaFree(gpuBuf);
 	refCount--;
 	if(refCount == 0){
 		cout << "Last hackrf object is beeing destroyed, freeing hackrf device list and deiniting library" << endl;

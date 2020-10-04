@@ -19,13 +19,18 @@ __global__ void VecAdd(float* A, float* B, float* C, int N){
 	if(i < N) C[i] = A[i]+B[i];
 }
 
+double getTime(){
 
+	return(chrono::duration_cast<chrono::milliseconds>(chrono::system_clock::now().time_since_epoch()).count())/1000.0;
+}
 int main(int argc, char *argv[]){
 	int N = 1024;
+	float *tbuf;
 	size_t size = N*sizeof(float);
 	float* h_A = (float*) malloc(size);
 	float* h_B = (float*) malloc(size);
 	float* h_C = (float*) malloc(size);
+	double t0;
 	for(int i = 0 ; i < N ; i++){
 		h_A[i] = 1;
 		h_B[i] = 3;
@@ -57,8 +62,15 @@ int main(int argc, char *argv[]){
 		hrfl[i]->start();
 	}
 
-	this_thread::sleep_for(chrono::seconds(30));
-
+	t0 =getTime();
+	while(getTime()-t0 < 10){
+		this_thread::sleep_for(chrono::milliseconds(2));
+		for(int i = 0 ; i < numHackrf ; i++){
+			tbuf=hrfl[i]->m_itb->consumerCheckout();
+			if(tbuf!=NULL)
+				hrfl[i]->m_itb->consumerCheckin();
+		}
+	}
 	for(int i = 0 ; i < numHackrf ; i++){
 		hrfl[i]->stop();
 	}
