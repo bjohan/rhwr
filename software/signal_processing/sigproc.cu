@@ -26,6 +26,7 @@ double getTime(){
 int main(int argc, char *argv[]){
 	int N = 1024;
 	float *tbuf;
+	char buf[BUFLEN];
 	size_t size = N*sizeof(float);
 	float* h_A = (float*) malloc(size);
 	float* h_B = (float*) malloc(size);
@@ -63,13 +64,19 @@ int main(int argc, char *argv[]){
 	}
 
 	t0 =getTime();
-	while(getTime()-t0 < 10){
-		this_thread::sleep_for(chrono::milliseconds(2));
+	while(getTime()-t0 < 2){
+		//this_thread::sleep_for(chrono::milliseconds(2));
 		for(int i = 0 ; i < numHackrf ; i++){
 			tbuf=hrfl[i]->m_itb->consumerCheckout();
-			if(tbuf!=NULL)
+			if(tbuf!=NULL){
+				//cout << "reading" << tbuf << endl;
+				cudaMemcpy(buf, tbuf, BUFLEN, cudaMemcpyDeviceToHost);
 				hrfl[i]->m_itb->consumerCheckin();
+			}
 		}
+	}
+	for(int i = 0 ; i < 100 ; i++){
+		cout << (int)(int8_t) buf[i] << " ";
 	}
 	for(int i = 0 ; i < numHackrf ; i++){
 		hrfl[i]->stop();

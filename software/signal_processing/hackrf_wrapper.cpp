@@ -15,6 +15,8 @@ MyHackRf::MyHackRf(int index){
 	refCount++;
 	status = hackrf_device_list_open(devs, index, &dev);
 	hackrf_set_sample_rate(dev, 5e6);
+	hackrf_set_lna_gain(dev, 40);
+	hackrf_set_vga_gain(dev, 40);
 	if(status) cout << "Failed to open hackrf index: " << index << " status: " << status << endl;
 	running = false;
 
@@ -25,6 +27,7 @@ int MyHackRf::myRxCallback(hackrf_transfer* transfer){
 }
 
 int MyHackRf::rx_callback(hackrf_transfer* transfer){
+	//cout << (int)((int8_t)(transfer->buffer[0])) << " ";
 	return ((MyHackRf *)transfer->rx_ctx)->myRxCallback(transfer);
 }
 
