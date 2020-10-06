@@ -27,5 +27,6 @@ class TurntableController:
             self.setSpeed(start+i*delta)
             tset = time.time()-tset
             delay = rampTime/steps-tset
-            time.sleep(delay)
+            if delay > 0:
+                time.sleep(delay)
         #print "Target", target, "current", self.speed

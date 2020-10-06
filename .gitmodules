@@ -7,3 +7,6 @@
 [submodule "external_dependencies/pyhackrf"]
 	path = external_dependencies/pyhackrf
 	url = https://github.com/dressel/pyhackrf.git
+[submodule "external_dependencies/matplotlib-cpp"]
+	path = external_dependencies/matplotlib-cpp
+	url = https://github.com/lava/matplotlib-cpp.git

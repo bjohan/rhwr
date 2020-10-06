@@ -1,8 +1,16 @@
 GPUCC=nvcc
 LIB_DIRS=/usr/lib/aarch64-linux-gnu
+PYTHON_BIN     ?= python3
+PYTHON_CONFIG  := $(PYTHON_BIN)-config
+PYTHON_INCLUDE ?= $(shell $(PYTHON_CONFIG) --includes)
+EXTRA_FLAGS    := $(PYTHON_INCLUDE)
+INCLUDE_DIRS=../../external_dependencies/matplotlib-cpp/ $(PYTHON_INCLUDE)
+
 LIBS=hackrf 
-LDFLAGS=-L $(LIB_DIRS) -l$(LIBS)
-CFLAGS= -O3
+INCLUDEFLAGS=-I $(INCLUDE_DIRS)
+LDFLAGS=-L $(LIB_DIRS) -l$(LIBS) -lpython3.6m
+CUFLAGS= -O3 $(INCLUDEFLAGS)
+CXXFLAGS=$(CUFLAGS)
 CXX=g++
 CXXSRC=$(wildcard *.cpp)
 CUSRC=$(wildcard *.cu)
@@ -14,10 +22,10 @@ OBJS=$(CXXOBJS) $(CUOBJS)
 all : sigproc
 
 %.o: %.cu
-	$(GPUCC) -c -o $@ $< $(CFLAGS)
+	$(GPUCC) -c -o $@ $< $(CUFLAGS)
 
 %.o: %.cpp
-	$(CXX) -c -o $@ $< $(CXXFLAGX)
+	$(CXX) -c -o $@ $< $(CXXFLAGS)
 
 sigproc: $(OBJS)
 	echo $(OBJS)
@@ -29,4 +37,4 @@ run : sigproc
 
 .PHONY : clean
 clean:
-	rm *.o sigproc
+	rm $(OBJS) sigproc

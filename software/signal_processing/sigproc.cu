@@ -8,11 +8,11 @@
 #include <cuda_runtime.h>
 #include "thread_stuff.hpp"
 #include "hackrf_gpu.hpp"
-
+#include <matplotlibcpp.h>
 #define BUFLEN 262144
 
 using namespace std;
-
+namespace plt = matplotlibcpp;
 
 __global__ void VecAdd(float* A, float* B, float* C, int N){
 	int i = blockDim.x*blockIdx.x+threadIdx.x;
@@ -24,9 +24,10 @@ double getTime(){
 	return(chrono::duration_cast<chrono::milliseconds>(chrono::system_clock::now().time_since_epoch()).count())/1000.0;
 }
 int main(int argc, char *argv[]){
+	vector<double> yplot(1024);
 	int N = 1024;
 	float *tbuf;
-	char buf[BUFLEN];
+	int8_t buf[BUFLEN];
 	size_t size = N*sizeof(float);
 	float* h_A = (float*) malloc(size);
 	float* h_B = (float*) malloc(size);
@@ -52,11 +53,11 @@ int main(int argc, char *argv[]){
 	cudaMemcpy(h_C, d_C, size, cudaMemcpyDeviceToHost);
 
 
-	int numHackrf=4;
+	int numHackrf=1;
 	HackRfGpu* hrfl[4];
 
 	for(int i = 0 ; i < numHackrf ; i++){
-		hrfl[i] = new HackRfGpu(i);
+		hrfl[i] = new HackRfGpu(3);
 	}
 
 	for(int i = 0 ; i < numHackrf ; i++){
@@ -70,13 +71,14 @@ int main(int argc, char *argv[]){
 			tbuf=hrfl[i]->m_itb->consumerCheckout();
 			if(tbuf!=NULL){
 				//cout << "reading" << tbuf << endl;
+				if(i==0)
 				cudaMemcpy(buf, tbuf, BUFLEN, cudaMemcpyDeviceToHost);
 				hrfl[i]->m_itb->consumerCheckin();
 			}
 		}
 	}
-	for(int i = 0 ; i < 100 ; i++){
-		cout << (int)(int8_t) buf[i] << " ";
+	for(int i = 0 ; i < 1024 ; i++){
+		yplot[i] = (int) buf[i*2];
 	}
 	for(int i = 0 ; i < numHackrf ; i++){
 		hrfl[i]->stop();
@@ -85,8 +87,10 @@ int main(int argc, char *argv[]){
 	for(int i = 0 ; i < numHackrf ; i++){
 		delete hrfl[i];
 	}
-
-
+	cout << "plotting" << endl;
+	plt::plot(yplot);
+	plt::grid(true);
+	plt::show();
 
 	cudaFree(d_A);
 	cudaFree(d_B);
