@@ -11,6 +11,7 @@ class HackRfGpu : public MyHackRf{
 		HackRfGpu(int idx);
 		~HackRfGpu();
 		int myRxCallback(hackrf_transfer *transfer);
+		void myStop();
 		
 };
 

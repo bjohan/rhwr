@@ -9,14 +9,15 @@ INCLUDE_DIRS=../../external_dependencies/matplotlib-cpp/ $(PYTHON_INCLUDE)
 LIBS=hackrf 
 INCLUDEFLAGS=-I $(INCLUDE_DIRS)
 LDFLAGS=-L $(LIB_DIRS) -l$(LIBS) -lpython3.6m
-CUFLAGS= -O3 $(INCLUDEFLAGS)
+CUFLAGS= -O3 $(INCLUDEFLAGS) -g
 CXXFLAGS=$(CUFLAGS)
 CXX=g++
+CXX=nvcc
 CXXSRC=$(wildcard *.cpp)
 CUSRC=$(wildcard *.cu)
 CXXOBJS=$(patsubst %.cpp, %.o, $(CXXSRC))  
 CUOBJS=$(patsubst %.cu, %.o, $(CUSRC))
-OBJS=$(CXXOBJS) $(CUOBJS)
+OBJS=$(CUOBJS) $(CXXOBJS)
 
 .PHONY : all
 all : sigproc

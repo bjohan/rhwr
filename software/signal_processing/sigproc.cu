@@ -8,6 +8,7 @@
 #include <cuda_runtime.h>
 #include "thread_stuff.hpp"
 #include "hackrf_gpu.hpp"
+#include "hackrf_gpu_gang.hpp"
 #include <matplotlibcpp.h>
 #define BUFLEN 262144
 
@@ -24,10 +25,14 @@ double getTime(){
 	return(chrono::duration_cast<chrono::milliseconds>(chrono::system_clock::now().time_since_epoch()).count())/1000.0;
 }
 int main(int argc, char *argv[]){
-	vector<double> yplot(1024);
+	vector<double> yqplot(1024);
+	vector<double> yiplot(1024);
+	vector<double> absplot(1024);
+	vector<double> argplot(1024);
+	vector<double> freqplot(1024);
 	int N = 1024;
-	float *tbuf;
-	int8_t buf[BUFLEN];
+	//float *tbuf;
+	//int8_t buf[BUFLEN];
 	size_t size = N*sizeof(float);
 	float* h_A = (float*) malloc(size);
 	float* h_B = (float*) malloc(size);
@@ -53,44 +58,64 @@ int main(int argc, char *argv[]){
 	cudaMemcpy(h_C, d_C, size, cudaMemcpyDeviceToHost);
 
 
-	int numHackrf=1;
-	HackRfGpu* hrfl[4];
+	vector<int> hackRfDeviceIndex{0, 1, 2, 3};
+	HackRfGpuGang hrg(hackRfDeviceIndex);
+	//int numHackrf=1;
 
-	for(int i = 0 ; i < numHackrf ; i++){
-		hrfl[i] = new HackRfGpu(3);
-	}
+	//HackRfGpu* hrfl[4];
 
-	for(int i = 0 ; i < numHackrf ; i++){
-		hrfl[i]->start();
-	}
+	//for(int i = 0 ; i < numHackrf ; i++){
+	//	hrfl[i] = new HackRfGpu(3);
+	//}
+
+	//for(int i = 0 ; i < numHackrf ; i++){
+	//	hrfl[i]->start();
+	//}
+	hrg.start();
 
 	t0 =getTime();
-	while(getTime()-t0 < 2){
+	while(getTime()-t0 < 0.1){
 		//this_thread::sleep_for(chrono::milliseconds(2));
-		for(int i = 0 ; i < numHackrf ; i++){
-			tbuf=hrfl[i]->m_itb->consumerCheckout();
-			if(tbuf!=NULL){
-				//cout << "reading" << tbuf << endl;
-				if(i==0)
-				cudaMemcpy(buf, tbuf, BUFLEN, cudaMemcpyDeviceToHost);
-				hrfl[i]->m_itb->consumerCheckin();
-			}
+		hrg.process();
+		//for(int i = 0 ; i < numHackrf ; i++){
+		//	tbuf=hrfl[i]->m_itb->consumerCheckout();
+		//	if(tbuf!=NULL){
+		//		//cout << "reading" << tbuf << endl;
+		//		if(i==0)
+		//		cudaMemcpy(buf, tbuf, BUFLEN, cudaMemcpyDeviceToHost);
+		//		hrfl[i]->m_itb->consumerCheckin();
+		//	}
+		//}
+	}
+	cout << "exitied loop" << endl;
+	/*for(int i = 0 ; i < 1024 ; i++){
+		yqplot[i] = (int) buf[i*2];
+		yiplot[i] = (int) buf[i*2+1];
+		absplot[i] = sqrt(yqplot[i]*yqplot[i]+yiplot[i]*yiplot[i]);
+		argplot[i] = atan2(yiplot[i], yqplot[i]);
+		if(i == 0){
+			freqplot[0] = 0;
+		} else {
+			freqplot[i] = argplot[i]-argplot[i-1];
 		}
-	}
-	for(int i = 0 ; i < 1024 ; i++){
-		yplot[i] = (int) buf[i*2];
-	}
-	for(int i = 0 ; i < numHackrf ; i++){
+	}*/
+	/*for(int i = 0 ; i < numHackrf ; i++){
 		hrfl[i]->stop();
-	}
+	}*/
+	hrg.stop();
 
-	for(int i = 0 ; i < numHackrf ; i++){
-		delete hrfl[i];
-	}
-	cout << "plotting" << endl;
-	plt::plot(yplot);
-	plt::grid(true);
-	plt::show();
+	//for(int i = 0 ; i < numHackrf ; i++){
+	//	delete hrfl[i];
+	//}
+	/*cout << "plotting" << endl;
+	plt::plot(yqplot);
+	plt::plot(yiplot);
+	plt::plot(absplot);*/
+	//plt::plot(argplot);
+	//plt::plot(freqplot);
+	//plt::plot(yqplot, yiplot);
+	/*plt::grid(true);
+	plt::show();*/
 
 	cudaFree(d_A);
 	cudaFree(d_B);

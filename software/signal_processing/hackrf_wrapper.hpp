@@ -17,6 +17,7 @@ class MyHackRf{
 		~MyHackRf();
 		void start();
 		void stop();
+		virtual void myStop();
 
 };
 

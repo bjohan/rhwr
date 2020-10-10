@@ -28,6 +28,11 @@ HackRfGpu::~HackRfGpu(){
 	
 }
 
+void HackRfGpu::myStop(){
+	cout << "My stop called" << endl;
+	m_itb->producerStop();
+}
+
 int HackRfGpu::myRxCallback(hackrf_transfer* xfer){
 	float *mem = m_itb->producerCheckout();
 	if(mem != NULL){

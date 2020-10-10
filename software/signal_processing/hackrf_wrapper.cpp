@@ -14,9 +14,11 @@ MyHackRf::MyHackRf(int index){
 	m_idx = index;
 	refCount++;
 	status = hackrf_device_list_open(devs, index, &dev);
-	hackrf_set_freq(dev, 375e6);
+	hackrf_set_freq(dev, 350.0e6);
+	status = hackrf_set_baseband_filter_bandwidth(dev, 5e6);
+	cout << "Set filter return " << status << endl;
 	hackrf_set_sample_rate(dev, 5e6);
-	hackrf_set_lna_gain(dev, 40);
+	hackrf_set_lna_gain(dev, 39);
 	hackrf_set_vga_gain(dev, 10);
 	if(status) cout << "Failed to open hackrf index: " << index << " status: " << status << endl;
 	running = false;
@@ -41,10 +43,14 @@ void MyHackRf::start(){
 	}
 }
 
+void MyHackRf::myStop(){
+}
+
 void MyHackRf::stop(){
 	if(running){
 		hackrf_stop_rx(dev);
 		running = false;
+		myStop();
 	}
 }
 
