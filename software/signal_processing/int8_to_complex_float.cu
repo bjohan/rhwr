@@ -23,7 +23,7 @@ void Int8ToComplexFloat::process(int8_t *in, size_t sizeIndata, thrust::complex<
 	int inDataElems = sizeIndata/2;
 	size_t outSize = outDataElems*sizeof(thrust::complex<float>);
 	if(outSize > maxSizeOutData){
-		cout << "Out data does not fit in designated array" << endl;
+		cout << "Out data does not fit in designated array. indataElems " << inDataElems <<  " outDataElems " << outDataElems << " outSize " << outSize << " maxSizeOutData " << maxSizeOutData << endl;
 	}
         	
 	int threadsPerBlock = 32;

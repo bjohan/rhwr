@@ -74,7 +74,7 @@ int main(int argc, char *argv[]){
 	hrg.start();
 
 	t0 =getTime();
-	while(getTime()-t0 < 0.1){
+	while(getTime()-t0 < 1){
 		//this_thread::sleep_for(chrono::milliseconds(2));
 		hrg.process();
 		//for(int i = 0 ; i < numHackrf ; i++){

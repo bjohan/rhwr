@@ -21,7 +21,6 @@ class EventSynchronizer{
 template < typename T>
 class InterThreadBuffer{
 	private:
-		T* m_buffs;
 		int m_producerPos=0;
 		int m_consumerPos=0;
 		int m_sz = 0;
@@ -30,14 +29,15 @@ class InterThreadBuffer{
 		EventSynchronizer m_writeEvent;
 
 	public:
+		T* m_buffs;
 		InterThreadBuffer(int sz);
 		~InterThreadBuffer();
-		T producerCheckout();
+		T& producerCheckout();
 		void producerStop();
-		void producerCheckin(T);
-		T consumerCheckout();
+		void producerCheckin();
+		T& consumerCheckout();
 		void consumerCheckin();
-		T* getBufferIndexUnsafe(int i);
+		T& getBufferIndexUnsafe(int i);
 		int getSize();
 		bool isStopped();
 };

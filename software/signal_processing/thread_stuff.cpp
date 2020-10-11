@@ -1,4 +1,8 @@
 #include "thread_stuff.hpp"
+#include "buffered_message.hpp"
+#include <thrust/complex.h>
+#include <stdexcept>
+
 using namespace std;
 
 
@@ -38,8 +42,8 @@ void EventSynchronizer::unlock(){
 template < typename T>
 InterThreadBuffer<T>::InterThreadBuffer(int sz){
 	m_buffs = new T[sz];
+	cout << "Allocated " << sz << " buffers at " << hex << static_cast<void *>(m_buffs) << endl;
 	m_sz = sz;
-	for(int i = 0 ; i < sz ; i++) m_buffs[i]=NULL;
 	m_stopped = false;
 }
 
@@ -49,32 +53,29 @@ InterThreadBuffer<T>::~InterThreadBuffer(){
 }
 
 template <typename T>
-T InterThreadBuffer<T>::producerCheckout(){
-	T result;
+T& InterThreadBuffer<T>::producerCheckout(){
 	m_mutex.lock();
 	int next = (m_producerPos+1)%m_sz;
 	if(next == m_consumerPos){
 		m_mutex.unlock();
-		return NULL;
+		throw overflow_error("producer can not get element from already full queue");
 	}
-	result = m_buffs[m_producerPos];
+	T& result = m_buffs[m_producerPos];
 	m_mutex.unlock();
 	return result;
 }
 
 template <typename T>
-void InterThreadBuffer<T>::producerCheckin(T p){
+void InterThreadBuffer<T>::producerCheckin(){
 	m_mutex.lock();
 	int next = (m_producerPos+1)%m_sz;
 	if(next == m_consumerPos){
 		m_mutex.unlock();
 		cout << "next " << next << " m_consumerPos " << m_consumerPos << endl;
-	       	//throw "Error, try to commit to full buffer";
+		throw logic_error("Checking in object in queue that is already full. Should not happen since producerCheckout sould raise exception if queue is full");
 	}
-	m_buffs[m_producerPos] = p;
 	m_producerPos = next;
 	m_writeEvent.set();
-	//cout << "setting event" << endl;
 	m_mutex.unlock();
 }
 
@@ -87,25 +88,23 @@ void InterThreadBuffer<T>::producerStop(){
 }
 
 template <typename T>
-T InterThreadBuffer<T>::consumerCheckout(){
-	T result;
+T& InterThreadBuffer<T>::consumerCheckout(){
 	m_mutex.lock();
 	if(m_stopped){
 		m_mutex.unlock();
-		return NULL;
+		throw underflow_error("Queue is stopped");
 	}
 	m_writeEvent.lock();
 	if(m_consumerPos == m_producerPos){
 		m_writeEvent.clear();
 		m_writeEvent.unlock();
 		m_mutex.unlock();
-	       	//return NULL;
 	       	m_writeEvent.wait();
 	       	return consumerCheckout();
 
 	}
 	m_writeEvent.unlock();
-	result = m_buffs[m_consumerPos];
+	T& result = m_buffs[m_consumerPos];
 	m_mutex.unlock();
 	return result;
 }
@@ -119,8 +118,8 @@ void InterThreadBuffer<T>::consumerCheckin(){
 }
 
 template <typename T>
-T* InterThreadBuffer<T>::getBufferIndexUnsafe(int i){
-	return &m_buffs[i];
+T& InterThreadBuffer<T>::getBufferIndexUnsafe(int i){
+	return m_buffs[i];
 }
 
 template <typename T>
@@ -134,3 +133,10 @@ bool InterThreadBuffer<T>::isStopped(){
 }
 
 template class InterThreadBuffer<float *>;
+template class InterThreadBuffer<int8_t *>;
+template class InterThreadBuffer<char *>;
+template class InterThreadBuffer<thrust::complex<float>*>;
+template class InterThreadBuffer<BufferedMessage<float>>;
+template class InterThreadBuffer<BufferedMessage<int8_t>>;
+template class InterThreadBuffer<BufferedMessage<char>>;
+template class InterThreadBuffer<BufferedMessage<thrust::complex<float>>>;

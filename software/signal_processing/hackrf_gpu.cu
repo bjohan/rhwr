@@ -1,46 +1,48 @@
 #include "hackrf_gpu.hpp"
+#include <stdexcept>
 #include <iostream>
 #define BUFLEN 262144
 using namespace std;
 
-HackRfGpu::HackRfGpu(int index) : MyHackRf(index){
-	float **p;
-	m_itb = new InterThreadBuffer<float *>(8);
-	for(int i = 0 ; i < m_itb->getSize() ; i++){
-		p = m_itb->getBufferIndexUnsafe(i);
-		cudaMalloc(p, BUFLEN*sizeof(float));
-		//cout << "Allocated " << *p << endl;
+HackRfGpu::HackRfGpu(int index) : MyHackRf(index), m_itb(8){
+	for(int i = 0 ; i < m_itb.getSize() ; i++){
+		BufferedMessage<int8_t> &msg = m_itb.getBufferIndexUnsafe(i);
+		cudaMalloc(&(msg.m_ptr), BUFLEN);
+		msg.setBufferLength(BUFLEN);
+		msg.m_messageLength = 0;
 	}
 	m_success = 0;
 	m_fail = 0;
 }
 
 HackRfGpu::~HackRfGpu(){
-	float **p;
 	stop();
-	for(int i = 0 ; i < m_itb->getSize() ; i++){
-		p = m_itb->getBufferIndexUnsafe(i);
-		//cout << "freed " << *p << endl;
-		cudaFree(p);
+	for(int i = 0 ; i < m_itb.getSize() ; i++){
+		auto &msg = m_itb.getBufferIndexUnsafe(i);
+		cudaFree(msg.m_ptr);
+		msg.setBufferLength(0);
 	}
-	delete m_itb;
-	cout << "Hackrf " << m_idx << " Success: " << m_success << " Fails: " << m_fail << endl;
+	cout << "Hackrf " << m_idx << dec << " was destroyed. Result; Success: " << m_success << " Fails: " << m_fail << endl;
 	
 }
 
 void HackRfGpu::myStop(){
 	cout << "My stop called" << endl;
-	m_itb->producerStop();
+	m_itb.producerStop();
 }
 
 int HackRfGpu::myRxCallback(hackrf_transfer* xfer){
-	float *mem = m_itb->producerCheckout();
-	if(mem != NULL){
-		//cout << "copy to" << mem << " " << endl;
-		cudaMemcpy(mem, xfer->buffer, xfer->valid_length, cudaMemcpyHostToDevice);
-		m_success+=xfer->valid_length/2;
-		m_itb->producerCheckin(mem);
-	} else {
+	try {
+		if(xfer->valid_length > 0){
+			auto &msg = m_itb.producerCheckout();
+			cudaMemcpy(msg.m_ptr, xfer->buffer, xfer->valid_length, cudaMemcpyHostToDevice);
+			msg.m_messageLength = xfer->valid_length;
+			m_success+=xfer->valid_length/2;
+			m_itb.producerCheckin();
+		} else {
+			cout << "Valid length " << xfer->valid_length << endl;
+		}
+	} catch (overflow_error &e) {
 		m_fail+=xfer->valid_length/2;
 	}
 	return 0;

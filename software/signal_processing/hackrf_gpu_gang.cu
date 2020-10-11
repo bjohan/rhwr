@@ -1,6 +1,7 @@
 #include "hackrf_gpu_gang.hpp"
 #include "int8_to_complex_float.hpp"
 #include <thrust/complex.h>
+#include <stdexcept>
 using namespace std;
 
 #define BUFLEN 262144
@@ -24,18 +25,19 @@ void HackRfGpuGang::start(){
 }
 
 void HackRfGpuGang::process(){
-	float *tbuf;
 	Int8ToComplexFloat proc;
-	//int8_t buf;
 	for(auto hrf:m_hackRfs){
-		tbuf=hrf->m_itb->consumerCheckout();
-		if(tbuf != 0){
-
-			//cudaMemcpy(buf, tbuf, BUFLEN, cudaMemcpyDeviceToHost;
-			proc.process((int8_t*)tbuf, BUFLEN, (thrust::complex<float> *)computeBuf, BUFLEN*sizeof(thrust::complex<float>));
-			hrf->m_itb->consumerCheckin();
-		} else {
-			cout << "Got null, itb->isStopped: " << hrf->m_itb->isStopped();
+		try {
+			BufferedMessage<int8_t>& msg = hrf->m_itb.consumerCheckout();
+			if(msg.m_messageLength > 0) {
+				proc.process(msg.m_ptr, msg.m_messageLength, (thrust::complex<float> *)computeBuf, BUFLEN*sizeof(thrust::complex<float>));
+			} else {
+				cout << "Wierd message length " << msg.m_messageLength << " in hackrf " << hrf->m_idx << endl;
+				cout << "Message buffer " << hex << static_cast<void *>(msg.m_ptr)<< endl;
+			}
+			hrf->m_itb.consumerCheckin();
+		} catch (overflow_error &e){
+			cout << "Got null, itb->isStopped: " << hrf->m_itb.isStopped();
 		}
 	}
 }
