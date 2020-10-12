@@ -1,4 +1,5 @@
 #include "simple_tcp.hpp"
+#include <poll.h>
 using namespace std;
 
 TcpConnectedClient::TcpConnectedClient()
@@ -59,6 +60,17 @@ TcpConnectedClient TcpServer::acceptConnection(){
 	TcpConnectedClient client;
 	client.setConnection(accept(m_socket, client.getAddrP(), client.getAddrLengthP()));
 	return client;
+}
+
+bool TcpServer::incommingConnection(int timeout){
+	struct pollfd poll_set[1];
+	poll_set[0].fd=m_socket;
+	poll_set[0].events =POLLIN;
+	int status = poll(poll_set, 1, 1000);
+	if(status < 0){
+		cout << "Failed to poll socket with fd " << m_socket << endl;
+	}
+	return poll_set[0].revents&POLLIN;
 }
 
 TcpClient::TcpClient(int port, const char *addr)

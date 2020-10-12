@@ -9,6 +9,7 @@
 #include "thread_stuff.hpp"
 #include "hackrf_gpu.hpp"
 #include "hackrf_gpu_gang.hpp"
+#include "my_tcp_server.hpp"
 #include <matplotlibcpp.h>
 #define BUFLEN 262144
 
@@ -31,8 +32,6 @@ int main(int argc, char *argv[]){
 	vector<double> argplot(1024);
 	vector<double> freqplot(1024);
 	int N = 1024;
-	//float *tbuf;
-	//int8_t buf[BUFLEN];
 	size_t size = N*sizeof(float);
 	float* h_A = (float*) malloc(size);
 	float* h_B = (float*) malloc(size);
@@ -42,7 +41,8 @@ int main(int argc, char *argv[]){
 		h_A[i] = 1;
 		h_B[i] = 3;
 	}
-
+	MyTcpServer srv(7000);
+	srv.start();
 	float* d_A;
 	cudaMalloc(&d_A, size);
 	float* d_B;
@@ -60,67 +60,20 @@ int main(int argc, char *argv[]){
 
 	vector<int> hackRfDeviceIndex{0, 1, 2, 3};
 	HackRfGpuGang hrg(hackRfDeviceIndex);
-	//int numHackrf=1;
-
-	//HackRfGpu* hrfl[4];
-
-	//for(int i = 0 ; i < numHackrf ; i++){
-	//	hrfl[i] = new HackRfGpu(3);
-	//}
-
-	//for(int i = 0 ; i < numHackrf ; i++){
-	//	hrfl[i]->start();
-	//}
 	hrg.start();
 
 	t0 =getTime();
-	while(getTime()-t0 < 1){
-		//this_thread::sleep_for(chrono::milliseconds(2));
+	while(getTime()-t0 < 30){
 		hrg.process();
-		//for(int i = 0 ; i < numHackrf ; i++){
-		//	tbuf=hrfl[i]->m_itb->consumerCheckout();
-		//	if(tbuf!=NULL){
-		//		//cout << "reading" << tbuf << endl;
-		//		if(i==0)
-		//		cudaMemcpy(buf, tbuf, BUFLEN, cudaMemcpyDeviceToHost);
-		//		hrfl[i]->m_itb->consumerCheckin();
-		//	}
-		//}
 	}
 	cout << "exitied loop" << endl;
-	/*for(int i = 0 ; i < 1024 ; i++){
-		yqplot[i] = (int) buf[i*2];
-		yiplot[i] = (int) buf[i*2+1];
-		absplot[i] = sqrt(yqplot[i]*yqplot[i]+yiplot[i]*yiplot[i]);
-		argplot[i] = atan2(yiplot[i], yqplot[i]);
-		if(i == 0){
-			freqplot[0] = 0;
-		} else {
-			freqplot[i] = argplot[i]-argplot[i-1];
-		}
-	}*/
-	/*for(int i = 0 ; i < numHackrf ; i++){
-		hrfl[i]->stop();
-	}*/
 	hrg.stop();
-
-	//for(int i = 0 ; i < numHackrf ; i++){
-	//	delete hrfl[i];
-	//}
-	/*cout << "plotting" << endl;
-	plt::plot(yqplot);
-	plt::plot(yiplot);
-	plt::plot(absplot);*/
-	//plt::plot(argplot);
-	//plt::plot(freqplot);
-	//plt::plot(yqplot, yiplot);
-	/*plt::grid(true);
-	plt::show();*/
+	srv.stop();
+	srv.join();
 
 	cudaFree(d_A);
 	cudaFree(d_B);
 	cudaFree(d_C);
-	//for(int i = 0 ; i < N ; i++) cout << "C["<< i <<"] is "<< h_C[i] << endl;
 	free(h_A);
 	free(h_B);
 	free(h_C);

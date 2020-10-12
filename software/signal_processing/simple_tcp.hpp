@@ -36,6 +36,7 @@ class TcpServer{
 		TcpServer(int port, int maxconn=20);
 		~TcpServer();
 		TcpConnectedClient acceptConnection();
+		bool incommingConnection(int timeout = 1000);
 };
 
 using namespace std;
