@@ -9,7 +9,7 @@ INCLUDE_DIRS=../../external_dependencies/matplotlib-cpp/ $(PYTHON_INCLUDE)
 LIBS=hackrf 
 INCLUDEFLAGS=-I $(INCLUDE_DIRS)
 LDFLAGS=-L $(LIB_DIRS) -l$(LIBS) -lpython3.6m
-CUFLAGS= -O3 $(INCLUDEFLAGS) -g
+CUFLAGS= -O3 $(INCLUDEFLAGS) -g -std=c++11
 CXXFLAGS=$(CUFLAGS)
 CXX=g++
 CXX=nvcc

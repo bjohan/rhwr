@@ -18,16 +18,16 @@ Int8ToComplexFloat::Int8ToComplexFloat()
 {
 }
 
-void Int8ToComplexFloat::process(int8_t *in, size_t sizeIndata, thrust::complex<float> *out, size_t maxSizeOutData){
-	int outDataElems = sizeIndata/2;
-	int inDataElems = sizeIndata/2;
-	size_t outSize = outDataElems*sizeof(thrust::complex<float>);
-	if(outSize > maxSizeOutData){
-		cout << "Out data does not fit in designated array. indataElems " << inDataElems <<  " outDataElems " << outDataElems << " outSize " << outSize << " maxSizeOutData " << maxSizeOutData << endl;
+//void Int8ToComplexFloat::process(int8_t *in, size_t sizeIndata, thrust::complex<float> *out, size_t maxSizeOutData){
+void Int8ToComplexFloat::process(BufferedMessage<int8_t> &in, BufferedMessage<thrust::complex<float>> &out){
+	int outDataElems = in.m_messageLength/2;//sizeIndata/2;
+	int inDataElems = in.m_messageLength/2; //sizeIndata/2;
+	if(outDataElems > out.len()){
+		cout << "Out data does not fit in designated array. indataElems " << inDataElems <<  " outDataElems " << outDataElems << " maxOutDataElems " << out.len() << endl;
 	}
         	
 	int threadsPerBlock = 32;
 	int blocksPerGrid = (inDataElems + threadsPerBlock -1)/threadsPerBlock;
-	IntToFloat<<<blocksPerGrid, threadsPerBlock>>>(in, out, inDataElems);
+	IntToFloat<<<blocksPerGrid, threadsPerBlock>>>(in.m_ptr, out.m_ptr, inDataElems);
 	//cout << "processed " << inDataElems << " samples" << endl;	
 }

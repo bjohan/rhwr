@@ -4,12 +4,13 @@
 #define BUFLEN 262144
 using namespace std;
 
-HackRfGpu::HackRfGpu(int index) : MyHackRf(index), m_itb(8){
+HackRfGpu::HackRfGpu(int index) : MyHackRf(index), m_itb(8, BUFLEN){
 	for(int i = 0 ; i < m_itb.getSize() ; i++){
 		BufferedMessage<int8_t> &msg = m_itb.getBufferIndexUnsafe(i);
-		cudaMalloc(&(msg.m_ptr), BUFLEN);
-		msg.setBufferLength(BUFLEN);
-		msg.m_messageLength = 0;
+		msg.allocate(BUFLEN);
+		//cudaMalloc(&(msg.m_ptr), BUFLEN);
+		//msg.setBufferLength(BUFLEN);
+		//msg.m_messageLength = 0;
 	}
 	m_success = 0;
 	m_fail = 0;

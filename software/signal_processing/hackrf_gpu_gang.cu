@@ -26,11 +26,14 @@ void HackRfGpuGang::start(){
 
 void HackRfGpuGang::process(){
 	Int8ToComplexFloat proc;
+	BufferedMessage<thrust::complex<float>> bm(BUFLEN, (thrust::complex<float>*) computeBuf);
+	
 	for(auto hrf:m_hackRfs){
 		try {
 			BufferedMessage<int8_t>& msg = hrf->m_itb.consumerCheckout();
 			if(msg.m_messageLength > 0) {
-				proc.process(msg.m_ptr, msg.m_messageLength, (thrust::complex<float> *)computeBuf, BUFLEN*sizeof(thrust::complex<float>));
+				//proc.process(msg.m_ptr, msg.m_messageLength, (thrust::complex<float> *)computeBuf, BUFLEN*sizeof(thrust::complex<float>));
+				proc.process(msg, bm);
 			} else {
 				cout << "Wierd message length " << msg.m_messageLength << " in hackrf " << hrf->m_idx << endl;
 				cout << "Message buffer " << hex << static_cast<void *>(msg.m_ptr)<< endl;
