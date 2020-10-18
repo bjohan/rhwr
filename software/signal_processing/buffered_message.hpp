@@ -9,6 +9,7 @@ class BufferedMessage{
 		int m_messageLength;
 		T* m_ptr;
 		BufferedMessage(int buflen, T* buf);
+		BufferedMessage(int buflen);
 		BufferedMessage();
 		virtual void allocate(int msglen);
 		void setBufferLength(int buflen);
@@ -23,6 +24,10 @@ BufferedMessage<T>::BufferedMessage(int buflen, T* bufPtr){
 	m_ptr = bufPtr;
 }
 
+template<typename T>
+BufferedMessage<T>::BufferedMessage(int buflen){
+	allocate(buflen);
+}
 
 template<typename T>
 BufferedMessage<T>::BufferedMessage(){

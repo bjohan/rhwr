@@ -10,14 +10,14 @@ class InterThreadBuffer{
 	private:
 		int m_producerPos=0;
 		int m_consumerPos=0;
-		int m_sz = 0;
+		int m_nMsg = 0;
 		bool m_stopped;
 		mutex m_mutex;
 		EventSynchronizer m_writeEvent;
 
 	public:
 		vector<T*> m_buffs;
-		InterThreadBuffer(int sz, int msgLen);
+		InterThreadBuffer(int nMsg, int msgLen);
 		~InterThreadBuffer();
 		T& producerCheckout();
 		void producerStop();
@@ -30,16 +30,17 @@ class InterThreadBuffer{
 };
 
 template < typename T>
-InterThreadBuffer<T>::InterThreadBuffer(int sz, int msgLen){
-	for(int i = 0 ; i < sz ; i++) m_buffs.push_back(new T(msgLen));
-	//m_buffs = new T[sz](msgLen);
-	//cout << "Allocated " << sz << " buffers at " << hex << static_cast<void *>(m_buffs) << endl;
-	m_sz = sz;
+InterThreadBuffer<T>::InterThreadBuffer(int nMsg, int msgLen){
+	for(int i = 0 ; i < nMsg ; i++) m_buffs.push_back(new T(msgLen));
+	//m_buffs = new T[nMsg](msgLen);
+	//cout << "Allocated " << nMsg << " buffers at " << hex << static_cast<void *>(m_buffs) << endl;
+	m_nMsg = nMsg;
 	m_stopped = false;
 }
 
 template < typename T>
 InterThreadBuffer<T>::~InterThreadBuffer(){
+	for(auto elem : m_buffs) delete elem;
 	//delete[] m_buffs;
 	
 }
@@ -47,7 +48,7 @@ InterThreadBuffer<T>::~InterThreadBuffer(){
 template <typename T>
 T& InterThreadBuffer<T>::producerCheckout(){
 	m_mutex.lock();
-	int next = (m_producerPos+1)%m_sz;
+	int next = (m_producerPos+1)%m_nMsg;
 	if(next == m_consumerPos){
 		m_mutex.unlock();
 		throw overflow_error("producer can not get element from already full queue");
@@ -60,7 +61,7 @@ T& InterThreadBuffer<T>::producerCheckout(){
 template <typename T>
 void InterThreadBuffer<T>::producerCheckin(){
 	m_mutex.lock();
-	int next = (m_producerPos+1)%m_sz;
+	int next = (m_producerPos+1)%m_nMsg;
 	if(next == m_consumerPos){
 		m_mutex.unlock();
 		cout << "next " << next << " m_consumerPos " << m_consumerPos << endl;
@@ -104,7 +105,7 @@ T& InterThreadBuffer<T>::consumerCheckout(){
 template <typename T>
 void InterThreadBuffer<T>::consumerCheckin(){
 	m_mutex.lock();
-	int next = (m_consumerPos+1)%m_sz;
+	int next = (m_consumerPos+1)%m_nMsg;
 	m_consumerPos = next;
 	m_mutex.unlock();
 }
@@ -116,7 +117,7 @@ T& InterThreadBuffer<T>::getBufferIndexUnsafe(int i){
 
 template <typename T>
 int InterThreadBuffer<T>::getSize(){
-	return m_sz;
+	return m_nMsg;
 }
 
 template <typename T>

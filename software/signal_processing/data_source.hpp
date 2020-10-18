@@ -7,11 +7,13 @@
 using namespace std;
 
 template <typename T>
-class DataSource{
-	private:
-		vector<InterThreadBuffer<BufferedMessage<T>>*> m_itbs;
-		//vector<InterThreadBuffer<BufferedMessage<Tout>>*> m_itbs;
-
+class DataSource: public InterThreadBuffer<BufferedMessage<T>>{
 	public:
-		DataSource();
+		//InterThreadBuffer<BufferedMessage<T>> m_itb;
+		DataSource(int nmsg, int msglen);
 };
+
+template <typename T>
+DataSource<T>::DataSource(int nmsg, int msglen): InterThreadBuffer<BufferedMessage<T>>(nmsg, msglen){
+}
+

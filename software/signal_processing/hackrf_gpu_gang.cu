@@ -30,7 +30,7 @@ void HackRfGpuGang::process(){
 	
 	for(auto hrf:m_hackRfs){
 		try {
-			BufferedMessage<int8_t>& msg = hrf->m_itb.consumerCheckout();
+			BufferedMessage<int8_t>& msg = hrf->consumerCheckout();
 			if(msg.m_messageLength > 0) {
 				//proc.process(msg.m_ptr, msg.m_messageLength, (thrust::complex<float> *)computeBuf, BUFLEN*sizeof(thrust::complex<float>));
 				proc.process(msg, bm);
@@ -38,9 +38,9 @@ void HackRfGpuGang::process(){
 				cout << "Wierd message length " << msg.m_messageLength << " in hackrf " << hrf->m_idx << endl;
 				cout << "Message buffer " << hex << static_cast<void *>(msg.m_ptr)<< endl;
 			}
-			hrf->m_itb.consumerCheckin();
+			hrf->consumerCheckin();
 		} catch (overflow_error &e){
-			cout << "Got null, itb->isStopped: " << hrf->m_itb.isStopped();
+			cout << "Got null, itb->isStopped: " << hrf->isStopped();
 		}
 	}
 }
