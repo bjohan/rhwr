@@ -1,14 +1,13 @@
 GPUCC=nvcc
 LIB_DIRS=/usr/lib/aarch64-linux-gnu
-PYTHON_BIN     ?= python3
-PYTHON_CONFIG  := $(PYTHON_BIN)-config
-PYTHON_INCLUDE ?= $(shell $(PYTHON_CONFIG) --includes)
-EXTRA_FLAGS    := $(PYTHON_INCLUDE)
-INCLUDE_DIRS=../../external_dependencies/matplotlib-cpp/ $(PYTHON_INCLUDE)
+#PYTHON_BIN     ?= python3
+#PYTHON_CONFIG  := $(PYTHON_BIN)-config
+#PYTHON_INCLUDE ?= $(shell $(PYTHON_CONFIG) --includes)
+INCLUDE_DIRS=
 
 LIBS=hackrf 
 INCLUDEFLAGS=-I $(INCLUDE_DIRS)
-LDFLAGS=-L $(LIB_DIRS) -l$(LIBS) -lpython3.6m
+LDFLAGS=-L $(LIB_DIRS) -l$(LIBS)
 CUFLAGS= -O3 $(INCLUDEFLAGS) -g -std=c++11
 CXXFLAGS=$(CUFLAGS)
 CXX=g++

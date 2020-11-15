@@ -7,14 +7,13 @@
 #include <assert.h>
 #include <cuda_runtime.h>
 #include "thread_stuff.hpp"
-#include "hackrf_gpu.hpp"
-#include "hackrf_gpu_gang.hpp"
+//#include "hackrf_gpu.hpp"
+//#include "hackrf_gpu_gang.hpp"
+#include "hackrf_thread.hpp"
 #include "my_tcp_server.hpp"
-#include <matplotlibcpp.h>
 #define BUFLEN 262144
 
 using namespace std;
-namespace plt = matplotlibcpp;
 
 __global__ void VecAdd(float* A, float* B, float* C, int N){
 	int i = blockDim.x*blockIdx.x+threadIdx.x;
@@ -26,11 +25,6 @@ double getTime(){
 	return(chrono::duration_cast<chrono::milliseconds>(chrono::system_clock::now().time_since_epoch()).count())/1000.0;
 }
 int main(int argc, char *argv[]){
-	vector<double> yqplot(1024);
-	vector<double> yiplot(1024);
-	vector<double> absplot(1024);
-	vector<double> argplot(1024);
-	vector<double> freqplot(1024);
 	int N = 1024;
 	size_t size = N*sizeof(float);
 	float* h_A = (float*) malloc(size);
@@ -59,15 +53,18 @@ int main(int argc, char *argv[]){
 
 
 	vector<int> hackRfDeviceIndex{0, 1, 2, 3};
-	HackRfGpuGang hrg(hackRfDeviceIndex);
-	hrg.start();
+	HackRfThread hrt(hackRfDeviceIndex);
+	hrt.start();
+	//HackRfGpuGang hrg(hackRfDeviceIndex);
+	//hrg.start();
 
 	t0 =getTime();
-	while(getTime()-t0 < 30){
-		hrg.process();
+	while(getTime()-t0 < 3){
+		//hrg.process();
 	}
+	hrt.stop();
 	cout << "exitied loop" << endl;
-	hrg.stop();
+	//hrg.stop();
 	srv.stop();
 	srv.join();
 
