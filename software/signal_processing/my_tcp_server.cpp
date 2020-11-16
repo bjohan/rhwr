@@ -13,7 +13,7 @@ void MyTcpServer::run(){
 		       	m_clients.push_back(m_tcpServer.acceptConnection());
 			cout << "Added new recently connected client" << endl;
 		}
-		cout << "Has incomming " << in << endl;
+		//cout << "Has incomming " << in << endl;
 		if(m_stop) break;
 	}
 	cout << "exited accept loop" << endl;

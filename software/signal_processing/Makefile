@@ -5,7 +5,7 @@ LIB_DIRS=/usr/lib/aarch64-linux-gnu
 #PYTHON_INCLUDE ?= $(shell $(PYTHON_CONFIG) --includes)
 INCLUDE_DIRS=
 
-LIBS=hackrf 
+LIBS=hackrf,readline 
 INCLUDEFLAGS=-I $(INCLUDE_DIRS)
 LDFLAGS=-L $(LIB_DIRS) -l$(LIBS)
 CUFLAGS= -O3 $(INCLUDEFLAGS) -g -std=c++11
@@ -28,7 +28,6 @@ all : sigproc
 	$(CXX) -c -o $@ $< $(CXXFLAGS)
 
 sigproc: $(OBJS)
-	echo $(OBJS)
 	$(GPUCC) -o sigproc $(OBJS) $(LDFLAGS)
 
 .PHONY : run
