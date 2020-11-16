@@ -12,14 +12,17 @@ CUFLAGS= -O3 $(INCLUDEFLAGS) -g -std=c++11
 CXXFLAGS=$(CUFLAGS)
 CXX=g++
 CXX=nvcc
-CXXSRC=$(wildcard *.cpp)
-CUSRC=$(wildcard *.cu)
+APPSRCS=$(wildcard application_*.c*)
+CXXSRC=$(filter-out $(APPSRCS), $(wildcard *.cpp))
+CUSRC=$(filter-out $(APPSRCS), $(wildcard *.cu))
 CXXOBJS=$(patsubst %.cpp, %.o, $(CXXSRC))  
 CUOBJS=$(patsubst %.cu, %.o, $(CUSRC))
 OBJS=$(CUOBJS) $(CXXOBJS)
+APPOBJS=$(pathsubst, %.cu, %.o, $(APPSRCS))
+APPS=$(pathsubst, %.cu,, $(APPSRCS))
 
 .PHONY : all
-all : sigproc
+all : sigproc sigview
 
 %.o: %.cu
 	$(GPUCC) -c -o $@ $< $(CUFLAGS)
@@ -27,8 +30,13 @@ all : sigproc
 %.o: %.cpp
 	$(CXX) -c -o $@ $< $(CXXFLAGS)
 
-sigproc: $(OBJS)
-	$(GPUCC) -o sigproc $(OBJS) $(LDFLAGS)
+
+
+sigproc: $(OBJS) application_sigproc.o
+	$(GPUCC) -o sigproc $^ $(LDFLAGS)
+
+sigview: $(OBJS) application_sigview.o
+	$(GPUCC) -o sigview $^ $(LDFLAGS)
 
 .PHONY : run
 run : sigproc
