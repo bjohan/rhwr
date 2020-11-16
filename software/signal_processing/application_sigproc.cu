@@ -12,6 +12,8 @@
 #include "hackrf_thread.hpp"
 #include "my_tcp_server.hpp"
 #define BUFLEN 262144
+#include <readline/readline.h>
+#include <readline/history.h>
 
 using namespace std;
 
@@ -59,7 +61,17 @@ int main(int argc, char *argv[]){
 	//hrg.start();
 
 	t0 =getTime();
-	while(getTime()-t0 < 3){
+	char *buf;
+	while(true){
+		buf = readline(">>");
+		if(buf){
+			if(strlen(buf)){
+				add_history(buf);
+				cout << "Command entered" << buf << " at run time " << getTime()-t0 << endl;
+			}
+		}
+		if(strcmp(buf, "quit")==0) break;
+		free(buf);
 		//hrg.process();
 	}
 	hrt.stop();
