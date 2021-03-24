@@ -1,5 +1,7 @@
 #include "hackrf_wrapper.hpp"
 #include <iostream>
+#include "aux_util.hpp"
+
 using namespace std;
 int MyHackRf::refCount=0;
 hackrf_device_list_t* MyHackRf::devs=NULL;

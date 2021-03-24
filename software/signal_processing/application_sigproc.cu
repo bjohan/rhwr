@@ -1,6 +1,5 @@
 #include <iostream>
 #include <thread>
-#include <chrono>
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
@@ -14,6 +13,7 @@
 #define BUFLEN 262144
 #include <readline/readline.h>
 #include <readline/history.h>
+#include "aux_util.hpp"
 
 using namespace std;
 
@@ -22,10 +22,7 @@ __global__ void VecAdd(float* A, float* B, float* C, int N){
 	if(i < N) C[i] = A[i]+B[i];
 }
 
-double getTime(){
 
-	return(chrono::duration_cast<chrono::milliseconds>(chrono::system_clock::now().time_since_epoch()).count())/1000.0;
-}
 int main(int argc, char *argv[]){
 	int N = 1024;
 	size_t size = N*sizeof(float);

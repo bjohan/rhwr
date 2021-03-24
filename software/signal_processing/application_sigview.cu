@@ -1,6 +1,5 @@
 #include <iostream>
 #include <thread>
-#include <chrono>
 #include <stdlib.h>
 #include <string.h>
 #include <ctype.h>
@@ -8,17 +7,31 @@
 #include "simple_tcp.hpp"
 #include <readline/readline.h>
 #include <readline/history.h>
-
+#include "aux_util.hpp"
 using namespace std;
 
 
-double getTime(){
-
-	return(chrono::duration_cast<chrono::milliseconds>(chrono::system_clock::now().time_since_epoch()).count())/1000.0;
-}
 int main(int argc, char *argv[]){
 	double t0;
-	TcpClient(7000, "localhost");	
+	TcpClient cli(7000, "127.0.0.1");	
 	t0 =getTime();
 	cout << "start time " << t0 << endl;
+	
+	char *buf;
+	while(true){
+		buf = readline(">> ");
+		if(buf){
+			//cli.send(buf, strlen(buf));
+			if(strlen(buf)){
+				add_history(buf);
+				cout << "Command entered " << buf << " at run time " << getTime()-t0 << endl;
+				if(strcmp(buf, "quit")==0){
+					cout << "Exiting" << endl;
+				       	break;
+				}
+			}
+		}
+		free(buf);
+		//hrg.process();
+	}
 }

@@ -44,4 +44,4 @@ run : sigproc
 
 .PHONY : clean
 clean:
-	rm $(OBJS) sigproc
+	rm $(OBJS) sigproc sigview
