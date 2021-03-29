@@ -14,6 +14,7 @@ HackRfGpu::HackRfGpu(int index) : MyHackRf(index), DataSource(8, BUFLEN){
 		//msg.m_messageLength = 0;
 	}*/
 	m_tStart = getTime();
+	cout << "Starting hackrf at " << m_tStart << endl;
 	m_success = 0;
 	m_fail = 0;
 }
@@ -31,8 +32,9 @@ HackRfGpu::~HackRfGpu(){
 }
 
 void HackRfGpu::myStop(){
-	m_runTime = getTime()-m_tStart;
-	cout << "My stop called" << endl;
+	double stopTime = getTime();
+	m_runTime = stopTime-m_tStart;
+	cout << "My stop called a  " << stopTime << endl;
 	producerStop();
 }
 

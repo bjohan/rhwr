@@ -60,7 +60,7 @@ int main(int argc, char *argv[]){
 	t0 =getTime();
 	char *buf;
 	while(true){
-		buf = readline(">>");
+		buf = readline(">> ");
 		if(buf){
 			if(strlen(buf)){
 				add_history(buf);

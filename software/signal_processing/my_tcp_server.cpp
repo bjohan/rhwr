@@ -6,6 +6,7 @@ MyTcpServer::MyTcpServer(uint16_t port) : MyThread("TCP accept thread"), m_tcpSe
 }
 
 void MyTcpServer::run(){
+	char recvBuf[65536];
 	bool in;
 	while(true){
 		in = m_tcpServer.incommingConnection();
@@ -15,6 +16,12 @@ void MyTcpServer::run(){
 		}
 		//cout << "Has incomming " << in << endl;
 		if(m_stop) break;
+		for ( auto& element : m_clients){
+			cout << "Reading from client" << flush;
+			int n = element.recv(recvBuf, 65536);
+			cout << " got " << n << " bytes" << endl;
+
+		}
 	}
 	cout << "exited accept loop" << endl;
 }

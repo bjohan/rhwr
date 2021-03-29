@@ -10,8 +10,8 @@ class HackRfGpu : public MyHackRf, public DataSource<int8_t>{
 	private:
 		uint64_t m_success;
 		uint64_t m_fail;
-		float m_runTime;
-		float m_tStart;
+		double m_runTime;
+		double m_tStart;
 	public:
 		//InterThreadBuffer<BufferedMessageDevice<int8_t>> m_itb;
 		HackRfGpu(int idx);

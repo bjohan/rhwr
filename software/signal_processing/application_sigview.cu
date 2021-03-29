@@ -8,6 +8,8 @@
 #include <readline/readline.h>
 #include <readline/history.h>
 #include "aux_util.hpp"
+#include "command_parser.hpp"
+
 using namespace std;
 
 
@@ -17,6 +19,8 @@ int main(int argc, char *argv[]){
 	t0 =getTime();
 	cout << "start time " << t0 << endl;
 	
+CommandSet cs("clientCommands");
+cs.addCommand(BaseCommand("hello"));
 	char *buf;
 	while(true){
 		buf = readline(">> ");
@@ -29,6 +33,7 @@ int main(int argc, char *argv[]){
 					cout << "Exiting" << endl;
 				       	break;
 				}
+				cs.execute(std::string(buf));
 			}
 		}
 		free(buf);
