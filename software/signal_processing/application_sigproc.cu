@@ -75,6 +75,7 @@ int main(int argc, char *argv[]){
 	cout << "exitied loop" << endl;
 	//hrg.stop();
 	srv.stop();
+	cout << "joining server thread";
 	srv.join();
 
 	cudaFree(d_A);
@@ -83,5 +84,6 @@ int main(int argc, char *argv[]){
 	free(h_A);
 	free(h_B);
 	free(h_C);
+	cout << "return from main";
 	return 0;
 }

@@ -13,14 +13,32 @@
 using namespace std;
 
 
+class HelloCommand: public BaseCommand{
+	private:
+		TcpClient& m_client;
+	public:
+		HelloCommand(TcpClient& cli): BaseCommand("hello"), m_client(cli){
+		}
+		virtual int execute(std::string args){
+			char m[] = "hello";
+			return m_client.send(m, 5);
+		}
+
+};
+
+
 int main(int argc, char *argv[]){
 	double t0;
-	TcpClient cli(7000, "127.0.0.1");	
+	TcpClient cli(7000, "127.0.0.1");
+	//cli.send("hejsan", 6);	
 	t0 =getTime();
 	cout << "start time " << t0 << endl;
 	
-CommandSet cs("clientCommands");
-cs.addCommand(BaseCommand("hello"));
+	CommandSet cs("clientCommands");
+	cs.addCommand(std::unique_ptr<BaseCommand>(new HelloCommand(cli)));
+	//BaseCommand& bc = cs.getCommand("hello");
+	//bc.execute("tj");
+
 	char *buf;
 	while(true){
 		buf = readline(">> ");
@@ -32,6 +50,9 @@ cs.addCommand(BaseCommand("hello"));
 				if(strcmp(buf, "quit")==0){
 					cout << "Exiting" << endl;
 				       	break;
+				}
+				if(strcmp(buf, "boh")==0){
+					cli.send("boh", 3);
 				}
 				cs.execute(std::string(buf));
 			}

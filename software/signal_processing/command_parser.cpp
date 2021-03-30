@@ -32,14 +32,14 @@ CommandSet::CommandSet(std::string name){
        	m_name = name;	
 }
 
-void CommandSet::addCommand(BaseCommand&& cmd){
-	m_commands.push_back(cmd);
+void CommandSet::addCommand(std::unique_ptr<BaseCommand> cmd){
+	m_commands.push_back(std::move(cmd));
 }
 
-BaseCommand& CommandSet::getCommand(std::string cmdName){
+std::unique_ptr<BaseCommand>& CommandSet::getCommand(std::string cmdName){
 	std::string t;
-	for(auto& cmd : m_commands){
-		t = cmd.getName();
+	for(std::unique_ptr<BaseCommand>& cmd : m_commands){
+		t = cmd->getName();
 		if(t.compare(cmdName) == 0) return cmd;
 	}
 	throw std::invalid_argument("No command named "+cmdName);
@@ -49,8 +49,8 @@ int CommandSet::execute(std::string cmdline){
 	auto toks = split(cmdline, ' ');
 	if(toks.size() > 0){
 		try {
-			BaseCommand& cmd = getCommand(toks[0]);
-			return cmd.execute(cmdline);
+			std::unique_ptr<BaseCommand>& cmd = getCommand(toks[0]);
+			return cmd->execute(cmdline);
 		} catch (const std::invalid_argument &e){
 			std::cout << e.what() << std::endl;
 		}

@@ -14,4 +14,5 @@ class MyThread{
 		void start();
 		virtual void run();
 		void join();
+		bool joinable();
 };

@@ -7,7 +7,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <iostream>
-
+#include <memory>
 
 using namespace std;
 class TcpConnectedClient{
@@ -17,12 +17,14 @@ class TcpConnectedClient{
 		socklen_t m_socklen;
        	public:
 		TcpConnectedClient();
+		TcpConnectedClient(int m_socket);
 		~TcpConnectedClient();
+		void acceptConnection(int m_socket);
  		struct sockaddr* getAddrP();
 		socklen_t* getAddrLengthP();
 		void setConnection(int connection);
 		int recv(char *buf, uint32_t buflen);
-		int send(char *buf, uint32_t buflen); 
+		int send(const char *buf, uint32_t buflen); 
 };
 
 
@@ -36,6 +38,7 @@ class TcpServer{
 		TcpServer(int port, int maxconn=20);
 		~TcpServer();
 		TcpConnectedClient acceptConnection();
+		std::unique_ptr<TcpConnectedClient> acceptAndGetConnection();
 		bool incommingConnection(int timeout = 1000);
 };
 
@@ -49,6 +52,6 @@ class TcpClient{
 		TcpClient(int port, const char *addr);
 		~TcpClient();
 		int recv(char *buf, uint32_t buflen);
-		int send(char *buf, uint32_t buflen);
+		int send(const char *buf, uint32_t buflen);
 };
 

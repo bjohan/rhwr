@@ -8,10 +8,10 @@ INCLUDE_DIRS=
 LIBS=hackrf,readline 
 INCLUDEFLAGS=-I $(INCLUDE_DIRS)
 LDFLAGS=-L $(LIB_DIRS) -l$(LIBS)
-CUFLAGS= -O3 $(INCLUDEFLAGS) -g -std=c++11 
+CUFLAGS= -O0 $(INCLUDEFLAGS) -ggdb -std=c++11 
 CXXFLAGS=$(CUFLAGS)
 CXX=g++
-CXX=nvcc
+#CXX=nvcc
 APPSRCS=$(wildcard application_*.c*)
 CXXSRC=$(filter-out $(APPSRCS), $(wildcard *.cpp))
 CUSRC=$(filter-out $(APPSRCS), $(wildcard *.cu))

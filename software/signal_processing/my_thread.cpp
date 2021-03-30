@@ -27,3 +27,7 @@ void MyThread::run(){
 void MyThread::join(){
 	m_thread.join();
 }
+
+bool MyThread::joinable(){
+	m_thread.joinable();
+}

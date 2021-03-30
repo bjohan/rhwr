@@ -8,11 +8,24 @@ TcpConnectedClient::TcpConnectedClient()
 	m_socklen=(sizeof(m_addr));
 }
 
+TcpConnectedClient::TcpConnectedClient(int m_socket)
+{
+	m_connection=0;
+	m_socklen=(sizeof(m_addr));
+	acceptConnection(m_socket);
+}
+
 TcpConnectedClient::~TcpConnectedClient()
 {
 	cout << "Closing client" << endl;
 	close(m_connection);
 }
+
+void TcpConnectedClient::acceptConnection(int m_socket)
+{
+	setConnection(accept(m_socket, getAddrP(), getAddrLengthP()));
+}
+
 struct sockaddr* TcpConnectedClient::getAddrP()
 {
 	return (struct sockaddr*) &m_addr;
@@ -33,7 +46,7 @@ int TcpConnectedClient::recv(char *buf, uint32_t buflen){
 	return ::recv(m_connection, buf, buflen, 0);
 }
 
-int TcpConnectedClient::send(char *buf, uint32_t buflen){
+int TcpConnectedClient::send(const char *buf, uint32_t buflen){
 	return ::send(m_connection, buf, buflen ,0);
 }
 
@@ -61,6 +74,11 @@ TcpConnectedClient TcpServer::acceptConnection(){
 	client.setConnection(accept(m_socket, client.getAddrP(), client.getAddrLengthP()));
 	return client;
 }
+
+std::unique_ptr<TcpConnectedClient> TcpServer::acceptAndGetConnection(){
+	return std::unique_ptr<TcpConnectedClient>(new TcpConnectedClient(m_socket));
+}
+
 
 bool TcpServer::incommingConnection(int timeout){
 	struct pollfd poll_set[1];
@@ -95,7 +113,7 @@ int TcpClient::recv(char *buf, uint32_t buflen){
 	return ::recv(m_socket, buf, buflen, 0);
 }
 
-int TcpClient::send(char *buf, uint32_t buflen){
+int TcpClient::send(const char *buf, uint32_t buflen){
 	return ::send(m_socket, buf, buflen, 0);
 }
 
