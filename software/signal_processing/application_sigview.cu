@@ -9,6 +9,7 @@
 #include <readline/history.h>
 #include "aux_util.hpp"
 #include "command_parser.hpp"
+#include "messages.hpp"
 
 using namespace std;
 
@@ -20,8 +21,14 @@ class HelloCommand: public BaseCommand{
 		HelloCommand(TcpClient& cli): BaseCommand("hello"), m_client(cli){
 		}
 		virtual int execute(std::string args){
-			char m[] = "hello";
-			return m_client.send(m, 5);
+			StringMessage msg("hejhopp");
+			char buf[256];
+			uint32_t msglen=msg.length();
+			msg.serialize(buf, 256);
+			return m_client.send(buf, msglen);
+			/*char m[] = "hello";
+			cout << "Sending" <<endl;
+			return m_client.send(m, 5);*/
 		}
 
 };

@@ -9,8 +9,15 @@
 #include <iostream>
 #include <memory>
 
+class SocketObject{
+	public:
+		SocketObject();
+		virtual int recv(char *buf, uint32_t buflen);
+		virtual int send(const char *buf, uint32_t buflen);
+};
+
 using namespace std;
-class TcpConnectedClient{
+class TcpConnectedClient: public SocketObject{
 	private:
 	      	struct sockaddr_in m_addr;
 		int m_connection;
@@ -44,7 +51,7 @@ class TcpServer{
 
 using namespace std;
 
-class TcpClient{
+class TcpClient: public SocketObject{
 	private:
 		struct sockaddr_in m_server_addr;
 		int m_socket;

@@ -2,6 +2,22 @@
 #include <poll.h>
 using namespace std;
 
+
+SocketObject::SocketObject()
+{
+}
+
+int SocketObject::recv(char *buf, uint32_t buflen){
+	cout << "unimplemented recv" << endl;
+	return -1;
+}
+
+int SocketObject::send(const char *buf, uint32_t buflen){
+	cout << "unimplemented send" << endl;
+	return -1;
+}
+
+
 TcpConnectedClient::TcpConnectedClient()
 {
 	m_connection=0;
