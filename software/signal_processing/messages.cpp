@@ -93,7 +93,9 @@ void BaseMessage::unpack(char *buf, uint32_t buflen){
 	}
 }
 
-StringMessage::StringMessage(std::string m):BaseMessage(1){
+uint32_t StringMessage::msgType =1;
+
+StringMessage::StringMessage(std::string m):BaseMessage(StringMessage::msgType){
 	this->set(m);
 	addField(&m_string);
 }
@@ -106,3 +108,7 @@ std::string StringMessage::get(){
 	return m_string.get();
 }
 
+std::unique_ptr<BaseMessage> StringMessage::createInstance(){
+	return std::unique_ptr<BaseMessage>(new StringMessage(""));
+
+}

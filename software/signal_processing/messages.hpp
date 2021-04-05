@@ -1,7 +1,9 @@
+#pragma once
 #include <string>
 #include <iostream>
 #include <stdint.h>
 #include <vector>
+#include <memory>
 
 class BaseField{
 	public:
@@ -58,6 +60,8 @@ class BaseMessage{
 class StringMessage: public BaseMessage{
 	private:
 	public:
+		static uint32_t msgType;
+		static std::unique_ptr<BaseMessage> createInstance();
 		StringField m_string;
 		StringMessage(std::string m);
 		void set(std::string s);
