@@ -9,7 +9,7 @@ class MessageFactory{
 	public:
 		MessageFactory();
 		void registerFactory(uint32_t baseType, std::unique_ptr<BaseMessage>(*factory)());
-		std::unique_ptr<BaseMessage> create(char *data);
+		std::shared_ptr<BaseMessage> create(char *data);
 };
 			
 

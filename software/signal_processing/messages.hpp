@@ -50,6 +50,7 @@ class BaseMessage{
 		FieldTemplate<uint32_t> m_length;
 		std::vector<BaseField*> m_fields;
 	public:
+		~BaseMessage(){};
 		BaseMessage(uint32_t msgId=0);
 		void addField(BaseField *f);
 		void serialize(char *buf, uint32_t buflen);
@@ -60,6 +61,7 @@ class BaseMessage{
 class StringMessage: public BaseMessage{
 	private:
 	public:
+		~StringMessage(){};
 		static uint32_t msgType;
 		static std::unique_ptr<BaseMessage> createInstance();
 		StringField m_string;

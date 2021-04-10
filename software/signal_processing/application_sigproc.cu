@@ -14,6 +14,8 @@
 #include <readline/readline.h>
 #include <readline/history.h>
 #include "aux_util.hpp"
+#include "signal_server.hpp" 
+
 
 using namespace std;
 
@@ -36,6 +38,8 @@ int main(int argc, char *argv[]){
 	}
 	MyTcpServer srv(7000);
 	srv.start();
+	SignalServer sigsrv(srv.pub);
+	sigsrv.start();
 	float* d_A;
 	cudaMalloc(&d_A, size);
 	float* d_B;
@@ -74,8 +78,15 @@ int main(int argc, char *argv[]){
 	hrt.stop();
 	cout << "exitied loop" << endl;
 	//hrg.stop();
+
+
+	sigsrv.stop();
+	cout << "joining signal server" << endl;
+	sigsrv.join();
+
+
 	srv.stop();
-	cout << "joining server thread";
+	cout << "joining server thread" << endl;
 	srv.join();
 
 	cudaFree(d_A);

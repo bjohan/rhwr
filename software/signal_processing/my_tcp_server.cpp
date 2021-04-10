@@ -1,10 +1,12 @@
 #include "my_tcp_server.hpp"
 #include <iostream>
-#include "messages.hpp"
 #include "message_factory.hpp"
 #include <memory>
+#include "subscriber_queue.hpp"
+
 MyTcpServer::MyTcpServer(uint16_t port) : MyThread("TCP accept thread"), m_tcpServer(7000){
 	m_stop = false;
+	pub = std::make_shared<Publisher<std::shared_ptr<StringMessage>>>();
 	//m_tcpServer = TcpServer(port);
 }
 
@@ -22,7 +24,9 @@ void MyTcpServer::run(){
 	MessageFactory msgFactory;
 	msgFactory.registerFactory(StringMessage::msgType, StringMessage::createInstance);
 	StringMessage rxmsg("");
-	std:: unique_ptr<BaseMessage> msg;
+	
+	std::shared_ptr<BaseMessage> msg;
+	std::shared_ptr<StringMessage> smsg;
 
 	while(true){
 		in = m_tcpServer.incommingConnection();
@@ -30,7 +34,7 @@ void MyTcpServer::run(){
 		       	m_clients.push_back(m_tcpServer.acceptAndGetConnection());
 			cout << "Added new recently connected client" << endl;
 		}
-		cout << "Has incomming " << in << endl;
+		//cout << "Has incomming " << in << endl;
 		if(m_stop) break;
 		for ( auto& element : m_clients){
 			cout << "Reading from client" << flush;
@@ -40,9 +44,12 @@ void MyTcpServer::run(){
 			cout << "unpacking msg" << endl;
 			msg->unpack(recvBuf, 256);
 			//rxmsg.unpack(recvBuf, 256);
-			BaseMessage *bm=msg.get();
-			StringMessage *sm=static_cast<StringMessage*>(bm);
-			cout << "message contents: " << sm->m_string.get() << endl;
+			smsg = std::static_pointer_cast<StringMessage>(msg);
+			//BaseMessage *bm=msg.get();
+			//std::shared_ptr<StringMessage> sm=static_cast<StringMessage*>(bm);
+			//cout << "message contents: " << sm->m_string.get() << endl;
+			cout << "message contents: " << smsg->m_string.get() << endl;
+			pub->publish(smsg);
 		}
 	}
 	cout << "exited accept loop" << endl;
