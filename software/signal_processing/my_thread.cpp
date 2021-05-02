@@ -29,5 +29,5 @@ void MyThread::join(){
 }
 
 bool MyThread::joinable(){
-	m_thread.joinable();
+	return m_thread.joinable();
 }

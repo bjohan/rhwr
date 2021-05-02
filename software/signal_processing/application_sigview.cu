@@ -10,9 +10,8 @@
 #include "aux_util.hpp"
 #include "command_parser.hpp"
 #include "messages.hpp"
-
+#include "plot_thread.hpp"
 using namespace std;
-
 
 class HelloCommand: public BaseCommand{
 	private:
@@ -37,12 +36,18 @@ class HelloCommand: public BaseCommand{
 int main(int argc, char *argv[]){
 	double t0;
 	TcpClient cli(7000, "127.0.0.1");
+	cout << "creating plot thread" << endl;
+	PlotThread pt(&argc, argv);
+	cout << "starting plot thread" << endl;
+	pt.start();
+	cout << "plot thread started" << endl;
 	//cli.send("hejsan", 6);	
 	t0 =getTime();
 	cout << "start time " << t0 << endl;
 	
 	CommandSet cs("clientCommands");
 	cs.addCommand(std::unique_ptr<BaseCommand>(new HelloCommand(cli)));
+
 	//BaseCommand& bc = cs.getCommand("hello");
 	//bc.execute("tj");
 
@@ -67,4 +72,5 @@ int main(int argc, char *argv[]){
 		free(buf);
 		//hrg.process();
 	}
+	pt.stop();
 }
