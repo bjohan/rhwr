@@ -35,13 +35,14 @@ class HelloCommand: public BaseCommand{
 
 int main(int argc, char *argv[]){
 	double t0;
-	TcpClient cli(7000, "127.0.0.1");
+		if(argc < 2) { std::cout << "Server ip must be second argument" << std::endl ; exit(1);}
+	TcpClient cli(7000, argv[1]);
 	cout << "creating plot thread" << endl;
 	PlotThread pt(&argc, argv);
 	cout << "starting plot thread" << endl;
 	pt.start();
 	cout << "plot thread started" << endl;
-	//cli.send("hejsan", 6);	
+	cli.send("hejsan", 6);	
 	t0 =getTime();
 	cout << "start time " << t0 << endl;
 	

@@ -1,5 +1,7 @@
 #include "simple_tcp.hpp"
 #include <poll.h>
+#include <cerrno>
+#include <cstring>
 using namespace std;
 
 
@@ -73,10 +75,10 @@ TcpServer::TcpServer(int port, int maxconn){
 	m_sockAddr.sin_addr.s_addr=htonl(INADDR_ANY);
 	m_maxconn=maxconn;
 	if( bind(m_socket, (struct sockaddr*) &m_sockAddr, sizeof(m_sockAddr)) < 0){
-		cout << "Error binding socket" << endl;
+		throw std::runtime_error("Error binding socket: "+std::string(strerror(errno)));
 	}
 	if(listen(m_socket, m_maxconn) <  0){
-		cout << "Listen error" << endl;
+		throw std::runtime_error("Listen error: "+std::string(strerror(errno)));
 	}
 }
 
@@ -114,9 +116,12 @@ TcpClient::TcpClient(int port, const char *addr)
 	m_server_addr.sin_family = AF_INET;
 	m_server_addr.sin_port = htons(port);
 	m_server_addr.sin_addr.s_addr = inet_addr(addr);
+	std::cout << "Connecting to " << addr << std::endl;
 	if(connect(m_socket, (struct sockaddr*) &m_server_addr, sizeof(m_server_addr)) < 0){
 		cout << "Unable to connect" << endl;
+		throw std::runtime_error("Unable to connect: "+std::string(strerror(errno)));
 	}
+	std::cout << "Connected!" << std::endl;
 }
 
 TcpClient::~TcpClient()
