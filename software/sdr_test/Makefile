@@ -5,7 +5,7 @@ LIB_DIRS=/usr/lib/aarch64-linux-gnu
 #PYTHON_INCLUDE ?= $(shell $(PYTHON_CONFIG) --includes)
 INCLUDE_DIRS=
 
-LIBS=hackrf,readline,glut,GL,GLEW 
+LIBS=hackrf,readline,glut,GL,GLEW,GLU 
 INCLUDEFLAGS=-I $(INCLUDE_DIRS)
 LDFLAGS=-L $(LIB_DIRS) -l$(LIBS)
 CUFLAGS= -O0 $(INCLUDEFLAGS) -ggdb -std=c++11 

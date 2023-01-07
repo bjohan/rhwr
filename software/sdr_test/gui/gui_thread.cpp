@@ -106,6 +106,8 @@ void GuiThread::run(){
 	ImGui_ImplGLUT_InstallFuncs();
 	ImGui_ImplOpenGL2_Init();
 	m_windows.push_back(std::make_shared<PlotWindow>("window1"));
+	m_windows.push_back(std::make_shared<PlotWindow>("window2"));
+	m_windows.push_back(std::make_shared<PlotWindow>("window3"));
 
 	glutMainLoop();
 
