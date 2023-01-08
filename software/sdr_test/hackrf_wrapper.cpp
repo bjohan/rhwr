@@ -36,7 +36,7 @@ int MyHackRf::myRxCallback(hackrf_transfer* transfer){
 		if(transfer->valid_length > 0){
 			std::shared_ptr<std::vector<std::complex<int8_t>>> msg = 
 				std::make_shared<std::vector<std::complex<int8_t>>>((std::complex<int8_t> *)transfer->buffer, (std::complex<int8_t> *)transfer->buffer+((size_t) transfer->valid_length/2));
-				m_rxQueue->put(msg, std::chrono::milliseconds(50));
+				m_rxQueue->offer(msg);
 			
 			m_success+=transfer->valid_length/2;
 		} else {

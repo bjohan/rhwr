@@ -24,8 +24,6 @@ Framebuffer::Framebuffer(size_t width, size_t height):m_width(width), m_height(h
 	glRenderbufferStorage(GL_RENDERBUFFER, GL_DEPTH_COMPONENT24, m_width, m_height);
 	glFramebufferRenderbuffer(GL_DRAW_FRAMEBUFFER, GL_DEPTH_ATTACHMENT, GL_RENDERBUFFER, m_depthbufferId);
 
-	
-
 	switch(glCheckFramebufferStatus(GL_FRAMEBUFFER)){
 		case GL_FRAMEBUFFER_COMPLETE:
 			break;
@@ -36,51 +34,28 @@ Framebuffer::Framebuffer(size_t width, size_t height):m_width(width), m_height(h
 	}
 
 	glBindFramebuffer(GL_FRAMEBUFFER, prevId);
+	std::cout << "Created framebuffer" << std::endl;
 }
 
-void Framebuffer::render(){
+Framebuffer::~Framebuffer(){
+	std::cout << "Deleting framebuffer" << std::endl;
+	glDeleteFramebuffers(1, &m_framebufferId);
+	glDeleteTextures(1, &m_colorbufferId);
+	glDeleteTextures(1, &m_depthbufferId);
+}
 
-	float const light_dir[]={1,1,1,0};
-	float const light_color[]={1,0.95,0.9,1};
-
-	GLint prevFb, prevTex;
-	glGetIntegerv(GL_FRAMEBUFFER_BINDING, &prevFb);
-	glGetIntegerv(GL_TEXTURE_2D, &prevTex);
-
-	
-
+void Framebuffer::renderTo(){
+	glGetIntegerv(GL_FRAMEBUFFER_BINDING, &m_previousFramebuffer);
+	glGetIntegerv(GL_TEXTURE_2D, &m_previousTexture);
 	glBindTexture(GL_TEXTURE_2D, 0);
 	glEnable(GL_TEXTURE_2D);
 	glBindFramebuffer(GL_FRAMEBUFFER, m_framebufferId);
-
 	glViewport(0,0, m_width, m_height);
+}
 
-	glClearColor(1,1,1,0);
-	glClear( GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT );
-
-	glMatrixMode(GL_PROJECTION);
-	glLoadIdentity();
-	gluPerspective(45, 1, 1, 10);
-
-	glMatrixMode(GL_MODELVIEW);
-	glLoadIdentity();
-
-	glEnable(GL_LIGHT0);
-	glEnable(GL_LIGHTING);
-
-	glEnable(GL_DEPTH_TEST);
-	glDisable(GL_CULL_FACE);
-
-	glLightfv(GL_LIGHT0, GL_POSITION, light_dir);
-	glLightfv(GL_LIGHT0, GL_DIFFUSE, light_color);
-
-	glTranslatef(0,0,-5);
-
-	glutSolidTeapot(0.75);
-
-	glBindFramebuffer(GL_FRAMEBUFFER, prevFb);
-	glBindTexture(GL_TEXTURE_2D, prevTex);
-
+void Framebuffer::end(){
+	glBindFramebuffer(GL_FRAMEBUFFER, m_previousFramebuffer);
+	glBindTexture(GL_TEXTURE_2D, m_previousTexture);
 }
 
 void Framebuffer::bind(){

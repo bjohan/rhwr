@@ -1,5 +1,6 @@
 #include "my_thread.hpp"
 #include <sys/prctl.h>
+#include <iostream>
 
 using namespace std;
 MyThread::MyThread(const char *name) : m_name{string(name)}{
@@ -10,6 +11,7 @@ MyThread::MyThread(const char *name) : m_name{string(name)}{
 
 MyThread::~MyThread()
 {
+	std::cout << "dtor for " << m_name << " thread" << std::endl;
 	stop();
 	join();
 }
@@ -32,7 +34,7 @@ void MyThread::run(){
 }
 
 void MyThread::join(){
-	m_thread.join();
+	if(joinable())m_thread.join();
 }
 
 bool MyThread::joinable(){
