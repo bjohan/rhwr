@@ -73,6 +73,7 @@ void MyHackRf::stop(){
 }
 
 MyHackRf::~MyHackRf(){
+	std::cout << "hrf dtor"<<std::endl;
 	stop();
 	hackrf_close(dev);
 	refCount--;

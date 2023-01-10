@@ -17,11 +17,11 @@ class ThreadSafeQueue{
 		~ThreadSafeQueue() { std::cout << "Destructor for queue: " << m_name << std::endl;};
 
 		virtual void offer(T v) {
-			if(!full()) put(v);
+			if(!full()) ThreadSafeQueue<T>::put(v);
 			else m_rejected++;
 		};
 		virtual void put(T v) {
-			put(v, m_timeout);
+			ThreadSafeQueue<T>::put(v, m_timeout);
 		}; 
 
 		virtual void put(T v, std::chrono::nanoseconds timeout){
@@ -29,7 +29,7 @@ class ThreadSafeQueue{
 				std::mutex mtx;
 				std::unique_lock<std::mutex> lck(mtx);
 				if(m_readCondition.wait_for(lck, timeout) == std::cv_status::timeout)
-					throw QueueFullException();
+					throw std::overflow_error(m_name);
 			}
 			std::lock_guard<std::mutex> lk(m_accessMutex);
 			m_q.push(v);
@@ -45,7 +45,7 @@ class ThreadSafeQueue{
 				std::mutex mtx;
 				std::unique_lock<std::mutex> lck(mtx);
 				if(m_writeCondition.wait_for(lck, timeout) == std::cv_status::timeout)
-					throw QueueEmptyException();
+					throw std::underflow_error(m_name);
 			}
 			std::lock_guard<std::mutex> lk(m_accessMutex);
 			T v = m_q.front();
@@ -84,13 +84,39 @@ class ThreadSafeQueue{
 };
 
 template <typename T>
+class DroppingThreadSafeQueue : public ThreadSafeQueue<T>{
+		public:
+			DroppingThreadSafeQueue(std::string name, std::chrono::nanoseconds timeout):ThreadSafeQueue<T>(name, 0,timeout),foo(1){};
+			DroppingThreadSafeQueue(std::string name, size_t maxSize, std::chrono::nanoseconds timeout ): ThreadSafeQueue<T>(name, maxSize, timeout),foo(1){};
+			void put(T v) {ThreadSafeQueue<T>::offer(v);};
+			void put(T v, std::chrono::nanoseconds timeout ) {ThreadSafeQueue<T>::offer(v);};
+		private:
+			uint32_t foo;
+};
+
+
+template <typename T>
 class TappedThreadSafeQueue : public ThreadSafeQueue<T>{
 		public:
 			TappedThreadSafeQueue(std::string name, std::shared_ptr<ThreadSafeQueue<T>> tap, std::chrono::nanoseconds timeout):ThreadSafeQueue<T>(name, 0,timeout), m_tap(tap){};
 			TappedThreadSafeQueue(std::string name, std::shared_ptr<ThreadSafeQueue<T>> tap, size_t maxSize, std::chrono::nanoseconds timeout ): ThreadSafeQueue<T>(name, maxSize, timeout), m_tap(tap){};
-		void offer(T v) {m_tap->offer(v) ; ThreadSafeQueue<T>::offer(v);};
-		void put(T v) { m_tap->offer(v) ; ThreadSafeQueue<T>::put(v);}
-		void put(T v, std::chrono::nanoseconds timeout ) { m_tap->offer(v) ; ThreadSafeQueue<T>::put(v, timeout);}
+			void offer(T v) {m_tap->offer(v) ; ThreadSafeQueue<T>::offer(v);};
+			void put(T v) { m_tap->offer(v) ; ThreadSafeQueue<T>::put(v);}
+			void put(T v, std::chrono::nanoseconds timeout ) { m_tap->offer(v) ; ThreadSafeQueue<T>::put(v, timeout);};
 		private:
 			std::shared_ptr<ThreadSafeQueue<T>> m_tap;
 };
+
+template <typename T>
+class TeeThreadSafeQueue : public ThreadSafeQueue<T>{
+		public:
+			TeeThreadSafeQueue(std::string name, std::shared_ptr<ThreadSafeQueue<T>> tee, std::chrono::nanoseconds timeout):ThreadSafeQueue<T>(name, 0,timeout), m_tee(tee){};
+			TeeThreadSafeQueue(std::string name, std::shared_ptr<ThreadSafeQueue<T>> tee, size_t maxSize, std::chrono::nanoseconds timeout ): ThreadSafeQueue<T>(name, maxSize, timeout), m_tee(tee){};
+			void offer(T v) {m_tee->offer(v) ; ThreadSafeQueue<T>::offer(v);};
+			void put(T v) { m_tee->put(v) ; ThreadSafeQueue<T>::put(v);}
+			void put(T v, std::chrono::nanoseconds timeout ) { m_tee->offer(v) ; ThreadSafeQueue<T>::put(v, timeout);};
+		private:
+			std::shared_ptr<ThreadSafeQueue<T>> m_tee;
+};
+
+
