@@ -5,7 +5,7 @@ LIB_DIRS=/usr/lib/aarch64-linux-gnu
 #PYTHON_INCLUDE ?= $(shell $(PYTHON_CONFIG) --includes)
 INCLUDE_DIRS=
 
-LIBS=hackrf,readline,glut,GL,GLEW,GLU 
+LIBS=hackrf,readline,glut,GL,GLEW,GLU,serial 
 INCLUDEFLAGS=-I $(INCLUDE_DIRS)
 LDFLAGS=-L $(LIB_DIRS) -l$(LIBS)
 CUFLAGS= -O3 $(INCLUDEFLAGS) -ggdb -std=c++11 
@@ -25,10 +25,10 @@ APPS = $(pathsubst, %.cu,, $(APPSRCS))
 all : sdr_test
 
 %.o: %.cu
-	$(GPUCC) -c -o $@ $< $(CUFLAGS)
+	$(GPUCC) $(CUFLAGS) -c -o $@ $< 
 
 %.o: %.cpp
-	$(CXX) -c -o $@ $< $(CXXFLAGS)
+	$(CXX) $(CXXFLAGS) -c -o $@ $<
 
 
 
