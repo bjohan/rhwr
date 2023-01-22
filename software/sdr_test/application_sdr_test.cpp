@@ -10,8 +10,8 @@
 #include "thread_safe_queue.hpp"
 #include "gui/gui_thread.hpp"
 #include "gui/plot_window.hpp"
-#include "pulse_extractor.cpp"
-#include "signal_processor.hpp"
+#include "signal_processors/pulse_extractor.cpp"
+#include "signal_processors/signal_processor.hpp"
 #include "gps.hpp"
 
 std::ostream &operator <<(std::ostream &os, const std::complex<int8_t> &c){

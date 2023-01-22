@@ -1,6 +1,6 @@
 #pragma once
 #include "signal_processor.hpp"
-#include "vector_operations.hpp"
+#include "../vector_operations.hpp"
 
 template <typename T>
 class PulseExtractor: public SignalProcessor<std::shared_ptr<complex_vector<T>>, std::shared_ptr<complex_vector<T>>>{

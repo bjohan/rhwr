@@ -1,6 +1,6 @@
 #pragma once
-#include "thread_safe_queue.hpp"
-#include "my_thread.hpp"
+#include "../thread_safe_queue.hpp"
+#include "../my_thread.hpp"
 
 class Processor{
 	public:
